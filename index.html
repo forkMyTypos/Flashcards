@@ -20,10 +20,9 @@
 <meta name="twitter:title" content="In a Flash"/>
 <meta name="twitter:description" content="Build rich flashcards, study with spaced repetition, and embed decks anywhere. Fast, private, offline-ready."/>
 <meta name="twitter:image" content="https://inaflash.cards/og.png"/>
-<meta name="theme-color" content="#111111"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="Flashcards"/>
+<meta name="apple-mobile-web-app-title" content="In a Flash"/>
 <script>
 const _mf = {"name":"In a Flash","short_name":"In a Flash","description":"A fast, private flashcard studio — rich cards, spaced repetition, quizzes, drawing, and embeddable decks. Works offline.","start_url":"./index.html","display":"standalone","background_color":"#0d0d14","theme_color":"#0d0d14","orientation":"any","icons":[{"src":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22ifc%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231c2748%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2310131f%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22ifb%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237cb0ff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233b82f6%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%221.5%22%20y%3D%221.5%22%20width%3D%2221%22%20height%3D%2221%22%20rx%3D%225%22%20fill%3D%22url(%23ifc)%22%20stroke%3D%22%232b3a5e%22%20stroke-width%3D%220.8%22%2F%3E%3Cpolygon%20points%3D%2212.67%204.5%206%2013.5%2012%2013.5%2011.33%2019.5%2018%2010.5%2012%2010.5%2012.67%204.5%22%20fill%3D%22url(%23ifb)%22%2F%3E%3C%2Fsvg%3E","sizes":"192x192","type":"image/svg+xml","purpose":"any maskable"},{"src":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22ifc%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231c2748%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2310131f%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22ifb%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237cb0ff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233b82f6%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%221.5%22%20y%3D%221.5%22%20width%3D%2221%22%20height%3D%2221%22%20rx%3D%225%22%20fill%3D%22url(%23ifc)%22%20stroke%3D%22%232b3a5e%22%20stroke-width%3D%220.8%22%2F%3E%3Cpolygon%20points%3D%2212.67%204.5%206%2013.5%2012%2013.5%2011.33%2019.5%2018%2010.5%2012%2010.5%2012.67%204.5%22%20fill%3D%22url(%23ifb)%22%2F%3E%3C%2Fsvg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}],"categories":["education","productivity"],"shortcuts":[{"name":"Create Cards","url":"./index.html","description":"Open the card editor"}]};
 const _mfBlob = new Blob([JSON.stringify(_mf)], {type:'application/json'});
@@ -121,6 +120,28 @@ input[type="number"]{-moz-appearance:textfield;}
 #card-pos-input:focus,#card-total-input:focus{border-color:#3b82f6;}
 .card-sep{color:#44445a;font-size:13px;}
 .cardbar-btn{height:26px;padding:0 10px;border-radius:6px;border:1px solid #2a2a3a;background:#1a1a2a;color:#9090a8;font-size:11px;display:flex;align-items:center;gap:4px;cursor:pointer;transition:background .12s,color .12s,border-color .12s;}
+.cardbar-btn:disabled{opacity:.35;cursor:default;pointer-events:none;}
+#card-bg-ctrl{display:flex;align-items:center;gap:3px;height:26px;padding:0 5px;border:1px solid #2a2a3a;border-radius:6px;background:#1a1a2a;}
+#card-bg-input{width:20px;height:18px;padding:0;border:1px solid #33334a;border-radius:4px;background:none;cursor:pointer;}
+#card-bg-clear{cursor:pointer;color:#7070a0;font-size:14px;line-height:1;padding:0 1px;}
+#card-bg-clear:hover{color:#f87171;}
+#reorder-pop{position:fixed;z-index:6000;width:300px;max-height:60vh;background:#16162a;border:1px solid #2a3a5a;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.55);display:none;flex-direction:column;overflow:hidden;}
+#reorder-pop.open{display:flex;}
+.reorder-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid #232340;flex-shrink:0;}
+.reorder-head .rh-title{font-size:12.5px;font-weight:700;color:#a3c4e0;flex:1;}
+.reorder-head .rh-x{cursor:pointer;color:#7070a0;font-size:16px;line-height:1;}
+.reorder-head .rh-x:hover{color:#f87171;}
+.reorder-hint{font-size:10.5px;color:#6a6a88;padding:6px 12px 2px;flex-shrink:0;}
+.reorder-list{overflow-y:auto;padding:6px;display:flex;flex-direction:column;gap:4px;}
+.reorder-row{display:flex;align-items:center;gap:7px;padding:6px 7px;border-radius:7px;background:#1c1c30;border:1px solid #26263e;}
+.reorder-row.current{border-color:#3b82f6;background:#1a2540;}
+.reorder-row.dragging{opacity:.55;}
+.reorder-row.drop-target{box-shadow:0 -2px 0 #3b82f6 inset;}
+.reorder-grip{cursor:grab;color:#5a5a78;flex-shrink:0;display:flex;touch-action:none;}
+.reorder-grip:active{cursor:grabbing;}
+.reorder-pos{width:34px;flex-shrink:0;height:22px;background:#10101a;border:1px solid #2a2a3a;border-radius:5px;color:#b0b0d0;font-size:11px;text-align:center;font-family:monospace;}
+.reorder-prev{flex:1;min-width:0;font-size:11.5px;color:#c2c2d4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.reorder-prev.empty{color:#666688;font-style:italic;}
 #btn-add-card:hover{background:#1e3a6e;color:#60a5fa;border-color:#3b82f6;}
 #btn-del-card:hover{background:#3a1010;color:#f87171;border-color:#f87171;}
 #btn-dup-card:hover{background:#2a1a4a;color:#a78bfa;border-color:#a78bfa;}
@@ -304,6 +325,16 @@ input[type="number"]{-moz-appearance:textfield;}
 #restore-confirm button{height:30px;padding:0 14px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#e0e0e0;}
 #restore-confirm button.confirm{background:#5a1e1e;border-color:#f87171;color:#f87171;}
 #restore-confirm button.confirm:hover{background:#7a2828;}
+#import-choice{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:5000;}
+#import-choice.show{display:flex;}
+#import-choice .rc-box{background:#16162a;border:1px solid #2a3a5a;border-radius:8px;padding:20px;max-width:440px;color:#e0e0e0;}
+#import-choice .rc-title{font-size:15px;font-weight:700;color:#7cb0ff;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+#import-choice .rc-body{font-size:13px;line-height:1.5;color:#a0a0c0;margin-bottom:14px;}
+#import-choice .rc-stats{background:#1a1a2a;border-radius:6px;padding:8px 12px;margin-bottom:14px;font-family:monospace;font-size:11px;color:#7ec4b8;}
+#import-choice .rc-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;}
+#import-choice button{height:30px;padding:0 14px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#e0e0e0;}
+#import-choice button.confirm{background:#1a2540;border-color:#3b82f6;color:#7cb0ff;}
+#import-choice button.confirm:hover{background:#22325a;}
 .manage-row:hover{background:#13131e;}
 .manage-row-closed{opacity:0.55;}.manage-row-closed:hover{opacity:0.8;}
 .manage-row-info{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
@@ -689,6 +720,8 @@ input[type="number"]{-moz-appearance:textfield;}
     <button class="cardbar-btn" id="btn-add-card"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>Add</button>
     <button class="cardbar-btn" id="btn-dup-card"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Dup</button>
     <button class="cardbar-btn" id="btn-del-card"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>Del</button>
+    <button class="cardbar-btn" id="btn-reorder" title="Reorder cards"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><polyline points="3 4 3 8 5 6" fill="currentColor"/><polyline points="3 16 3 20 5 18" fill="currentColor"/></svg>Order</button>
+    <span id="card-bg-ctrl" title="Card background colour"><input type="color" id="card-bg-input" value="#16162a"/><span id="card-bg-clear" title="No background">&times;</span></span>
     <span class="card-label" id="card-label"></span>
     <div id="save-indicator" class="unsaved"><svg width="7" height="7" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg><span id="save-label">unsaved</span></div>
     <div id="sr-status"></div>
@@ -696,7 +729,7 @@ input[type="number"]{-moz-appearance:textfield;}
   </div>
   <div id="tagbar">
     <span class="tagbar-label">Tags</span>
-    <div id="tag-chips" style="display:contents"></div>
+    <div id="tag-chips" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"></div>
     <input id="tag-input" type="text" placeholder="add tag &amp; press Enter&hellip;" maxlength="32" autocomplete="off"/>
   </div>
   <div id="workspace">
@@ -854,6 +887,18 @@ input[type="number"]{-moz-appearance:textfield;}
     </div>
   </div>
 </div>
+<div id="import-choice">
+  <div class="rc-box ic-box">
+    <div class="rc-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import cards</div>
+    <div class="rc-body">Where should these cards go?</div>
+    <div class="rc-stats" id="ic-stats"></div>
+    <div class="rc-actions ic-actions">
+      <button id="ic-cancel">Cancel</button>
+      <button id="ic-new">New set</button>
+      <button class="confirm" id="ic-merge">Add to current set</button>
+    </div>
+  </div>
+</div>
 <!-- Embed modal: shows live preview iframe + size selector + paste-ready code. -->
 <div id="embed-modal">
   <div class="embed-box">
@@ -935,9 +980,9 @@ async function initDB(){
 }
 var dbBoss={getSet:async function(id){return await db.sets.get(id);},getCard:async function(id){return await db.cards.get(id);}};
 async function DB_loadApp(){const allSets=await db.sets.toArray();const info=await db.info.get('info').catch(()=>null);const result={sets:[],lastSetId:info?info.lastSet:null};for(const s of allSets){const cards=await DB_loadCards(s.id);result.sets.push({id:s.id,name:s.name,cards,closed:s.open===false,ytVideoId:s.ytVideoId||null});}return result;}
-async function DB_loadCards(setId){const s=await db.sets.get(setId);if(!s||!s.cardIDs||!s.cardIDs.length)return[];const raw=await db.cards.where('id').anyOf(s.cardIDs).toArray();return s.cardIDs.map(id=>raw.find(c=>c.id===id)).filter(Boolean).map(c=>({id:c.id,name:c.name||'',sideA:c.sideA||'',sideB:c.sideB||'',tags:c.tags||[],sr:c.sr||null,ytClip:c.ytClip||null}));}
+async function DB_loadCards(setId){const s=await db.sets.get(setId);if(!s||!s.cardIDs||!s.cardIDs.length)return[];const raw=await db.cards.where('id').anyOf(s.cardIDs).toArray();return s.cardIDs.map(id=>raw.find(c=>c.id===id)).filter(Boolean).map(c=>({id:c.id,name:c.name||'',sideA:c.sideA||'',sideB:c.sideB||'',tags:c.tags||[],sr:c.sr||null,ytClip:c.ytClip||null,bg:c.bg||null}));}
 async function DB_createSet(name){const cardId=await db.cards.add({name:'card1',sideA:'',sideB:'',tags:[]});const info=await db.info.get('info');const n=(info&&info.setN)?info.setN:1;await db.info.update('info',{setN:n+1});const setId=await db.sets.add({name,cardIDs:[cardId],open:true,n:1,tags:[]});return{id:setId,name,cards:[{id:cardId,name:'card1',sideA:'',sideB:'',tags:[]}]};}
-async function DB_saveCard(setId,cardId,sideA,sideB){await db.cards.update(cardId,{sideA,sideB});}
+async function DB_saveCard(setId,cardId,sideA,sideB,bg){await db.cards.update(cardId,{sideA,sideB,bg:bg||null});}
 async function DB_addCard(setId){const s=await db.sets.get(setId);const n=s?(s.n||0)+1:1;const cardId=await db.cards.add({name:'card'+n,sideA:'',sideB:'',tags:[]});const cardIDs=s?[...(s.cardIDs||[]),cardId]:[cardId];await db.sets.update(setId,{cardIDs,n});return{id:cardId,name:'card'+n,sideA:'',sideB:'',tags:[]};}
 async function DB_deleteCard(setId,cardId){await db.cards.delete(cardId);const s=await db.sets.get(setId);if(!s)return;const cardIDs=(s.cardIDs||[]).filter(id=>id!==cardId);await db.sets.update(setId,{cardIDs,n:cardIDs.length});}
 async function DB_bulkImport(name,cardsData){
@@ -948,15 +993,36 @@ async function DB_bulkImport(name,cardsData){
   for(const c of (Array.isArray(cardsData)?cardsData:[])){
     if(!c||typeof c!=='object')continue;
     if(cardFieldTooBig(c.sideA)||cardFieldTooBig(c.sideB))continue;
-    clean.push({sideA:sanitizeCardField(c.sideA||''),sideB:sanitizeCardField(c.sideB||''),sr:c.sr,ytClip:c.ytClip});
+    clean.push({sideA:sanitizeCardField(c.sideA||''),sideB:sanitizeCardField(c.sideB||''),sr:c.sr,ytClip:c.ytClip,bg:c.bg||null});
   }
   if(!clean.length)clean.push({sideA:'',sideB:''});
-  const cardObjects=clean.map((c,i)=>({name:'card'+(i+1),sideA:c.sideA,sideB:c.sideB,tags:[],sr:c.sr||undefined,ytClip:c.ytClip||undefined}));
+  const cardObjects=clean.map((c,i)=>({name:'card'+(i+1),sideA:c.sideA,sideB:c.sideB,tags:[],sr:c.sr||undefined,ytClip:c.ytClip||undefined,bg:c.bg||null}));
   const cardIds=await db.cards.bulkAdd(cardObjects,{allKeys:true});
   const setId=await db.sets.add({name,cardIDs:cardIds,open:true,n:clean.length,tags:[]});
-  return{id:setId,name,cards:cardIds.map((id,i)=>({id,name:'card'+(i+1),sideA:cardObjects[i].sideA,sideB:cardObjects[i].sideB,tags:[],sr:cardObjects[i].sr||null,ytClip:cardObjects[i].ytClip||null}))};
+  return{id:setId,name,cards:cardIds.map((id,i)=>({id,name:'card'+(i+1),sideA:cardObjects[i].sideA,sideB:cardObjects[i].sideB,tags:[],sr:cardObjects[i].sr||null,ytClip:cardObjects[i].ytClip||null,bg:cardObjects[i].bg||null}))};
 }
 async function DB_deleteSet(setId){const s=await db.sets.get(setId);if(s&&s.cardIDs&&s.cardIDs.length)await db.cards.bulkDelete(s.cardIDs);await db.sets.delete(setId);}
+/* Merge cards from an import file into an EXISTING set. Same inbound
+   sanitization as DB_bulkImport; respects MAX_CARDS by importing only what
+   fits. Returns {added:[cardObjs], skipped:n, overflow:n}. */
+async function DB_mergeCards(setId,cardsData){
+  const s=await db.sets.get(setId);if(!s)throw new Error('Set not found');
+  const clean=[];let skipped=0;
+  for(const c of (Array.isArray(cardsData)?cardsData:[])){
+    if(!c||typeof c!=='object'){skipped++;continue;}
+    if(cardFieldTooBig(c.sideA)||cardFieldTooBig(c.sideB)){skipped++;continue;}
+    clean.push({sideA:sanitizeCardField(c.sideA||''),sideB:sanitizeCardField(c.sideB||''),sr:c.sr,ytClip:c.ytClip,bg:c.bg||null});
+  }
+  const room=Math.max(0,MAX_CARDS-s.cardIDs.length);
+  const overflow=Math.max(0,clean.length-room);
+  const take=clean.slice(0,room);
+  if(!take.length)return{added:[],skipped,overflow};
+  const base=s.cardIDs.length;
+  const cardObjects=take.map((c,i)=>({name:'card'+(base+i+1),sideA:c.sideA,sideB:c.sideB,tags:[],sr:c.sr||undefined,ytClip:c.ytClip||undefined,bg:c.bg||null}));
+  const ids=await db.cards.bulkAdd(cardObjects,{allKeys:true});
+  await db.sets.update(setId,{cardIDs:[...s.cardIDs,...ids],n:s.cardIDs.length+ids.length});
+  return{added:ids.map((id,i)=>({id,name:cardObjects[i].name,sideA:cardObjects[i].sideA,sideB:cardObjects[i].sideB,tags:[],sr:cardObjects[i].sr||null,ytClip:cardObjects[i].ytClip||null,bg:cardObjects[i].bg||null})),skipped,overflow};
+}
 async function DB_renameSet(setId,name){await db.sets.update(setId,{name});}
 async function DB_setSetOpen(setId,open){await db.sets.update(setId,{open});}
 async function DB_setLastSet(setId){await db.info.update('info',{lastSet:setId}).catch(()=>{});}
@@ -1433,7 +1499,7 @@ var learnBoss={
   _rateKey:function(r){if(!this.shellEl||!this.shellEl.classList.contains('flipped'))return;this._rate(r).then(()=>this._next());},
   _next:function(){this._unflip();setTimeout(()=>this._goRel(1),220);},
   _updateProgress:function(){const known=Object.values(this.ratings).filter(r=>r==='knew').length,total=this.cards.length,pct=total?Math.round(known/total*100):0;const bar=this.c.querySelector('.learn-progress-bar');if(bar)bar.style.width=pct+'%';const ctr=document.getElementById('learn-counter');if(ctr)ctr.textContent=known+' / '+total+' known';const srInfo=this.c.querySelector('.learn-sr-info');if(srInfo){const card=this.cards[this.order[this.pos]];srInfo.textContent=card?SR.label(card):'';}},
-  _goTo:function(idx){const len=this.order.length;if(!len)return;this.pos=((idx%len)+len)%len;const posInput=this.c.querySelector('.posInput'),totalEl=this.c.querySelector('.total-span');if(posInput)posInput.value=this.pos+1;if(totalEl)totalEl.textContent=len;this._unflip();const card=this.cards[this.order[this.pos]];if(card){const aHtml=DOMPurify.sanitize(card.sideA||''),bHtml=DOMPurify.sanitize(card.sideB||'');if(this.reversed){this.sideA.innerHTML=bHtml;this.sideB.innerHTML=aHtml;}else{this.sideA.innerHTML=aHtml;this.sideB.innerHTML=bHtml;}}this._updateProgress();if(card&&typeof ytBoss!=='undefined')ytBoss.playCardClip(card);},
+  _goTo:function(idx){const len=this.order.length;if(!len)return;this.pos=((idx%len)+len)%len;const posInput=this.c.querySelector('.posInput'),totalEl=this.c.querySelector('.total-span');if(posInput)posInput.value=this.pos+1;if(totalEl)totalEl.textContent=len;this._unflip();const card=this.cards[this.order[this.pos]];if(card){const aHtml=DOMPurify.sanitize(card.sideA||''),bHtml=DOMPurify.sanitize(card.sideB||'');if(this.reversed){this.sideA.innerHTML=bHtml;this.sideB.innerHTML=aHtml;}else{this.sideA.innerHTML=aHtml;this.sideB.innerHTML=bHtml;}const _cbg=card.bg||'';this.sideA.style.background=_cbg;this.sideB.style.background=_cbg;}this._updateProgress();if(card&&typeof ytBoss!=='undefined')ytBoss.playCardClip(card);},
   currentCard:function(){return(this.cards&&this.order)?this.cards[this.order[this.pos]]:null;},
   _toggleShuffle:function(){this.shuffled=!this.shuffled;const btn=this.c.querySelector('#btn-shuffle');btn.classList.toggle('shuffle-on',this.shuffled);btn.classList.toggle('active',this.shuffled);this._buildOrder();this._goTo(0);toast(this.shuffled?'Shuffled':'Order restored','info');},
   /* Reverse mode: start showing the back content (red side), flip to see front
@@ -1466,7 +1532,7 @@ const sliderBoss={
         const inp=document.createElement('input');inp.className='tab-name-input';inp.type='text';inp.value=name;
         const x=document.createElement('span');x.className='tab-x';x.textContent='\u00d7';
         tab.appendChild(inp);tab.appendChild(x);
-        inp.addEventListener('mousedown',e=>e.stopPropagation());
+        inp.addEventListener('mousedown',e=>{if(!tab.classList.contains('active')){e.preventDefault();e.stopPropagation();ctrl.setActive(id);onSelect(id);}else e.stopPropagation();});
         inp.addEventListener('click',e=>e.stopPropagation());
         inp.addEventListener('change',e=>{const n=e.target.value.trim()||'Untitled';e.target.value=n;const entry=ctrl.data.find(d=>d.id===id);if(entry)entry.name=n;onRename(id,n);});
         inp.addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur();e.stopPropagation();});
@@ -1672,12 +1738,13 @@ function makeEditor(edId,tbId,statusId,valignId){
   let fmt={bold:false,italic:false,underline:false,color:null,size:null,font:null};
   let pickerColor="#e84393",pickerOpen=false,frozenSel=null,frozenCur=null;
   let colorBarEl=null,colorInputEl=null,colorSwatchEl=null,colorOkBtn=null,fmtLocked=false;
-  let selectedImage=null,imgResizeGroup=null,imgResizeSlider=null,imgResizeVal=null;
+  let selectedImage=null,imgResizeGroup=null,imgResizeSlider=null,imgResizeVal=null,imgBgInput=null;
   let currentValign="top";
+  let histUndo=[],histRedo=[],_lastSnapTime=0,_lastSnapKind="";
   const ed=document.getElementById(edId),valignEl=document.getElementById(valignId);
   const DEFAULTS={bold:false,italic:false,underline:false,color:null,size:null,font:null};
   function mkRun(t,f={}){return{type:"text",text:t,bold:f.bold??false,italic:f.italic??false,underline:f.underline??false,color:f.color??null,size:f.size??null,font:f.font??null};}
-  function mkImage(src,w=100){return{type:"image",src,width:w};}
+  function mkImage(src,w=100,bg=null){return{type:"image",src,width:w,bg:bg||null};}
   function mergeRuns(runs){const o=[];for(const r of runs){if(r.type==="image"){o.push(r);continue;}if(!r.text)continue;const p=o[o.length-1];if(p&&p.type!=="image"&&sameStyle(p,r)){p.text+=r.text;}else o.push({...r});}return o.length?o:[mkRun("")];}
   function sameStyle(a,b){if(a.type==="image"||b.type==="image")return false;return a.bold===b.bold&&a.italic===b.italic&&a.underline===b.underline&&a.color===b.color&&a.size===b.size&&a.font===b.font;}
   function plen(p){return p.runs.reduce((s,r)=>s+(r.type==="image"?1:r.text.length),0);}
@@ -1688,7 +1755,7 @@ function makeEditor(edId,tbId,statusId,valignId){
   function getImgAt(pi,off){const p=doc[pi];if(!p)return null;let acc=0;for(let ri=0;ri<p.runs.length;ri++){const r=p.runs[ri],l=rlen(r);if(r.type==="image"&&(off===acc||off===acc+1))return{runIndex:ri,run:r};acc+=l;}return null;}
   doc.push(mkPara([mkRun("")]));
   function applyStyle(el,r){if(r.bold)el.style.fontWeight="bold";if(r.italic)el.style.fontStyle="italic";if(r.underline)el.style.textDecoration="underline";if(r.color)el.style.color=r.color;if(r.size)el.style.fontSize=r.size+"px";if(r.font)el.style.fontFamily=r.font;}
-  function buildLine(i){const p=doc[i];const div=document.createElement("div");div.className="line";div.dataset.p=i;div.style.textAlign=p.align;for(let ri=0;ri<p.runs.length;ri++){const r=p.runs[ri];if(r.type==="text"){const s=document.createElement("span");s.textContent=r.text||"\u200B";if(r.text)applyStyle(s,r);div.appendChild(s);}else if(r.type==="image"){const w=document.createElement("span");w.className="img-run";w.dataset.imgRun="1";w.dataset.imgP=i;w.dataset.imgRi=ri;w.contentEditable="false";w.style.userSelect="none";w.draggable=false;w.style.display="inline-block";w.style.width=(r.width||100)+"%";if(selectedImage&&selectedImage.p===i&&selectedImage.runIndex===ri)w.classList.add("img-selected");const img=document.createElement("img");img.src=r.src;img.style.width="100%";img.style.display="block";img.draggable=false;img.style.pointerEvents="none";w.appendChild(img);div.appendChild(w);}}if(!div.childNodes.length){const s=document.createElement("span");s.textContent="\u200B";div.appendChild(s);}return div;}
+  function buildLine(i){const p=doc[i];const div=document.createElement("div");div.className="line";div.dataset.p=i;div.style.textAlign=p.align;for(let ri=0;ri<p.runs.length;ri++){const r=p.runs[ri];if(r.type==="text"){const s=document.createElement("span");s.textContent=r.text||"\u200B";if(r.text)applyStyle(s,r);div.appendChild(s);}else if(r.type==="image"){const w=document.createElement("span");w.className="img-run";w.dataset.imgRun="1";w.dataset.imgP=i;w.dataset.imgRi=ri;w.contentEditable="false";w.style.userSelect="none";w.draggable=false;w.style.display="inline-block";w.style.width=(r.width||100)+"%";if(r.bg)w.style.background=r.bg;if(selectedImage&&selectedImage.p===i&&selectedImage.runIndex===ri)w.classList.add("img-selected");const img=document.createElement("img");img.src=r.src;img.style.width="100%";img.style.display="block";img.draggable=false;img.style.pointerEvents="none";w.appendChild(img);div.appendChild(w);}}if(!div.childNodes.length){const s=document.createElement("span");s.textContent="\u200B";div.appendChild(s);}return div;}
   function renderAll(){ed.innerHTML="";for(let i=0;i<doc.length;i++)ed.appendChild(buildLine(i));}
   function getLine(i){return ed.querySelector(`[data-p="${i}"]`);}
   function tNodes(le){const n=[];const w=(x)=>{if(x.nodeType===1&&x.dataset&&x.dataset.imgRun)return;if(x.nodeType===3){n.push(x);return;}for(const c of x.childNodes)w(c);};w(le);return n;}
@@ -1698,6 +1765,13 @@ function makeEditor(edId,tbId,statusId,valignId){
   function charOff(le,tn,to){let c=0;const w=(n)=>{if(n===tn&&n.nodeType===3){c+=to;return true;}if(n.nodeType===1&&n.dataset&&n.dataset.imgRun){c+=1;return false;}if(n.nodeType===3){if(n.textContent==="\u200B")return false;c+=n.textContent.length;return false;}for(const ch of n.childNodes){if(w(ch))return true;}return false;};w(le);return c;}
   function readSel(){if(busy||pickerOpen)return;const s=window.getSelection();if(!s||!s.rangeCount)return;const r=s.getRangeAt(0);if(!ed.contains(r.startContainer))return;const si=lineIdx(r.startContainer),ei=lineIdx(r.endContainer);const sl=getLine(si),el=getLine(ei);if(!sl||!el)return;const so=charOff(sl,r.startContainer,r.startOffset),eo=charOff(el,r.endContainer,r.endOffset);if(si===ei&&so===eo){cur={p:si,offset:so};sel=null;}else if(si<ei||(si===ei&&so<eo)){cur={p:si,offset:so};sel={sp:si,so,ep:ei,eo};}else{cur={p:ei,offset:eo};sel={sp:ei,so:eo,ep:si,eo:so};}syncFmt();updateImgSel();updateTb();}
   function commit(){busy=true;renderAll();requestAnimationFrame(()=>{if(sel)restoreSel();else placeCaret(cur.p,cur.offset);busy=false;updateTb();});}
+  // --- Undo / redo: snapshot the doc model BEFORE a mutation. Consecutive
+  // typing (or held-delete) coalesces into one step. Redo cleared on new edits.
+  function snapState(){return{doc:doc.map(p=>({align:p.align,runs:p.runs.map(r=>({...r}))})),cur:{...cur},sel:sel?{...sel}:null,valign:currentValign};}
+  function pushUndo(kind){const now=Date.now();const coal=histUndo.length&&kind===_lastSnapKind&&(kind==="type"||kind==="del")&&(now-_lastSnapTime<800);_lastSnapTime=now;_lastSnapKind=kind;if(coal)return;histUndo.push(snapState());if(histUndo.length>80)histUndo.shift();histRedo.length=0;}
+  function restoreState(s){doc=s.doc.map(p=>({align:p.align,runs:p.runs.map(r=>({...r}))}));cur={...s.cur};sel=s.sel?{...s.sel}:null;currentValign=s.valign;valignEl.className="editor-valign-wrap valign-"+currentValign;selectedImage=null;busy=true;renderAll();requestAnimationFrame(()=>{if(sel)restoreSel();else placeCaret(cur.p,cur.offset);busy=false;updateTb();});if(typeof markDirty==="function")markDirty();}
+  function undo(){if(!histUndo.length)return;histRedo.push(snapState());restoreState(histUndo.pop());}
+  function redo(){if(!histRedo.length)return;histUndo.push(snapState());restoreState(histRedo.pop());}
   function syncFmt(){if(fmtLocked){fmtLocked=false;return;}const p=doc[cur.p];if(!p)return;const st=getStyleAt(p,cur.offset);fmt={...st};if(st.color){pickerColor=st.color;if(colorBarEl)colorBarEl.style.background=pickerColor;if(colorInputEl)colorInputEl.value=pickerColor;if(colorSwatchEl)colorSwatchEl.style.background=pickerColor;}}
   function updateImgSel(){const h=getImgAt(cur.p,cur.offset);selectedImage=h?{p:cur.p,runIndex:h.runIndex}:null;}
   function delSel(){if(!sel)return;const{sp,so,ep,eo}=sel;if(sp===ep){doc[sp].runs=mergeRuns([...rfr(doc[sp],0,so),...rfr(doc[sp],eo,plen(doc[sp]))]);}else{doc[sp].runs=mergeRuns([...rfr(doc[sp],0,so),...rfr(doc[ep],eo,plen(doc[ep]))]);doc.splice(sp+1,ep-sp);}cur={p:sp,offset:so};sel=null;}
@@ -1707,12 +1781,14 @@ function makeEditor(edId,tbId,statusId,valignId){
   function delFwd(){if(sel){delSel();return;}const p=doc[cur.p],l=plen(p);if(cur.offset<l){let acc=0,tgt=-1;for(let ri=0;ri<p.runs.length;ri++){const rl=rlen(p.runs[ri]);if(acc+rl>cur.offset){tgt=ri;break;}acc+=rl;}if(tgt>=0&&p.runs[tgt].type==="image"){p.runs.splice(tgt,1);if(!p.runs.length)p.runs=[mkRun("")];}else{p.runs=mergeRuns([...rfr(p,0,cur.offset),...rfr(p,cur.offset+1,l)]);}}else if(cur.p<doc.length-1){p.runs=mergeRuns([...p.runs,...doc[cur.p+1].runs]);doc.splice(cur.p+1,1);sel=null;}}
   function applyFmt(key,val){if(!sel){fmt[key]=val;return;}const{sp,so,ep,eo}=sel;for(let pi=sp;pi<=ep;pi++){const p=doc[pi],fr=pi===sp?so:0,to=pi===ep?eo:plen(p);if(fr===to)continue;const b=rfr(p,0,fr),m=rfr(p,fr,to).map(r=>r.type==="image"?r:{...r,[key]:val}),a=rfr(p,to,plen(p));p.runs=mergeRuns([...b,...m,...a]);}fmt[key]=val;}
   function isFull(key){if(!sel)return!!fmt[key];const{sp,so,ep,eo}=sel;for(let pi=sp;pi<=ep;pi++){const p=doc[pi],fr=pi===sp?so:0,to=pi===ep?eo:plen(p);let acc=0;for(const r of p.runs){if(r.type==="image"){acc++;continue;}const rs=acc,re=acc+r.text.length;if(re>fr&&rs<to&&!r[key])return false;acc+=r.text.length;}}return true;}
-  function togFmt(key){const w=isFull(key);applyFmt(key,!w);fmt[key]=!w;}
+  function togFmt(key){if(sel)pushUndo("fmt");const w=isFull(key);applyFmt(key,!w);fmt[key]=!w;}
   function applyAlign(a){const s=sel?sel.sp:cur.p,e=sel?sel.ep:cur.p;for(let i=s;i<=e;i++)doc[i].align=a;}
   function setValign(v){currentValign=v;valignEl.className="editor-valign-wrap valign-"+v;}
-  function insImg(src){if(sel)delSel();const p=doc[cur.p];const l=rfr(p,0,cur.offset),r=rfr(p,cur.offset,plen(p));p.runs=mergeRuns([...l,mkImage(src,100),...r]);cur.offset+=1;}
+  function insImg(src){pushUndo("img");if(sel)delSel();const p=doc[cur.p];const l=rfr(p,0,cur.offset),r=rfr(p,cur.offset,plen(p));p.runs=mergeRuns([...l,mkImage(src,100),...r]);cur.offset+=1;}
   function setImgW(w){if(!selectedImage)return;const{p,runIndex}=selectedImage;if(!doc[p]||!doc[p].runs[runIndex])return;doc[p].runs[runIndex].width=w;const wrap=ed.querySelector(`[data-img-p="${p}"][data-img-ri="${runIndex}"]`);if(wrap){wrap.style.width=w+"%";}else{const le=getLine(p);if(le)le.replaceWith(buildLine(p));}}
-  function updateTb(){const tb=document.getElementById(tbId);tb.querySelectorAll(".tbtn[data-k]").forEach(b=>{b.classList.toggle("on",!!fmt[b.dataset.k]);});const si=tb.querySelector('input[type="number"]');if(si)si.value=fmt.size||15;const fs=tb.querySelector('select');if(fs)fs.value=fmt.font||"Arial";if(colorBarEl)colorBarEl.style.background=pickerColor;if(colorSwatchEl)colorSwatchEl.style.background=pickerColor;if(imgResizeGroup){if(selectedImage){imgResizeGroup.classList.add("visible");const r=doc[selectedImage.p]&&doc[selectedImage.p].runs[selectedImage.runIndex];const w=r?(r.width||100):100;if(imgResizeSlider)imgResizeSlider.value=w;if(imgResizeVal)imgResizeVal.textContent=w+"%";}else imgResizeGroup.classList.remove("visible");}tb.querySelectorAll(".tbtn[data-valign]").forEach(b=>{b.classList.toggle("on",b.dataset.valign===currentValign);});}
+  function setImgBg(c){if(!selectedImage)return;const{p,runIndex}=selectedImage;if(!doc[p]||!doc[p].runs[runIndex])return;pushUndo("imgbg");doc[p].runs[runIndex].bg=c||null;const wrap=ed.querySelector(`[data-img-p="${p}"][data-img-ri="${runIndex}"]`);if(wrap)wrap.style.background=c||"transparent";if(typeof markDirty==="function")markDirty();}
+  function _toHex(c){if(!c)return"#ffffff";if(c[0]==="#")return c;const m=c.match(/\d+/g);if(!m||m.length<3)return"#ffffff";return"#"+m.slice(0,3).map(n=>(+n).toString(16).padStart(2,"0")).join("");}
+  function updateTb(){const tb=document.getElementById(tbId);tb.querySelectorAll(".tbtn[data-k]").forEach(b=>{b.classList.toggle("on",!!fmt[b.dataset.k]);});const si=tb.querySelector('input[type="number"]');if(si)si.value=fmt.size||15;const fs=tb.querySelector('select');if(fs)fs.value=fmt.font||"Arial";if(colorBarEl)colorBarEl.style.background=pickerColor;if(colorSwatchEl)colorSwatchEl.style.background=pickerColor;if(imgResizeGroup){if(selectedImage){imgResizeGroup.classList.add("visible");const r=doc[selectedImage.p]&&doc[selectedImage.p].runs[selectedImage.runIndex];const w=r?(r.width||100):100;if(imgResizeSlider)imgResizeSlider.value=w;if(imgResizeVal)imgResizeVal.textContent=w+"%";if(imgBgInput&&r&&r.bg)imgBgInput.value=_toHex(r.bg);}else imgResizeGroup.classList.remove("visible");}tb.querySelectorAll(".tbtn[data-valign]").forEach(b=>{b.classList.toggle("on",b.dataset.valign===currentValign);});const _al=(doc[cur.p]&&doc[cur.p].align)||"left";tb.querySelectorAll(".tbtn[data-align]").forEach(b=>{b.classList.toggle("on",b.dataset.align===_al);});}
   // --- Color popover -------------------------------------------------------
   // One button opens a popover with Default / Favorites / Recent / Palette /
   // Custom. Selection is frozen on open (clicking the popover would otherwise
@@ -1750,6 +1826,7 @@ function makeEditor(edId,tbId,statusId,valignId){
   function applyLive(hex){
     if(!frozenCur)return;
     sel=frozenSel?{...frozenSel}:null;cur={...frozenCur};
+    if(sel&&!_colorApplied)pushUndo("color"); // one undo step per picker session, even with live-drag previews
     applyFmt("color",hex);fmt.color=hex;
     if(hex){pickerColor=hex;if(colorBarEl)colorBarEl.style.background=hex;}
     _curColor=hex;
@@ -1863,27 +1940,35 @@ function makeEditor(edId,tbId,statusId,valignId){
     const szW=document.createElement("div");szW.style.cssText="display:flex;align-items:center;gap:2px";
     const si=document.createElement("input");si.type="number";si.value=15;si.min=8;si.max=96;
     si.onmousedown=e=>{readSel();e.stopPropagation();};
-    si.onblur=()=>{const v=Math.max(8,Math.min(96,Number(si.value)||15));si.value=v;applyFmt("size",v);fmt.size=v;if(sel){renderAll();requestAnimationFrame(()=>{restoreSel();busy=false;updateTb();});}else{ed.focus();updateTb();}};
+    si.onblur=()=>{const v=Math.max(8,Math.min(96,Number(si.value)||15));si.value=v;if(sel)pushUndo("fmt");applyFmt("size",v);fmt.size=v;if(sel){renderAll();requestAnimationFrame(()=>{restoreSel();busy=false;updateTb();});}else{ed.focus();updateTb();}};
     si.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();si.blur();}};
     const mkSz=(lb,d)=>{const b=document.createElement("div");b.className="tbtn";b.textContent=lb;b.tabIndex=-1;b.style.cssText="font-weight:400;font-size:13px";b.onmousedown=e=>e.preventDefault();b.onclick=()=>{readSel();const v=Math.max(8,Math.min(96,(Number(si.value)||15)+d));si.value=v;applyFmt("size",v);fmt.size=v;if(sel){renderAll();requestAnimationFrame(()=>{restoreSel();busy=false;});}};return b;};
     szW.appendChild(mkSz("\u2212",-1));szW.appendChild(si);szW.appendChild(mkSz("+",1));
     tb.appendChild(szW);tb.appendChild(sep());
     const fs=document.createElement("select");
     ["Arial","Georgia","Times New Roman","Courier New","Verdana"].forEach(f=>{const o=document.createElement("option");o.value=f;o.textContent=f;fs.appendChild(o);});
-    fs.onmousedown=()=>readSel();fs.onchange=()=>{applyFmt("font",fs.value);fmt.font=fs.value;if(sel){renderAll();requestAnimationFrame(()=>{restoreSel();busy=false;});}else ed.focus();};
+    fs.onmousedown=()=>readSel();fs.onchange=()=>{if(sel)pushUndo("fmt");applyFmt("font",fs.value);fmt.font=fs.value;if(sel){renderAll();requestAnimationFrame(()=>{restoreSel();busy=false;});}else ed.focus();};
     tb.appendChild(fs);tb.appendChild(sep());
     const alSVG={left:'<svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg>',center:'<svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>',right:'<svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="6" x2="21" y2="6"/><line x1="9" y1="12" x2="21" y2="12"/><line x1="6" y1="18" x2="21" y2="18"/></svg>'};
-    ["left","center","right"].forEach(a=>{tb.appendChild(btn(alSVG[a],null,()=>{applyAlign(a);renderAll();requestAnimationFrame(()=>{if(sel)restoreSel();else placeCaret(cur.p,cur.offset);busy=false;updateTb();})}));});
+    ["left","center","right"].forEach(a=>{const ab=btn(alSVG[a],null,()=>{pushUndo("align");applyAlign(a);renderAll();requestAnimationFrame(()=>{if(sel)restoreSel();else placeCaret(cur.p,cur.offset);busy=false;updateTb();})});ab.dataset.align=a;ab.title="Align "+a;tb.appendChild(ab);});
     tb.appendChild(sep());
-    const vd=[{v:"top",svg:'<svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="3" x2="21" y2="3"/><rect x="7" y="7" width="10" height="14" rx="1"/></svg>'},{v:"middle",svg:'<svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"/><rect x="7" y="5" width="10" height="14" rx="1"/></svg>'},{v:"bottom",svg:'<svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="21" x2="21" y2="21"/><rect x="7" y="3" width="10" height="14" rx="1"/></svg>'}];
-    vd.forEach(({v,svg})=>{const b=document.createElement("div");b.className="tbtn";b.innerHTML=svg;b.tabIndex=-1;b.dataset.valign=v;b.title="Vertical align: "+v;b.onmousedown=e=>e.preventDefault();b.onclick=()=>{setValign(v);updateTb();};tb.appendChild(b);});
+    const vd=[{v:"top",svg:'<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2" stroke-width="1.4"/><line x1="8" y1="7" x2="16" y2="7" stroke-width="2.2"/><line x1="8" y1="10.5" x2="13" y2="10.5" stroke-width="2.2"/></svg>'},{v:"middle",svg:'<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2" stroke-width="1.4"/><line x1="8" y1="10.5" x2="16" y2="10.5" stroke-width="2.2"/><line x1="8" y1="14" x2="13" y2="14" stroke-width="2.2"/></svg>'},{v:"bottom",svg:'<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2" stroke-width="1.4"/><line x1="8" y1="14" x2="16" y2="14" stroke-width="2.2"/><line x1="8" y1="17.5" x2="13" y2="17.5" stroke-width="2.2"/></svg>'}];
+    vd.forEach(({v,svg})=>{const b=document.createElement("div");b.className="tbtn";b.innerHTML=svg;b.tabIndex=-1;b.dataset.valign=v;b.title="Vertical align: "+v;b.onmousedown=e=>e.preventDefault();b.onclick=()=>{pushUndo("valign");setValign(v);updateTb();};tb.appendChild(b);});
     tb.appendChild(sep());
     const irg=document.createElement("div");irg.className="img-resize-group";imgResizeGroup=irg;
     const rl=document.createElement("span");rl.className="resize-label";rl.textContent="W";
     const rs=document.createElement("input");rs.type="range";rs.min=10;rs.max=100;rs.value=100;rs.step=5;imgResizeSlider=rs;
     const rv=document.createElement("span");rv.className="resize-val";rv.textContent="100%";imgResizeVal=rv;
     rs.onmousedown=e=>e.stopPropagation();rs.oninput=()=>{const w=Number(rs.value);rv.textContent=w+"%";setImgW(w);};
-    irg.appendChild(rl);irg.appendChild(rs);irg.appendChild(rv);tb.appendChild(irg);
+    irg.appendChild(rl);irg.appendChild(rs);irg.appendChild(rv);
+    const bgWrap=document.createElement("span");bgWrap.style.cssText="display:flex;align-items:center;gap:4px;border-left:1px solid #2b3b2b;padding-left:6px;margin-left:2px;";
+    const bgLabel=document.createElement("span");bgLabel.className="resize-label";bgLabel.textContent="BG";
+    const bgInput=document.createElement("input");bgInput.type="color";bgInput.value="#ffffff";bgInput.title="Backdrop colour behind image";bgInput.style.cssText="width:22px;height:18px;padding:0;border:1px solid #3a5a3a;border-radius:4px;background:none;cursor:pointer;";imgBgInput=bgInput;
+    bgInput.onmousedown=e=>e.stopPropagation();bgInput.oninput=()=>setImgBg(bgInput.value);
+    const bgClear=document.createElement("span");bgClear.textContent="\u00d7";bgClear.title="Remove backdrop";bgClear.style.cssText="cursor:pointer;color:#7dba7d;font-size:13px;line-height:1;padding:0 1px;";
+    bgClear.onmousedown=e=>e.stopPropagation();bgClear.onclick=()=>setImgBg(null);
+    bgWrap.appendChild(bgLabel);bgWrap.appendChild(bgInput);bgWrap.appendChild(bgClear);irg.appendChild(bgWrap);
+    tb.appendChild(irg);
     tb.appendChild(sep());
     // Draw: opens the drawing modal; the result is inserted as an image run so
     // it renders everywhere images do (Learn / Quiz / embed).
@@ -1900,11 +1985,11 @@ function makeEditor(edId,tbId,statusId,valignId){
       const h=["insertText","insertParagraph","insertLineBreak","deleteContentBackward","deleteContentForward","insertFromPaste"];
       if(!h.includes(e.inputType))return;e.preventDefault();
       switch(e.inputType){
-        case"insertText":if(e.data){selectedImage=null;insText(e.data);commit();}break;
-        case"insertParagraph":case"insertLineBreak":selectedImage=null;insPara();commit();break;
-        case"deleteContentBackward":selectedImage=null;delBack();commit();break;
-        case"deleteContentForward":selectedImage=null;delFwd();commit();break;
-        case"insertFromPaste":{const t=e.dataTransfer?.getData("text/plain")||"";if(t){selectedImage=null;pasteTxt(t);commit();}break;}
+        case"insertText":if(e.data){pushUndo("type");selectedImage=null;insText(e.data);commit();}break;
+        case"insertParagraph":case"insertLineBreak":pushUndo("para");selectedImage=null;insPara();commit();break;
+        case"deleteContentBackward":pushUndo("del");selectedImage=null;delBack();commit();break;
+        case"deleteContentForward":pushUndo("del");selectedImage=null;delFwd();commit();break;
+        case"insertFromPaste":{const t=e.dataTransfer?.getData("text/plain")||"";if(t){pushUndo("paste");selectedImage=null;pasteTxt(t);commit();}break;}
       }
     });
     ed.addEventListener("paste",e=>{
@@ -1921,7 +2006,7 @@ function makeEditor(edId,tbId,statusId,valignId){
       }
       e.preventDefault();
       const t=e.clipboardData.getData("text/plain")||"";
-      if(t){selectedImage=null;pasteTxt(t);commit();}
+      if(t){pushUndo("paste");selectedImage=null;pasteTxt(t);commit();}
     });
     ed.addEventListener("click",e=>{
       const w=e.target.closest("[data-img-run]");
@@ -1930,6 +2015,26 @@ function makeEditor(edId,tbId,statusId,valignId){
     });
     const onSC=()=>{if(!busy&&!pickerOpen)readSel();};
     ed.addEventListener("mouseup",onSC);ed.addEventListener("keyup",onSC);
+    ed.addEventListener("keydown",e=>{
+      if((e.ctrlKey||e.metaKey)&&!e.altKey){
+        const k=e.key.toLowerCase();
+        if(k==="z"&&!e.shiftKey){e.preventDefault();e.stopPropagation();undo();}
+        else if((k==="z"&&e.shiftKey)||k==="y"){e.preventDefault();e.stopPropagation();redo();}
+      }
+    });
+    // Clicking the empty area of the valign wrapper (above/below the text when
+    // it doesn't fill the box) should focus the editor and drop a caret, so you
+    // can always type even when content is short and vertically aligned.
+    valignEl.addEventListener("mousedown",e=>{
+      if(e.target!==valignEl)return;
+      e.preventDefault();ed.focus();
+      const lines=ed.querySelectorAll(".line");
+      if(!lines.length){cur={p:0,offset:0};sel=null;placeCaret(0,0);updateTb();return;}
+      const firstTop=lines[0].getBoundingClientRect().top;
+      if(e.clientY<firstTop)cur={p:0,offset:0};
+      else{const li=doc.length-1;cur={p:li,offset:plen(doc[li])};}
+      sel=null;placeCaret(cur.p,cur.offset);updateTb();
+    });
     document.addEventListener("selectionchange",()=>{if(!busy&&!pickerOpen&&document.activeElement===ed)onSC();});
   }
   function pasteTxt(t){const ls=t.replace(/\r\n/g,"\n").replace(/\r/g,"\n").split("\n");ls.forEach((l,i)=>{if(i>0)insPara();if(l)insText(l);});}
@@ -1945,7 +2050,7 @@ function makeEditor(edId,tbId,statusId,valignId){
     lines.forEach(le=>{
       const runs=[];
       le.childNodes.forEach(c=>{
-        if(c.nodeType===1&&c.dataset&&c.dataset.imgRun){const img=c.querySelector('img');if(img)runs.push(mkImage(img.src,parseInt(c.style.width)||100));}
+        if(c.nodeType===1&&c.dataset&&c.dataset.imgRun){const img=c.querySelector('img');if(img)runs.push(mkImage(img.src,parseInt(c.style.width)||100,c.style.backgroundColor||null));}
         else if(c.nodeType===1){const t=c.textContent.replace(/\u200B/g,'');if(!t)return;const r=mkRun(t);if(c.style.fontWeight==='bold')r.bold=true;if(c.style.fontStyle==='italic')r.italic=true;if(c.style.textDecoration==='underline')r.underline=true;if(c.style.color)r.color=c.style.color;if(c.style.fontSize)r.size=parseInt(c.style.fontSize);if(c.style.fontFamily)r.font=c.style.fontFamily;runs.push(r);}
       });
       doc.push(mkPara(runs.length?runs:[mkRun('')],le.style.textAlign||le.style.getPropertyValue('text-align')||'left'));
@@ -2002,7 +2107,7 @@ async function saveCurrentCard(){
   card.sideA=frontEditor.getHTML();
   card.sideB=backEditor.getHTML();
   try{
-    await DB_saveCard(set.id,card.id,card.sideA,card.sideB);
+    await DB_saveCard(set.id,card.id,card.sideA,card.sideB,card.bg);
     if(card.ytClip!==undefined)await db.cards.update(card.id,{ytClip:card.ytClip});
     setSaveStatus('saved');
   }catch(e){
@@ -2018,7 +2123,9 @@ async function saveCurrentCard(){
   }
 }
 function _fadeCards(fn){const wraps=document.querySelectorAll('.editor-wrap');wraps.forEach(w=>w.classList.add('card-fade'));setTimeout(()=>{fn();wraps.forEach(w=>w.classList.remove('card-fade'));},120);}
-function loadCardIntoEditors(card){_fadeCards(()=>{if(card){frontEditor.setHTML(card.sideA||'');backEditor.setHTML(card.sideB||'');}else{frontEditor.clear();backEditor.clear();}});setSaveStatus('saved');updateCardBar();renderTagbar();if(typeof ytBoss!=='undefined')ytBoss.syncCard();}
+function _setEditorBg(c){const f=document.getElementById('valign-front'),b=document.getElementById('valign-back');if(f)f.style.background=c||'';if(b)b.style.background=c||'';}
+function applyCardBg(c){const card=activeCard();if(!card)return;card.bg=c||null;_setEditorBg(c);const inp=document.getElementById('card-bg-input');if(inp&&c)inp.value=c;markDirty();}
+function loadCardIntoEditors(card){_fadeCards(()=>{if(card){frontEditor.setHTML(card.sideA||'');backEditor.setHTML(card.sideB||'');}else{frontEditor.clear();backEditor.clear();}});setSaveStatus('saved');updateCardBar();renderTagbar();_setEditorBg(card?card.bg:null);const _bi=document.getElementById('card-bg-input');if(_bi)_bi.value=(card&&card.bg)||'#16162a';if(typeof ytBoss!=='undefined')ytBoss.syncCard();}
 
 /* Tagbar rendering + persistence. Tags live on card.tags as a plain string[].
    Render: clear chips area, append a chip for each tag, leave the input alone.
@@ -2068,6 +2175,47 @@ async function removeTagFromCurrent(tag){
 }
 async function navigateCard(delta){await saveCurrentCard();const cards=activeCards();if(!cards.length)return;cardIndex=((cardIndex+delta)%cards.length+cards.length)%cards.length;loadCardIntoEditors(activeCard());}
 async function jumpToCard(idx){await saveCurrentCard();cardIndex=Math.max(0,Math.min(activeCards().length-1,idx));loadCardIntoEditors(activeCard());}
+async function commitCardOrder(newCards){const set=activeSet();if(!set||!set.cards)return;const curId=activeCard()?activeCard().id:null;set.cards=newCards;cardIndex=Math.max(0,newCards.findIndex(c=>c.id===curId));try{await db.sets.update(set.id,{cardIDs:newCards.map(c=>c.id)});}catch(err){console.error('reorder save failed',err);}updateCardBar();loadCardIntoEditors(activeCard());}
+function _cardPreview(card){const d=document.createElement('div');d.innerHTML=DOMPurify.sanitize(card.sideA||'');let t=(d.textContent||'').replace(/\u200B/g,'').trim();if(!t)return{text:'(no text / image card)',empty:true};if(t.length>46)t=t.slice(0,46)+'\u2026';return{text:t,empty:false};}
+function _wireReorderDrag(row,handle,getOrder,onDrop){
+  let dragging=false,list=null;
+  handle.addEventListener('pointerdown',e=>{e.preventDefault();dragging=true;list=row.parentElement;row.classList.add('dragging');try{handle.setPointerCapture(e.pointerId);}catch(_){}}); 
+  handle.addEventListener('pointermove',e=>{if(!dragging||!list)return;const rows=[...list.querySelectorAll('.reorder-row')];const y=e.clientY;let after=null;for(const r of rows){if(r===row)continue;const rect=r.getBoundingClientRect();if(y<rect.top+rect.height/2){after=r;break;}}if(after){if(after!==row.nextSibling)list.insertBefore(row,after);}else if(row!==list.lastElementChild)list.appendChild(row);});
+  handle.addEventListener('pointerup',()=>{if(!dragging)return;dragging=false;row.classList.remove('dragging');const rows=[...list.querySelectorAll('.reorder-row')];const byId=new Map(getOrder().map(c=>[String(c.id),c]));const newOrder=rows.map(r=>byId.get(r.dataset.id)).filter(Boolean);rows.forEach((r,i)=>{const pi=r.querySelector('.reorder-pos');if(pi)pi.value=i+1;});onDrop(newOrder);});
+}
+function _reorderOutside(e){const pop=document.getElementById('reorder-pop'),btn=document.getElementById('btn-reorder');if(pop&&!pop.contains(e.target)&&btn&&!btn.contains(e.target))closeReorderPop();}
+function closeReorderPop(){const pop=document.getElementById('reorder-pop');if(pop)pop.classList.remove('open');document.removeEventListener('mousedown',_reorderOutside);}
+async function openReorderPop(){
+  const set=activeSet();if(!set||!set.cards||!set.cards.length){toast('No cards to reorder','err');return;}
+  await saveCurrentCard();
+  let pop=document.getElementById('reorder-pop');
+  if(!pop){pop=document.createElement('div');pop.id='reorder-pop';document.body.appendChild(pop);}
+  let order=set.cards.slice();const curId=activeCard()?activeCard().id:null;
+  async function persist(){await commitCardOrder(order.slice());}
+  function rebuild(){
+    pop.innerHTML='';
+    const head=document.createElement('div');head.className='reorder-head';head.innerHTML='<span class="rh-title">Reorder cards</span><span class="rh-x">\u00d7</span>';head.querySelector('.rh-x').onclick=closeReorderPop;pop.appendChild(head);
+    const hint=document.createElement('div');hint.className='reorder-hint';hint.textContent='Drag the grip to reorder, type a number to set position, or click text to jump.';pop.appendChild(hint);
+    const list=document.createElement('div');list.className='reorder-list';pop.appendChild(list);
+    order.forEach((card,i)=>{
+      const row=document.createElement('div');row.className='reorder-row'+(card.id===curId?' current':'');row.dataset.id=card.id;
+      const grip=document.createElement('span');grip.className='reorder-grip';grip.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg>';
+      const pos=document.createElement('input');pos.className='reorder-pos';pos.type='number';pos.min=1;pos.max=order.length;pos.value=i+1;
+      pos.onclick=e=>e.stopPropagation();
+      pos.onchange=()=>{let v=parseInt(pos.value);if(isNaN(v)){pos.value=i+1;return;}v=Math.max(1,Math.min(order.length,v))-1;if(v===i){pos.value=i+1;return;}const[mv]=order.splice(i,1);order.splice(v,0,mv);rebuild();persist();};
+      const prev=_cardPreview(card);const pv=document.createElement('div');pv.className='reorder-prev'+(prev.empty?' empty':'');pv.textContent=prev.text;pv.title='Jump to this card';
+      pv.onclick=async()=>{await persist();const idx=activeCards().findIndex(c=>c.id===card.id);closeReorderPop();if(idx>=0)await jumpToCard(idx);};
+      _wireReorderDrag(row,grip,()=>order,no=>{order=no;persist();});
+      row.appendChild(grip);row.appendChild(pos);row.appendChild(pv);list.appendChild(row);
+    });
+  }
+  rebuild();
+  const btn=document.getElementById('btn-reorder'),r=btn.getBoundingClientRect();
+  pop.style.left=Math.max(8,Math.min(window.innerWidth-308,r.right-300))+'px';
+  pop.classList.add('open');
+  const ph=pop.offsetHeight;let top=r.bottom+6;if(top+ph>window.innerHeight-8)top=Math.max(8,r.top-ph-6);pop.style.top=top+'px';
+  setTimeout(()=>document.addEventListener('mousedown',_reorderOutside),0);
+}
 const MAX_CARDS=500;
 async function addCard(){const set=activeSet();if(!set)return;if(set.cards.length>=MAX_CARDS){toast(`Max ${MAX_CARDS} cards per set`,'err');return;}await saveCurrentCard();const newCard=await DB_addCard(set.id);set.cards.push(newCard);cardIndex=set.cards.length-1;loadCardIntoEditors(activeCard());toast('Card added','ok');}
 async function duplicateCard(){await saveCurrentCard();const set=activeSet(),card=activeCard();if(!set||!card)return;if(set.cards.length>=MAX_CARDS){toast(`Max ${MAX_CARDS} cards per set`,'err');return;}const newCard=await DB_addCard(set.id);newCard.sideA=card.sideA;newCard.sideB=card.sideB;newCard.tags=Array.isArray(card.tags)?card.tags.slice():[];await DB_saveCard(set.id,newCard.id,newCard.sideA,newCard.sideB);await db.cards.update(newCard.id,{tags:newCard.tags});set.cards.splice(cardIndex+1,0,newCard);const s=await db.sets.get(set.id);const idx=s.cardIDs.indexOf(newCard.id);if(idx>-1)s.cardIDs.splice(idx,1);s.cardIDs.splice(cardIndex+1,0,newCard.id);await db.sets.update(set.id,{cardIDs:s.cardIDs});cardIndex=cardIndex+1;loadCardIntoEditors(activeCard());toast('Card duplicated','ok');}
@@ -2085,7 +2233,7 @@ function closeSearch(){document.getElementById('search-overlay').classList.remov
 function renderSearchResults(query){const res=document.getElementById('search-results'),q=query.trim().toLowerCase();const closedSets=sets.filter(s=>s.closed===true),openSets=sets.filter(s=>s.closed!==true);const visibleClosed=q?closedSets.filter(s=>s.name.toLowerCase().includes(q)):closedSets;const cardMatches=[];if(q){openSets.forEach(set=>{(set.cards||[]).forEach((card,idx)=>{const tmp=document.createElement('div');tmp.innerHTML=DOMPurify.sanitize((card.sideA||'')+(card.sideB||''));const text=tmp.textContent||'';if(text.toLowerCase().includes(q))cardMatches.push({set,card,idx,text});});});}if(!visibleClosed.length&&!cardMatches.length){res.innerHTML=q?'<div id="search-empty">No results</div>':'<div id="search-empty">Start typing to search across all open sets</div>';return;}res.innerHTML='';if(visibleClosed.length){const lbl=document.createElement('div');lbl.className='search-section-label';lbl.textContent='Closed Sets';res.appendChild(lbl);visibleClosed.forEach(set=>{const n=(set.cards||[]).length;const item=document.createElement('div');item.className='search-result-item closed-set';item.innerHTML=`<div class="search-result-meta"><span class="search-result-set">${DOMPurify.sanitize(set.name)}</span><span class="search-result-text" style="color:#2a2a4a">${n} card${n!==1?'s':''}</span></div><span class="search-reopen-tag">Reopen</span>`;item.addEventListener('click',async()=>{closeSearch();await reopenSet(set.id);enterCreateMode();});res.appendChild(item);});}if(cardMatches.length){const lbl=document.createElement('div');lbl.className='search-section-label';lbl.textContent='Card Matches';res.appendChild(lbl);cardMatches.slice(0,30).forEach(({set,idx,text})=>{const item=document.createElement('div');item.className='search-result-item';const snippet=text.slice(0,120).trim();const safeQ=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');const parts=snippet.split(new RegExp('('+safeQ+')','gi'));const hiHtml=parts.map(p=>p.toLowerCase()===q?'<mark>'+DOMPurify.sanitize(p)+'</mark>':DOMPurify.sanitize(p)).join('');item.innerHTML=`<div class="search-result-meta"><span class="search-result-set">${DOMPurify.sanitize(set.name)}</span><span class="search-result-text">${hiHtml}</span></div>`;item.addEventListener('click',async()=>{closeSearch();await selectSet(set.id);await jumpToCard(idx);});res.appendChild(item);});}}
 function openShortcuts(){document.getElementById('shortcuts-modal').classList.add('open');}
 function closeShortcuts(){document.getElementById('shortcuts-modal').classList.remove('open');}
-function exportSet(){const set=activeSet();if(!set){toast('No active set','err');return;}const data={name:set.name,version:2,cards:set.cards.map(c=>({sideA:c.sideA,sideB:c.sideB,sr:c.sr||null})),exported:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(set.name||'flashcards').replace(/[^a-z0-9]/gi,'_')+'.json';a.click();URL.revokeObjectURL(a.href);toast('Exported "'+set.name+'"','ok');}
+function exportSet(){const set=activeSet();if(!set){toast('No active set','err');return;}const data={name:set.name,version:2,cards:set.cards.map(c=>({sideA:c.sideA,sideB:c.sideB,sr:c.sr||null,bg:c.bg||null})),exported:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(set.name||'flashcards').replace(/[^a-z0-9]/gi,'_')+'.json';a.click();URL.revokeObjectURL(a.href);toast('Exported "'+set.name+'"','ok');}
 
 /* Self-contained embed snippet for the current set. The output is an
    <iframe srcdoc="..."> wrapping a complete HTML document (CSS + JS + cards
@@ -2120,6 +2268,7 @@ function _buildEmbedDoc(setName,setYtVideoId,cards){
       out.s=c.ytClip.startMs;
       out.e=c.ytClip.endMs;
     }
+    if(c.bg)out.bg=c.bg;
     return out;
   });
   // Validate the video id strictly — defense in depth before it goes into a URL.
@@ -2290,7 +2439,7 @@ function _buildEmbedDoc(setName,setYtVideoId,cards){
         'pauseClip();'+
         'cd.classList.remove("fl");'+
         'var c=cards[ord[idx]];'+
-        'if(reversed){ft.innerHTML=c.back;bk.innerHTML=c.front;}else{ft.innerHTML=c.front;bk.innerHTML=c.back;}'+
+        'if(reversed){ft.innerHTML=c.back;bk.innerHTML=c.front;}else{ft.innerHTML=c.front;bk.innerHTML=c.back;}ft.style.background=c.bg||"";bk.style.background=c.bg||"";'+
         'po.textContent=idx+1;'+
         // Play button shown only when the current card has timings
         'if(ytId&&typeof c.s==="number"&&typeof c.e==="number")pl.classList.add("show");else pl.classList.remove("show");'+
@@ -2438,20 +2587,47 @@ async function importSet(file){
     // Per-set format
     if(!data.cards||!Array.isArray(data.cards))throw new Error('Invalid format');
     const name=(data.name||file.name.replace('.json',''))+'';
-    toast('Importing\u2026','info');
-    const ns=await DB_bulkImport(name,data.cards);
-    ns.closed=false;
-    if(data.ytVideoId){ns.ytVideoId=data.ytVideoId;await DB_saveSetVideo(ns.id,data.ytVideoId);}
-    sets.push(ns);
-    slider.addTab(ns.id,ns.name);
-    await selectSet(ns.id);
-    const got=ns.cards.length,asked=Array.isArray(data.cards)?data.cards.length:0;
-    const skipped=Math.max(0,asked-got);
-    toast('Imported "'+name+'" ('+got+' card'+(got!==1?'s':'')+(skipped?', '+skipped+' skipped':'')+')',skipped?'info':'ok');
+    // If a set is open, offer a choice: bring the cards in HERE, or create a
+    // new set (the old behavior). No active set -> new set, no question.
+    if(activeSet()){_pendingImport={data,name};openImportChoice(name,data.cards.length);return;}
+    await _importAsNewSet(data,name);
   }catch(e){
     console.error('Import error:',e);
     toast('Import failed: '+(e.message||'Invalid file'),'err');
   }
+}
+let _pendingImport=null;
+function openImportChoice(name,count){
+  const m=document.getElementById('import-choice');
+  document.getElementById('ic-stats').textContent='"'+name+'" \u00b7 '+count+' card'+(count!==1?'s':'');
+  const cur=activeSet();
+  document.getElementById('ic-merge').textContent='Add to "'+(cur?cur.name:'current set')+'"';
+  m.classList.add('show');
+}
+function closeImportChoice(){document.getElementById('import-choice').classList.remove('show');_pendingImport=null;}
+async function _importAsNewSet(data,name){
+  toast('Importing\u2026','info');
+  const ns=await DB_bulkImport(name,data.cards);
+  ns.closed=false;
+  if(data.ytVideoId){ns.ytVideoId=data.ytVideoId;await DB_saveSetVideo(ns.id,data.ytVideoId);}
+  sets.push(ns);
+  slider.addTab(ns.id,ns.name);
+  await selectSet(ns.id);
+  const got=ns.cards.length,asked=Array.isArray(data.cards)?data.cards.length:0;
+  const skipped=Math.max(0,asked-got);
+  toast('Imported "'+name+'" ('+got+' card'+(got!==1?'s':'')+(skipped?', '+skipped+' skipped':'')+')',skipped?'info':'ok');
+}
+async function _importIntoCurrent(data){
+  const set=activeSet();if(!set){toast('No active set','err');return;}
+  await saveCurrentCard();
+  toast('Importing\u2026','info');
+  const res=await DB_mergeCards(set.id,data.cards);
+  set.cards.push(...res.added);
+  if(res.added.length)cardIndex=set.cards.length-res.added.length; // land on first imported card
+  updateCardBar();loadCardIntoEditors(activeCard());
+  const bits=[];if(res.skipped)bits.push(res.skipped+' skipped');if(res.overflow)bits.push(res.overflow+' over the '+MAX_CARDS+'-card limit');
+  if(!res.added.length){toast('Nothing imported'+(bits.length?' ('+bits.join(', ')+')':''),'err');return;}
+  toast('Added '+res.added.length+' card'+(res.added.length!==1?'s':'')+' to "'+set.name+'"'+(bits.length?' ('+bits.join(', ')+')':''),bits.length?'info':'ok');
 }
 /* Full-data backup: every set, every card, every bit of info. JSON only —
    simple to inspect, simple to round-trip. Triggers a file download. */
@@ -2748,6 +2924,9 @@ function wireEvents(){
   });
   document.getElementById('btn-dup-card').addEventListener('click',()=>duplicateCard());
   document.getElementById('btn-del-card').addEventListener('click',()=>deleteCurrentCard());
+  document.getElementById('btn-reorder').addEventListener('click',openReorderPop);
+  document.getElementById('card-bg-input').addEventListener('input',e=>applyCardBg(e.target.value));
+  document.getElementById('card-bg-clear').addEventListener('click',()=>applyCardBg(null));
   ['ed-front','ed-back'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('input',()=>markDirty());el.addEventListener('blur',()=>{clearTimeout(autoSaveTimer);saveCurrentCard();});});
   document.getElementById('search-input').addEventListener('input',e=>renderSearchResults(e.target.value));
   document.getElementById('search-close').addEventListener('click',closeSearch);
@@ -2784,6 +2963,9 @@ function wireEvents(){
   }));
   document.getElementById('btn-import').addEventListener('click',()=>document.getElementById('import-input').click());
   document.getElementById('import-input').addEventListener('change',e=>{if(e.target.files[0]){importSet(e.target.files[0]);e.target.value='';}});
+  document.getElementById('ic-cancel').addEventListener('click',closeImportChoice);
+  document.getElementById('ic-new').addEventListener('click',async()=>{const p=_pendingImport;closeImportChoice();if(!p)return;try{await _importAsNewSet(p.data,p.name);}catch(e){console.error(e);toast('Import failed: '+(e.message||'error'),'err');}});
+  document.getElementById('ic-merge').addEventListener('click',async()=>{const p=_pendingImport;closeImportChoice();if(!p)return;try{await _importIntoCurrent(p.data);}catch(e){console.error(e);toast('Import failed: '+(e.message||'error'),'err');}});
   /* Full backup/restore handlers and reminder. The status text under the
      buttons shows time since last backup; goes amber after a week, red after a month. */
   document.getElementById('btn-backup-all').addEventListener('click',doBackupAll);
@@ -2801,10 +2983,10 @@ function wireEvents(){
   document.addEventListener('keydown',e=>{
     const inInput=document.activeElement&&['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName);
     const inEditor=document.activeElement&&document.activeElement.classList.contains('editor');
-    if(e.key==='Escape'){closeSearch();closeShortcuts();closeAI();}
+    if(e.key==='Escape'){closeSearch();closeShortcuts();closeAI();closeReorderPop();closeImportChoice();}
     if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}
     if(e.key==='?'&&!inInput&&!inEditor){openShortcuts();return;}
-    if(e.key==='z'&&(e.metaKey||e.ctrlKey)&&!e.shiftKey){e.preventDefault();_undo();return;}
+    if(e.key==='z'&&(e.metaKey||e.ctrlKey)&&!e.shiftKey&&!inEditor){e.preventDefault();_undo();return;}
     if(!inInput&&!inEditor){
       if(currentMode==='learn'){if(e.key==='1'){e.preventDefault();learnBoss._rateKey(0);}else if(e.key==='2'){e.preventDefault();learnBoss._rateKey(1);}else if(e.key==='3'){e.preventDefault();learnBoss._rateKey(2);}}
       else if(currentMode==='question'){if(/^[1-6]$/.test(e.key)){e.preventDefault();questionBoss._keyAnswer(parseInt(e.key,10)-1);}}
@@ -2815,24 +2997,6 @@ function wireEvents(){
 }
 // First-run sample deck: shows new users a working deck (rich text, colour,
 // font size, alignment, and Thai) instead of a blank app. Seeded once.
-const SAMPLE_DECK=[
- {sideA:'<div class="line">How do I study a deck?</div>',
-  sideB:'<div class="line">Open <b>Learn</b> from the sidebar, flip a card with <b>Space</b> (or tap it), then rate how well you knew it \u2014 spaced repetition schedules the rest for you.</div>'},
- {sideA:'<div class="line">How do I make my own cards?</div>',
-  sideB:'<div class="line">Open <b>Create</b>, then type the Front and Back. The toolbar adds <b>bold</b>, <span style="color:#60a5fa">colour</span>, images, and even a freehand <b>drawing</b> tool.</div>'},
- {sideA:'<div class="line">Can I add a video to a card?</div>',
-  sideB:'<div class="line">Yes. Open the <b>video</b> panel from the card bar, paste a YouTube link, then mark a <b>start</b> and <b>end</b> point to pin an exact clip to a card. It plays in <b>Learn</b> and travels with the deck if you embed it.</div>'},
- {sideA:'<div class="line">Can I quiz myself?</div>',
-  sideB:'<div class="line">Yes \u2014 <b>Quiz</b> mode turns any deck into multiple-choice questions automatically.</div>'},
- {sideA:'<div class="line">Can I share or embed a deck?</div>',
-  sideB:'<div class="line">From <b>Manage</b> you can export a deck or grab an <b>embed</b> snippet to drop a playable deck into a website or blog post.</div>'},
- {sideA:'<div class="line">Where is my data kept?</div>',
-  sideB:'<div class="line">Right here in <b>your browser</b> \u2014 private and offline. Back up from <b>Manage</b> now and then so a cleared browser never costs you a deck.</div>'}
-];
-async function seedSampleDeck(){
-  const ns=await DB_bulkImport('Welcome to In a Flash',SAMPLE_DECK);
-  ns.closed=false;sets.push(ns);slider.addTab(ns.id,ns.name);await selectSet(ns.id);
-}
 function showWelcome(){
   if(document.getElementById('welcome-modal'))return;
   const ov=document.createElement('div');ov.id='welcome-modal';
@@ -2841,7 +3005,7 @@ function showWelcome(){
    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:11px;">'
    +'<svg width="27" height="27" viewBox="0 0 24 24"><defs><linearGradient id="wgc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2748"/><stop offset="1" stop-color="#10131f"/></linearGradient><linearGradient id="wgb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7cb0ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><rect x="1.5" y="1.5" width="21" height="21" rx="5" fill="url(#wgc)" stroke="#2b3a5e" stroke-width="0.8"/><polygon points="12.67 4.5 6 13.5 12 13.5 11.33 19.5 18 10.5 12 10.5 12.67 4.5" fill="url(#wgb)"/></svg>'
    +'<div style="font-size:17px;font-weight:600;color:#ededf7;">Welcome to In a Flash</div></div>'
-   +'<p style="margin:0 0 12px;font-size:13.5px;line-height:1.6;color:#c2c2d4;">We\u2019ve added a <b>sample deck</b> to get you going. Tap <b>Learn</b> in the sidebar to try studying it, or open <b>Create</b> to start building your own.</p>'
+   +'<p style="margin:0 0 12px;font-size:13.5px;line-height:1.6;color:#c2c2d4;">Open <b>Create</b> to build your first cards, then study them in <b>Learn</b>. New here? The <b>Guide</b> &mdash; the book icon at the bottom of the left bar &mdash; walks through every feature, including images, drawings, and video clips.</p>'
    +'<div style="background:#101019;border:1px solid #24243a;border-radius:10px;padding:11px 12px;margin-bottom:16px;">'
    +'<div style="font-size:12px;font-weight:600;color:#9fb6ff;margin-bottom:3px;">Your data stays on this device</div>'
    +'<div style="font-size:12px;line-height:1.55;color:#9a9ab0;">Decks are saved in this browser \u2014 private and offline-ready. They can be lost if you clear site data or use private / incognito mode, so <b style="color:#c8c8da">back up regularly</b> from Manage.</div></div>'
@@ -2875,7 +3039,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
     try{
       const _info=await db.info.get('info');
       if(_info&&_info.seeded){await createSet('Set 1');}
-      else{await seedSampleDeck();await db.info.update('info',{seeded:true});showWelcome();}
+      else{await createSet('Set 1');await db.info.update('info',{seeded:true});showWelcome();}
     }catch(e){console.error('first-run setup failed:',e);try{await createSet('Set 1');}catch(_){updateCardBar();}}
   }
   setSaveStatus('saved');updateCardBar();

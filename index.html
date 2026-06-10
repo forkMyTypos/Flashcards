@@ -34,7 +34,7 @@ document.head.appendChild(_mfLink);
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22ifc%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231c2748%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2310131f%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22ifb%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237cb0ff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233b82f6%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%221.5%22%20y%3D%221.5%22%20width%3D%2221%22%20height%3D%2221%22%20rx%3D%225%22%20fill%3D%22url(%23ifc)%22%20stroke%3D%22%232b3a5e%22%20stroke-width%3D%220.8%22%2F%3E%3Cpolygon%20points%3D%2212.67%204.5%206%2013.5%2012%2013.5%2011.33%2019.5%2018%2010.5%2012%2010.5%2012.67%204.5%22%20fill%3D%22url(%23ifb)%22%2F%3E%3C%2Fsvg%3E"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:Arial,sans-serif;background:#111;color:#e0e0e0;height:100vh;overflow:hidden;display:flex;flex-direction:column;background-image:radial-gradient(circle at 20% 30%,#1a1a2e 0%,#111 60%);}
+body{font-family:Arial,sans-serif;background:#111;color:#e0e0e0;height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column;background-image:radial-gradient(circle at 20% 30%,#1a1a2e 0%,#111 60%);}
 .flex{display:flex;}.flexMe{display:flex;align-items:center;justify-content:center;}.alignMe{align-items:center;}.justMe{justify-content:center;}.col{flex-direction:column;}.flex1{flex:1;}.h100p{height:100%;}.hFit{height:fit-content;}.w100p{width:100%;}.noBor{border:none;}.borB{border-bottom:0.1em solid #1e1e2e;}.borBTitle{border-bottom:1px solid #2a2a3a;}.noOut{outline:none;}.mar1em{margin:1em;}.marL1em{margin-left:1em;}.pad0p6em{padding:0.6em;}.fs1em{font-size:1em;}.overflow{overflow:auto;}.scrollY{overflow-y:auto;}.darkBg{background:#10101a;}.cole0{color:#e0e0f0;}.col4a{color:#4a4a6a;}.bgTrans{background:transparent;}.pointer{cursor:pointer;}.cursor{cursor:default;}.none{display:none;}.delOn{background:#2a1818;color:#f87171;}
 input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;}
 input[type="number"]{-moz-appearance:textfield;}
@@ -673,7 +673,21 @@ input[type="number"]{-moz-appearance:textfield;}
   #browser-shell .rh,#yt-shell .rh{display:none!important;}
   .learn-shell{width:min(440px,calc(100vw - 84px))!important;min-width:0!important;}
   .learn-topbar{flex-wrap:wrap;}
-  #cardbar{flex-wrap:wrap;}
+  /* Titlebar: logo shrinks to the mark, tabs own row 1, action buttons drop
+     to their own full-width row underneath — nothing overlaps the tabs. */
+  #titlebar{flex-wrap:wrap;padding:8px;row-gap:6px;gap:6px;}
+  #app-label .al-name{display:none;}
+  #titlebar .divider{display:none;}
+  .title-actions{order:3;width:100%;margin-left:0;justify-content:flex-end;flex-wrap:wrap;row-gap:4px;}
+  .set-tab{font-size:1.05rem;padding:0 10px;height:32px;}
+  .tCont .len,.tCont .arrow,.tb-search-btn,.tCont .add{height:32px;}
+  /* Cardbar + editor toolbars: one compact row you can swipe sideways,
+     instead of wrapping into a tall stack. */
+  #cardbar{flex-wrap:nowrap;overflow-x:auto;gap:6px;padding:6px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  #cardbar::-webkit-scrollbar{display:none;}
+  .toolbar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .toolbar::-webkit-scrollbar{display:none;}
+  #tagbar{flex-wrap:wrap;padding:4px 8px;}
 }
 </style>
 </head>

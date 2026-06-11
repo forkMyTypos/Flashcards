@@ -325,16 +325,17 @@ input[type="number"]{-moz-appearance:textfield;}
 #restore-confirm button{height:30px;padding:0 14px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#e0e0e0;}
 #restore-confirm button.confirm{background:#5a1e1e;border-color:#f87171;color:#f87171;}
 #restore-confirm button.confirm:hover{background:#7a2828;}
-#import-choice{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:5000;}
-#import-choice.show{display:flex;}
-#import-choice .rc-box{background:#16162a;border:1px solid #2a3a5a;border-radius:8px;padding:20px;max-width:440px;color:#e0e0e0;}
-#import-choice .rc-title{font-size:15px;font-weight:700;color:#7cb0ff;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
-#import-choice .rc-body{font-size:13px;line-height:1.5;color:#a0a0c0;margin-bottom:14px;}
-#import-choice .rc-stats{background:#1a1a2a;border-radius:6px;padding:8px 12px;margin-bottom:14px;font-family:monospace;font-size:11px;color:#7ec4b8;}
-#import-choice .rc-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;}
-#import-choice button{height:30px;padding:0 14px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#e0e0e0;}
-#import-choice button.confirm{background:#1a2540;border-color:#3b82f6;color:#7cb0ff;}
-#import-choice button.confirm:hover{background:#22325a;}
+#import-choice,#export-choice,#import-pick{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:5000;}
+#import-choice.show,#export-choice.show,#import-pick.show{display:flex;}
+#import-choice .rc-box,#export-choice .rc-box,#import-pick .rc-box{background:#16162a;border:1px solid #2a3a5a;border-radius:8px;padding:20px;max-width:440px;color:#e0e0e0;}
+#import-choice .rc-title,#export-choice .rc-title,#import-pick .rc-title{font-size:15px;font-weight:700;color:#7cb0ff;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+#import-choice .rc-body,#export-choice .rc-body,#import-pick .rc-body{font-size:13px;line-height:1.5;color:#a0a0c0;margin-bottom:14px;}
+#import-choice .rc-stats,#export-choice .rc-stats{background:#1a1a2a;border-radius:6px;padding:8px 12px;margin-bottom:14px;font-family:monospace;font-size:11px;color:#7ec4b8;}
+#import-choice .rc-actions,#export-choice .rc-actions,#import-pick .rc-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;}
+#import-choice button,#export-choice button,#import-pick button{height:30px;padding:0 14px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#e0e0e0;}
+#import-choice button.confirm,#export-choice button.confirm,#import-pick button.confirm{background:#1a2540;border-color:#3b82f6;color:#7cb0ff;}
+#import-choice button.confirm:hover,#export-choice button.confirm:hover,#import-pick button.confirm:hover{background:#22325a;}
+#import-pick .rc-box{width:min(440px,92vw);}#import-pick .ip-file-btn{width:100%;height:38px;margin-bottom:4px;border:1px dashed #3a4a6a;background:#13131e;color:#a3c4e0;border-radius:7px;font-size:12.5px;font-weight:600;cursor:pointer;}#import-pick .ip-file-btn:hover{background:#1a2540;border-color:#3b82f6;}#import-pick .ip-or{font-size:10.5px;color:#6a6a88;text-transform:uppercase;letter-spacing:.08em;margin:10px 0 6px;text-align:center;}#ip-paste{width:100%;box-sizing:border-box;height:120px;resize:vertical;background:#10101a;border:1px solid #2a2a3a;border-radius:7px;color:#c2e0c2;font-family:monospace;font-size:11px;padding:8px 10px;margin-bottom:12px;outline:none;}#ip-paste:focus{border-color:#3b82f6;}
 .manage-row:hover{background:#13131e;}
 .manage-row-closed{opacity:0.55;}.manage-row-closed:hover{opacity:0.8;}
 .manage-row-info{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
@@ -719,8 +720,8 @@ input[type="number"]{-moz-appearance:textfield;}
     <div class="title-actions">
       <button class="title-btn ai-btn" id="btn-ai"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><circle cx="19" cy="5" r="3" fill="currentColor" stroke="none" opacity=".7"/></svg>AI Generate</button>
       <button class="title-btn" id="btn-export"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
-      <button class="title-btn" id="btn-embed" title="Generate a copy-paste embed snippet for the current set"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Embed</button>
       <button class="title-btn" id="btn-import"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import</button>
+      <button class="title-btn" id="btn-embed" title="Generate a copy-paste embed snippet for the current set"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Embed</button>
     </div>
   </div>
   <!-- Backup reminder: shown on app load when >7 days since last full backup
@@ -917,6 +918,31 @@ input[type="number"]{-moz-appearance:textfield;}
       <button id="ic-cancel">Cancel</button>
       <button id="ic-new">New set</button>
       <button class="confirm" id="ic-merge">Add to current set</button>
+    </div>
+  </div>
+</div>
+<div id="export-choice" class="ip-modal">
+  <div class="rc-box ic-box">
+    <div class="rc-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</div>
+    <div class="rc-body">Export just this set, or back up everything?</div>
+    <div class="rc-stats" id="ec-stats"></div>
+    <div class="rc-actions ic-actions">
+      <button id="ec-cancel">Cancel</button>
+      <button id="ec-all">Everything (backup)</button>
+      <button class="confirm" id="ec-set">This set</button>
+    </div>
+  </div>
+</div>
+<div id="import-pick" class="ip-modal">
+  <div class="rc-box ic-box">
+    <div class="rc-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import</div>
+    <div class="rc-body">Import a JSON file, or paste JSON below. Set files and full backups are auto-detected.</div>
+    <button class="ip-file-btn" id="ip-file">Choose a .json file&hellip;</button>
+    <div class="ip-or">or paste JSON</div>
+    <textarea id="ip-paste" spellcheck="false" placeholder='{"name":"My set","cards":[{"sideA":"...","sideB":"..."}]}'></textarea>
+    <div class="rc-actions ic-actions">
+      <button id="ip-cancel">Cancel</button>
+      <button class="confirm" id="ip-go">Import pasted JSON</button>
     </div>
   </div>
 </div>
@@ -1999,6 +2025,18 @@ function makeEditor(edId,tbId,statusId,valignId){
     drawBtn.onclick=()=>{readSel();const sc={...cur},ss=sel?{...sel}:null;
       openDrawModal(url=>{cur=sc;sel=ss;busy=false;selectedImage=null;insImg(url);sel=null;commit();});};
     tb.appendChild(drawBtn);
+    // Image by URL: hotlinks <img src="https://..."> instead of embedding
+    // base64, keeping cards/exports small. Needs the host to allow hotlinking.
+    const linkImgBtn=document.createElement("div");linkImgBtn.className="tbtn";linkImgBtn.title="Insert image from URL (hotlink)";linkImgBtn.tabIndex=-1;
+    linkImgBtn.innerHTML='<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/><path d="M14 4h6v6" stroke-width="0" fill="none"/></svg>';
+    linkImgBtn.onmousedown=e=>e.preventDefault();
+    linkImgBtn.onclick=()=>{readSel();const sc={...cur},ss=sel?{...sel}:null;
+      const u=(window.prompt('Image URL (https://\u2026)')||'').trim();
+      cur=sc;sel=ss;
+      if(!u)return;
+      if(!/^https?:\/\//i.test(u)){toast('URL must start with http(s)://','err');return;}
+      busy=false;selectedImage=null;insImg(u);sel=null;commit();};
+    tb.appendChild(linkImgBtn);
   }
   function bindEv(){
     ed.addEventListener("beforeinput",e=>{
@@ -2593,31 +2631,32 @@ async function copyEmbedCode(){
 async function importSet(file){
   try{
     const text=await file.text();
-    const data=JSON.parse(text);
-    // Auto-detect format: full-backup files have data.sets + data.cards arrays.
-    // If we see one, route to the restore-with-confirmation flow instead of
-    // treating it as a single-set import. Same Import button handles both.
-    if(data&&data.data&&Array.isArray(data.data.sets)&&Array.isArray(data.data.cards)){
-      _pendingRestore=data;
-      const when=data.exportedAt?new Date(data.exportedAt).toLocaleString():'unknown date';
-      document.getElementById('rc-stats').textContent=
-        '\u00b7 '+data.data.sets.length+' sets\n'+
-        '\u00b7 '+data.data.cards.length+' cards\n'+
-        '\u00b7 Exported: '+when;
-      document.getElementById('restore-confirm').classList.add('show');
-      return;
-    }
-    // Per-set format
-    if(!data.cards||!Array.isArray(data.cards))throw new Error('Invalid format');
-    const name=(data.name||file.name.replace('.json',''))+'';
-    // If a set is open, offer a choice: bring the cards in HERE, or create a
-    // new set (the old behavior). No active set -> new set, no question.
-    if(activeSet()){_pendingImport={data,name};openImportChoice(name,data.cards.length);return;}
-    await _importAsNewSet(data,name);
+    await importJSONText(text,file.name.replace('.json',''));
   }catch(e){
     console.error('Import error:',e);
     toast('Import failed: '+(e.message||'Invalid file'),'err');
   }
+}
+/* Shared pipeline for file imports AND pasted JSON. Auto-detects format:
+   full-backup files (data.sets + data.cards) route to the restore-with-
+   confirmation flow; per-set files go to the new-set / merge chooser. */
+async function importJSONText(text,fallbackName){
+  let data;
+  try{data=JSON.parse(text);}catch(_){throw new Error('Not valid JSON');}
+  if(data&&data.data&&Array.isArray(data.data.sets)&&Array.isArray(data.data.cards)){
+    _pendingRestore=data;
+    const when=data.exportedAt?new Date(data.exportedAt).toLocaleString():'unknown date';
+    document.getElementById('rc-stats').textContent=
+      '\u00b7 '+data.data.sets.length+' sets\n'+
+      '\u00b7 '+data.data.cards.length+' cards\n'+
+      '\u00b7 Exported: '+when;
+    document.getElementById('restore-confirm').classList.add('show');
+    return;
+  }
+  if(!data.cards||!Array.isArray(data.cards))throw new Error('Invalid format');
+  const name=(data.name||fallbackName||'Imported set')+'';
+  if(activeSet()){_pendingImport={data,name};openImportChoice(name,data.cards.length);return;}
+  await _importAsNewSet(data,name);
 }
 let _pendingImport=null;
 function openImportChoice(name,count){
@@ -2628,6 +2667,25 @@ function openImportChoice(name,count){
   m.classList.add('show');
 }
 function closeImportChoice(){document.getElementById('import-choice').classList.remove('show');_pendingImport=null;}
+/* Export chooser: this set only, or a full everything-backup. */
+function openExportChoice(){
+  const set=activeSet();
+  if(!set){doBackupAll();return;} // nothing active -> only sensible export is everything
+  const totalSets=sets.length,totalCards=sets.reduce((n,s)=>n+(s.cards?s.cards.length:0),0);
+  document.getElementById('ec-stats').textContent='This set: "'+set.name+'" \u00b7 '+set.cards.length+' card'+(set.cards.length!==1?'s':'')+'\nEverything: '+totalSets+' set'+(totalSets!==1?'s':'')+' \u00b7 '+totalCards+' card'+(totalCards!==1?'s':'');
+  document.getElementById('export-choice').classList.add('show');
+}
+function closeExportChoice(){document.getElementById('export-choice').classList.remove('show');}
+/* Import picker: file, or pasted JSON. */
+function openImportPick(){document.getElementById('ip-paste').value='';document.getElementById('import-pick').classList.add('show');}
+function closeImportPick(){document.getElementById('import-pick').classList.remove('show');}
+async function importPasted(){
+  const text=document.getElementById('ip-paste').value.trim();
+  if(!text){toast('Paste some JSON first','err');return;}
+  closeImportPick();
+  try{await importJSONText(text,'Pasted set');}
+  catch(e){console.error('Paste import error:',e);toast('Import failed: '+(e.message||'Invalid JSON'),'err');}
+}
 async function _importAsNewSet(data,name){
   toast('Importing\u2026','info');
   const ns=await DB_bulkImport(name,data.cards);
@@ -2663,7 +2721,7 @@ async function doBackupAll(){
     const stamp=new Date().toISOString().slice(0,10);
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
-    a.download='flashcard-studio-backup-'+stamp+'.json';
+    a.download='inaflash-backup-'+stamp+'.json';
     a.click();
     URL.revokeObjectURL(a.href);
     const iso=new Date().toISOString();
@@ -2972,7 +3030,10 @@ function wireEvents(){
   document.getElementById('sb-info').addEventListener('click',()=>openInfo('about'));
   document.getElementById('sb-guide').addEventListener('click',()=>openInfo('guide'));
   document.getElementById('ai-key').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();document.getElementById('ai-topic').focus();}});
-  document.getElementById('btn-export').addEventListener('click',exportSet);
+  document.getElementById('btn-export').addEventListener('click',openExportChoice);
+  document.getElementById('ec-cancel').addEventListener('click',closeExportChoice);
+  document.getElementById('ec-set').addEventListener('click',()=>{closeExportChoice();exportSet();});
+  document.getElementById('ec-all').addEventListener('click',()=>{closeExportChoice();doBackupAll();});
   document.getElementById('btn-embed').addEventListener('click',openEmbedModal);
   document.getElementById('embed-close').addEventListener('click',closeEmbedModal);
   document.getElementById('embed-done').addEventListener('click',closeEmbedModal);
@@ -2984,7 +3045,10 @@ function wireEvents(){
     _embedSize=b.dataset.size||'medium';
     _refreshEmbedPreview();
   }));
-  document.getElementById('btn-import').addEventListener('click',()=>document.getElementById('import-input').click());
+  document.getElementById('btn-import').addEventListener('click',openImportPick);
+  document.getElementById('ip-file').addEventListener('click',()=>{closeImportPick();document.getElementById('import-input').click();});
+  document.getElementById('ip-cancel').addEventListener('click',closeImportPick);
+  document.getElementById('ip-go').addEventListener('click',importPasted);
   document.getElementById('import-input').addEventListener('change',e=>{if(e.target.files[0]){importSet(e.target.files[0]);e.target.value='';}});
   document.getElementById('ic-cancel').addEventListener('click',closeImportChoice);
   document.getElementById('ic-new').addEventListener('click',async()=>{const p=_pendingImport;closeImportChoice();if(!p)return;try{await _importAsNewSet(p.data,p.name);}catch(e){console.error(e);toast('Import failed: '+(e.message||'error'),'err');}});
@@ -3006,7 +3070,7 @@ function wireEvents(){
   document.addEventListener('keydown',e=>{
     const inInput=document.activeElement&&['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName);
     const inEditor=document.activeElement&&document.activeElement.classList.contains('editor');
-    if(e.key==='Escape'){closeSearch();closeShortcuts();closeAI();closeReorderPop();closeImportChoice();}
+    if(e.key==='Escape'){closeSearch();closeShortcuts();closeAI();closeReorderPop();closeImportChoice();closeExportChoice();closeImportPick();}
     if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}
     if(e.key==='?'&&!inInput&&!inEditor){openShortcuts();return;}
     if(e.key==='z'&&(e.metaKey||e.ctrlKey)&&!e.shiftKey&&!inEditor){e.preventDefault();_undo();return;}

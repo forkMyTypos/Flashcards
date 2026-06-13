@@ -120,11 +120,26 @@ input[type="number"]{-moz-appearance:textfield;}
 #card-pos-input:focus,#card-total-input:focus{border-color:#3b82f6;}
 .card-sep{color:#44445a;font-size:13px;}
 .cardbar-btn{height:26px;padding:0 10px;border-radius:6px;border:1px solid #2a2a3a;background:#1a1a2a;color:#9090a8;font-size:11px;display:flex;align-items:center;gap:4px;cursor:pointer;transition:background .12s,color .12s,border-color .12s;}
-.cardbar-btn:disabled{opacity:.35;cursor:default;pointer-events:none;}
-#card-bg-ctrl{display:flex;align-items:center;gap:3px;height:26px;padding:0 5px;border:1px solid #2a2a3a;border-radius:6px;background:#1a1a2a;}
-#card-bg-input{width:20px;height:18px;padding:0;border:1px solid #33334a;border-radius:4px;background:none;cursor:pointer;}
-#card-bg-clear{cursor:pointer;color:#7070a0;font-size:14px;line-height:1;padding:0 1px;}
-#card-bg-clear:hover{color:#f87171;}
+.cardbar-btn:disabled{opacity:.35;cursor:default;pointer-events:none;}.tb-bg{position:relative;}.tb-bg-dot{position:absolute;right:1px;bottom:1px;width:6px;height:6px;border-radius:50%;border:1px solid #11111c;background:transparent;}.cardbar-btn.on{border-color:#3b82f6;color:#7cb0ff;background:#1a2540;}#find{position:relative;gap:6px;padding-right:4px;user-select:none;}#find .find-lbl{pointer-events:none;}#find #side{display:inline-flex;align-items:center;gap:2px;margin-left:2px;padding:2px 5px;border-radius:5px;background:#26263a;color:#b8b8d0;font-size:10px;font-weight:600;}#find.on #side{background:#1e3a6a;color:#bcd4ff;}#find #side:hover{background:#34344e;}#find #side-sel{position:absolute;right:0;top:0;height:100%;width:64px;opacity:0;cursor:pointer;}.br-load-more{margin:10px auto 2px;display:block;height:28px;padding:0 16px;border-radius:6px;border:1px solid #2a3a2a;background:#142014;color:#7dba7d;font-size:11px;font-weight:600;cursor:pointer;}.br-load-more:hover:not(:disabled){border-color:#4ade80;color:#4ade80;}.br-load-more:disabled{opacity:.5;cursor:default;}
+#tut-ov{position:fixed;inset:0;z-index:7000;display:none;}
+#tut-ov.show{display:block;}
+#tut-mask{position:absolute;inset:0;background:rgba(6,6,12,.66);}
+#tut-hole{position:absolute;border:2px solid #f59e0b;border-radius:10px;box-shadow:0 0 0 4000px rgba(6,6,12,.66);transition:all .25s ease;pointer-events:none;}
+#tut-tip{position:absolute;width:min(290px,86vw);background:#16161f;border:1px solid #5a4a2b;border-radius:11px;padding:14px 15px;box-shadow:0 16px 50px rgba(0,0,0,.6);transition:all .25s ease;}
+#tut-tip .tt-step{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#a98a3d;margin-bottom:5px;}
+#tut-tip .tt-title{font-size:14.5px;font-weight:700;color:#fbbf24;margin-bottom:6px;}
+#tut-tip .tt-body{font-size:12.5px;line-height:1.6;color:#c2c2d4;margin-bottom:12px;}
+#tut-tip .tt-row{display:flex;align-items:center;gap:8px;}
+#tut-tip .tt-row .tt-skip{margin-right:auto;background:none;border:none;color:#70708c;font-size:11px;cursor:pointer;padding:4px;}
+#tut-tip .tt-row .tt-skip:hover{color:#f87171;}
+#tut-tip button.nav{height:28px;padding:0 13px;border-radius:7px;border:1px solid #2a2a3a;background:#1c1c28;color:#d0d0e0;font-size:12px;font-weight:600;cursor:pointer;}
+#tut-tip button.nav.primary{background:#241c0d;border-color:#5a4a2b;color:#fbbf24;}
+#tut-tip button.nav.primary:hover{background:#2e2410;}
+#sb-tutorial.tut-active{background:#241c0d;color:#fbbf24;}
+
+
+
+
 #reorder-pop{position:fixed;z-index:6000;width:300px;max-height:60vh;background:#16162a;border:1px solid #2a3a5a;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.55);display:none;flex-direction:column;overflow:hidden;}
 #reorder-pop.open{display:flex;}
 .reorder-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid #232340;flex-shrink:0;}
@@ -335,7 +350,7 @@ input[type="number"]{-moz-appearance:textfield;}
 #import-choice button,#export-choice button,#import-pick button{height:30px;padding:0 14px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#e0e0e0;}
 #import-choice button.confirm,#export-choice button.confirm,#import-pick button.confirm{background:#1a2540;border-color:#3b82f6;color:#7cb0ff;}
 #import-choice button.confirm:hover,#export-choice button.confirm:hover,#import-pick button.confirm:hover{background:#22325a;}
-#import-pick .rc-box{width:min(440px,92vw);}#import-pick .ip-file-btn{width:100%;height:38px;margin-bottom:4px;border:1px dashed #3a4a6a;background:#13131e;color:#a3c4e0;border-radius:7px;font-size:12.5px;font-weight:600;cursor:pointer;}#import-pick .ip-file-btn:hover{background:#1a2540;border-color:#3b82f6;}#import-pick .ip-or{font-size:10.5px;color:#6a6a88;text-transform:uppercase;letter-spacing:.08em;margin:10px 0 6px;text-align:center;}#ip-paste{width:100%;box-sizing:border-box;height:120px;resize:vertical;background:#10101a;border:1px solid #2a2a3a;border-radius:7px;color:#c2e0c2;font-family:monospace;font-size:11px;padding:8px 10px;margin-bottom:12px;outline:none;}#ip-paste:focus{border-color:#3b82f6;}
+#import-pick .rc-box{width:min(440px,92vw);}#import-pick .ip-file-btn{width:100%;height:38px;margin-bottom:4px;border:1px dashed #3a4a6a;background:#13131e;color:#a3c4e0;border-radius:7px;font-size:12.5px;font-weight:600;cursor:pointer;}#import-pick .ip-file-btn:hover{background:#1a2540;border-color:#3b82f6;}#import-pick .ip-or{font-size:10.5px;color:#6a6a88;text-transform:uppercase;letter-spacing:.08em;margin:10px 0 6px;text-align:center;}#ip-paste{width:100%;box-sizing:border-box;height:120px;resize:vertical;background:#10101a;border:1px solid #2a2a3a;border-radius:7px;color:#c2e0c2;font-family:monospace;font-size:11px;padding:8px 10px;margin-bottom:12px;outline:none;}#ip-paste:focus{border-color:#3b82f6;}.ip-ai-row{font-size:11px;color:#8d8da8;line-height:1.5;margin:-4px 0 12px;}.ip-ai-row a{color:#7cb0ff;text-decoration:none;}.ip-ai-row a:hover{text-decoration:underline;}#imgfix{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:5200;}#imgfix.show{display:flex;}#imgfix .if-box{background:#16162a;border:1px solid #2a3a5a;border-radius:8px;padding:20px;max-width:460px;width:min(460px,92vw);color:#e0e0e0;}#imgfix .if-title{font-size:15px;font-weight:700;color:#7cb0ff;margin-bottom:8px;}#imgfix .if-body{font-size:13px;line-height:1.55;color:#a0a0c0;margin-bottom:10px;}#imgfix .if-prog{min-height:18px;font-family:monospace;font-size:11px;color:#7ec4b8;margin-bottom:12px;white-space:pre-wrap;}#imgfix .if-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;}#imgfix button{height:30px;padding:0 14px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#e0e0e0;}#imgfix button:disabled{opacity:.4;cursor:default;}#imgfix button.primary{background:#1a2540;border-color:#3b82f6;color:#7cb0ff;}#imgfix button.primary:hover:not(:disabled){background:#22325a;}
 .manage-row:hover{background:#13131e;}
 .manage-row-closed{opacity:0.55;}.manage-row-closed:hover{opacity:0.8;}
 .manage-row-info{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
@@ -540,11 +555,11 @@ input[type="number"]{-moz-appearance:textfield;}
 .br-answer-src{font-size:10px;color:#3a6a3a;margin-top:4px;}
 .br-open-tab{font-size:10px;color:#3a6a3a;text-decoration:none;margin-left:auto;flex-shrink:0;padding:2px 5px;border-radius:4px;border:1px solid #1e3a1e;background:#0d1a0d;transition:color .1s,border-color .1s;}
 .br-open-tab:hover{color:#4ade80;border-color:#3a6a3a;}
-#browser-img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:6px;}
+.browser-img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:6px;}
 .br-img-card{position:relative;aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#0d160d;border:1px solid #1e2e1e;cursor:pointer;transition:border-color .15s,transform .15s;}
 .br-img-card:hover{border-color:#4ade80;transform:scale(1.02);}
 .br-img-card img{width:100%;height:100%;object-fit:cover;display:block;}
-.br-img-card .br-img-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:12px 6px 4px;font-size:10px;color:#9abf9a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .15s;}
+.br-img-card .br-img-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:12px 6px 4px;font-size:10px;color:#9abf9a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .15s;}.br-img-lic{color:#4ade80;font-size:9px;opacity:.85;}
 .br-img-card:hover .br-img-label{opacity:1;}
 .br-img-card .br-img-copy{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);border:1px solid #2a4a2a;border-radius:4px;color:#4ade80;font-size:9px;padding:2px 5px;cursor:pointer;opacity:0;transition:opacity .15s;white-space:nowrap;}
 .br-img-card:hover .br-img-copy{opacity:1;}
@@ -710,6 +725,7 @@ input[type="number"]{-moz-appearance:textfield;}
   <button class="sb-btn" id="sb-delete" data-tip="Manage  (4)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="3" height="16" rx="0.5"/><rect x="7.5" y="7" width="3" height="13" rx="0.5"/><rect x="12" y="3" width="3" height="17" rx="0.5"/><rect x="16.5" y="6" width="3" height="14" rx="0.5"/></svg></button>
   <button class="sb-btn" id="sb-browser" data-tip="Browser  (5)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></button>
   <button class="sb-btn" id="sb-guide" data-tip="Guide"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></button>
+  <button class="sb-btn" id="sb-tutorial" data-tip="Tutorial &mdash; show tips"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>
   <button class="sb-btn" id="sb-info" data-tip="About, Terms &amp; Privacy"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.8" r="0.6" fill="currentColor" stroke="none"/></svg></button>
 </div>
 <div id="content">
@@ -743,7 +759,8 @@ input[type="number"]{-moz-appearance:textfield;}
     <button class="cardbar-btn" id="btn-dup-card"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Dup</button>
     <button class="cardbar-btn" id="btn-del-card"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>Del</button>
     <button class="cardbar-btn" id="btn-reorder" title="Reorder cards"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><polyline points="3 4 3 8 5 6" fill="currentColor"/><polyline points="3 16 3 20 5 18" fill="currentColor"/></svg>Order</button>
-    <span id="card-bg-ctrl" title="Card background colour"><input type="color" id="card-bg-input" value="#16162a"/><span id="card-bg-clear" title="No background">&times;</span></span>
+    <div id="find" class="cardbar-btn" title="Img find: auto-search images for each card"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="13" height="13" rx="2"/><circle cx="7.5" cy="7.5" r="1.3"/><path d="M16 12l-4-4-6 8"/><circle cx="17.5" cy="17.5" r="4"/><line x1="20.5" y1="20.5" x2="23" y2="23"/></svg><span class="find-lbl">Img find</span><span id="side" title="Which side\u2019s text to search with">Back<svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg></span><select id="side-sel"><option value="B">Back</option><option value="A">Front</option></select></div>
+    <button class="cardbar-btn" id="btn-imgcheck" title="Test every linked image in this set; fix broken ones via Openverse or embed local copies"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Img check</button>
     <span class="card-label" id="card-label"></span>
     <div id="save-indicator" class="unsaved"><svg width="7" height="7" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg><span id="save-label">unsaved</span></div>
     <div id="sr-status"></div>
@@ -787,7 +804,8 @@ input[type="number"]{-moz-appearance:textfield;}
       <span class="backup-panel-title">Full backup</span>
       <button class="backup-btn" id="btn-backup-all"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Backup all data</button>
       <button class="backup-btn danger" id="btn-restore-all"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Restore from file&hellip;</button>
-      <input type="file" id="restore-input" accept=".json,application/json" style="display:none"/>
+      <input type="file" id="restore-input" accept=".json,application/json" style="display:none"/>      <button class="backup-btn" id="btn-check-imgs" title="Test every linked image in the current set and fix broken ones"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Check images</button>
+
       <span class="backup-status" id="backup-status">Never backed up</span>
     </div>
     <div class="manage-header"><div class="manage-search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="manage-search" placeholder="Filter sets&#8230;" autocomplete="off"/></div><div class="manage-stats" id="manage-stats"></div></div>
@@ -940,6 +958,7 @@ input[type="number"]{-moz-appearance:textfield;}
     <button class="ip-file-btn" id="ip-file">Choose a .json file&hellip;</button>
     <div class="ip-or">or paste JSON</div>
     <textarea id="ip-paste" spellcheck="false" placeholder='{"name":"My set","cards":[{"sideA":"...","sideB":"..."}]}'></textarea>
+    <div class="ip-ai-row">Want AI to write your deck? <a id="ip-ai-prompt" href="#">Copy a ready-made prompt</a> for ChatGPT / Claude / Gemini, then paste the JSON it returns above.</div>
     <div class="rc-actions ic-actions">
       <button id="ip-cancel">Cancel</button>
       <button class="confirm" id="ip-go">Import pasted JSON</button>
@@ -1546,7 +1565,7 @@ var learnBoss={
   _rateKey:function(r){if(!this.shellEl||!this.shellEl.classList.contains('flipped'))return;this._rate(r).then(()=>this._next());},
   _next:function(){this._unflip();setTimeout(()=>this._goRel(1),220);},
   _updateProgress:function(){const known=Object.values(this.ratings).filter(r=>r==='knew').length,total=this.cards.length,pct=total?Math.round(known/total*100):0;const bar=this.c.querySelector('.learn-progress-bar');if(bar)bar.style.width=pct+'%';const ctr=document.getElementById('learn-counter');if(ctr)ctr.textContent=known+' / '+total+' known';const srInfo=this.c.querySelector('.learn-sr-info');if(srInfo){const card=this.cards[this.order[this.pos]];srInfo.textContent=card?SR.label(card):'';}},
-  _goTo:function(idx){const len=this.order.length;if(!len)return;this.pos=((idx%len)+len)%len;const posInput=this.c.querySelector('.posInput'),totalEl=this.c.querySelector('.total-span');if(posInput)posInput.value=this.pos+1;if(totalEl)totalEl.textContent=len;this._unflip();const card=this.cards[this.order[this.pos]];if(card){const aHtml=DOMPurify.sanitize(card.sideA||''),bHtml=DOMPurify.sanitize(card.sideB||'');if(this.reversed){this.sideA.innerHTML=bHtml;this.sideB.innerHTML=aHtml;}else{this.sideA.innerHTML=aHtml;this.sideB.innerHTML=bHtml;}const _cbg=card.bg||'';this.sideA.style.background=_cbg;this.sideB.style.background=_cbg;}this._updateProgress();if(card&&typeof ytBoss!=='undefined')ytBoss.playCardClip(card);},
+  _goTo:function(idx){const len=this.order.length;if(!len)return;this.pos=((idx%len)+len)%len;const posInput=this.c.querySelector('.posInput'),totalEl=this.c.querySelector('.total-span');if(posInput)posInput.value=this.pos+1;if(totalEl)totalEl.textContent=len;this._unflip();const card=this.cards[this.order[this.pos]];if(card){const aHtml=DOMPurify.sanitize(card.sideA||''),bHtml=DOMPurify.sanitize(card.sideB||'');if(this.reversed){this.sideA.innerHTML=bHtml;this.sideB.innerHTML=aHtml;}else{this.sideA.innerHTML=aHtml;this.sideB.innerHTML=bHtml;}const _ba=_bgSide(card,'a')||'',_bb=_bgSide(card,'b')||'';this.sideA.style.background=this.reversed?_bb:_ba;this.sideB.style.background=this.reversed?_ba:_bb;}this._updateProgress();if(card&&typeof ytBoss!=='undefined')ytBoss.playCardClip(card);},
   currentCard:function(){return(this.cards&&this.order)?this.cards[this.order[this.pos]]:null;},
   _toggleShuffle:function(){this.shuffled=!this.shuffled;const btn=this.c.querySelector('#btn-shuffle');btn.classList.toggle('shuffle-on',this.shuffled);btn.classList.toggle('active',this.shuffled);this._buildOrder();this._goTo(0);toast(this.shuffled?'Shuffled':'Order restored','info');},
   /* Reverse mode: start showing the back content (red side), flip to see front
@@ -1780,8 +1799,9 @@ function _drawInsert(){const cv=_draw.canvas,ctx=_draw.ctx;
   if(_draw.bg==="paper"){o.fillStyle="#fcfcf7";o.fillRect(0,0,w,h);}
   o.drawImage(cv,minX,minY,w,h,0,0,w,h);
   const url=out.toDataURL("image/png");const cb=_draw.onInsert;_drawClose();if(cb)cb(url);}
-function makeEditor(edId,tbId,statusId,valignId){
+function makeEditor(edId,tbId,statusId,valignId,onBgClick){
   let doc=[],cur={p:0,offset:0},sel=null,busy=false;
+  let _bgBtnEl=null;
   let fmt={bold:false,italic:false,underline:false,color:null,size:null,font:null};
   let pickerColor="#e84393",pickerOpen=false,frozenSel=null,frozenCur=null;
   let colorBarEl=null,colorInputEl=null,colorSwatchEl=null,colorOkBtn=null,fmtLocked=false;
@@ -1831,7 +1851,55 @@ function makeEditor(edId,tbId,statusId,valignId){
   function togFmt(key){if(sel)pushUndo("fmt");const w=isFull(key);applyFmt(key,!w);fmt[key]=!w;}
   function applyAlign(a){const s=sel?sel.sp:cur.p,e=sel?sel.ep:cur.p;for(let i=s;i<=e;i++)doc[i].align=a;}
   function setValign(v){currentValign=v;valignEl.className="editor-valign-wrap valign-"+v;}
-  function insImg(src){pushUndo("img");if(sel)delSel();const p=doc[cur.p];const l=rfr(p,0,cur.offset),r=rfr(p,cur.offset,plen(p));p.runs=mergeRuns([...l,mkImage(src,100),...r]);cur.offset+=1;}
+  function insImg(src,w){pushUndo("img");if(sel)delSel();const p=doc[cur.p];const l=rfr(p,0,cur.offset),r=rfr(p,cur.offset,plen(p));p.runs=mergeRuns([...l,mkImage(src,w||100),...r]);cur.offset+=1;}
+  /* Fit-to-card: pick an initial width% so the image's rendered height doesn't
+     blow past the visible card. The user can still resize with the slider. */
+  function _fitWidthFor(natW,natH){
+    if(!natW||!natH)return 100;
+    const cw=ed.clientWidth||400;
+    const ch=Math.max(120,(valignEl.clientHeight||ed.clientHeight||300)-24);
+    const dispH=cw*(natH/natW);          // height if inserted at 100% width
+    if(dispH<=ch)return 100;
+    return Math.min(100,Math.max(10,Math.floor(ch/dispH*100)));
+  }
+  function insImgFitted(src,st){
+    _compressDataURL(src,(out)=>{
+      const im=new Image();let done=false;
+      const go=w=>{if(done)return;done=true;
+        if(st){cur={...st.cur};sel=st.sel?{...st.sel}:null;}
+        busy=false;selectedImage=null;insImg(out,w);sel=null;commit();};
+      im.onload=()=>go(_fitWidthFor(im.naturalWidth,im.naturalHeight));
+      im.onerror=()=>go(100);
+      setTimeout(()=>go(100),3000);
+      im.src=out;
+    });
+  }
+  /* Shrink large raster images before they enter a card. Caps the longest edge
+     at ~1280px and re-encodes (JPEG for opaque photos, PNG when transparency is
+     present) — a phone-camera paste drops from multiple MB to tens of KB.
+     Hotlinks (http) and tiny/SVG/GIF data are passed through untouched. */
+  function _compressDataURL(src,cb){
+    if(!/^data:image\/(png|jpeg|jpg|webp)/i.test(src)){cb(src);return;}
+    const MAXEDGE=1280;
+    const im=new Image();
+    im.onload=()=>{
+      try{
+        let{naturalWidth:w,naturalHeight:h}=im;
+        const scale=Math.min(1,MAXEDGE/Math.max(w,h));
+        if(scale>=1&&src.length<300000){cb(src);return;} // already small enough
+        const cw=Math.max(1,Math.round(w*scale)),ch=Math.max(1,Math.round(h*scale));
+        const cv=document.createElement("canvas");cv.width=cw;cv.height=ch;
+        const cx=cv.getContext("2d");cx.drawImage(im,0,0,cw,ch);
+        // detect transparency to choose format
+        let hasAlpha=false;
+        try{const d=cx.getImageData(0,0,cw,ch).data;for(let i=3;i<d.length;i+=4){if(d[i]<250){hasAlpha=true;break;}}}catch(_){hasAlpha=true;}
+        const out=hasAlpha?cv.toDataURL("image/png"):cv.toDataURL("image/jpeg",0.82);
+        cb(out.length<src.length?out:src); // never make it bigger
+      }catch(_){cb(src);}
+    };
+    im.onerror=()=>cb(src);
+    im.src=src;
+  }
   function setImgW(w){if(!selectedImage)return;const{p,runIndex}=selectedImage;if(!doc[p]||!doc[p].runs[runIndex])return;doc[p].runs[runIndex].width=w;const wrap=ed.querySelector(`[data-img-p="${p}"][data-img-ri="${runIndex}"]`);if(wrap){wrap.style.width=w+"%";}else{const le=getLine(p);if(le)le.replaceWith(buildLine(p));}}
   function setImgBg(c){if(!selectedImage)return;const{p,runIndex}=selectedImage;if(!doc[p]||!doc[p].runs[runIndex])return;pushUndo("imgbg");doc[p].runs[runIndex].bg=c||null;const wrap=ed.querySelector(`[data-img-p="${p}"][data-img-ri="${runIndex}"]`);if(wrap)wrap.style.background=c||"transparent";if(typeof markDirty==="function")markDirty();}
   function _toHex(c){if(!c)return"#ffffff";if(c[0]==="#")return c;const m=c.match(/\d+/g);if(!m||m.length<3)return"#ffffff";return"#"+m.slice(0,3).map(n=>(+n).toString(16).padStart(2,"0")).join("");}
@@ -1871,6 +1939,7 @@ function makeEditor(edId,tbId,statusId,valignId){
   // always apply to the frozen selection (never the live one), so it stays
   // correct even though the editor loses focus to the OS dialog.
   function applyLive(hex){
+    if(_popMode){_popApply(hex);_curColor=hex;_colorApplied=true;_lastAppliedHex=hex;refreshCurEls(hex);return;}
     if(!frozenCur)return;
     sel=frozenSel?{...frozenSel}:null;cur={...frozenCur};
     if(sel&&!_colorApplied)pushUndo("color"); // one undo step per picker session, even with live-drag previews
@@ -1879,6 +1948,25 @@ function makeEditor(edId,tbId,statusId,valignId){
     _curColor=hex;
     _colorApplied=true;_lastAppliedHex=hex;
     if(sel)renderAll();
+  }
+  let refreshCurEls=()=>{};   // set by renderColorPop so live preview updates the Current row
+  // Generic color popover: drive the SAME picker UI for things other than text
+  // color (e.g. a card's background) by supplying an apply callback. While a
+  // pop "mode" is active, applyLive routes to it instead of the text model.
+  let _popMode=null,_popApply=()=>{},_popDefault=null;
+  function openColorPicker(btn,opts){
+    // opts:{current,default,onPick} — current/default are hex or null
+    _popMode=opts;_popApply=opts.onPick||(()=>{});_popDefault=opts.default||null;
+    fmtLocked=false;busy=false;
+    _curColor=opts.current||null;pickerColor=opts.current||opts.default||DEFAULT_TEXT_COLOR;
+    pickerOpen=true;_colorApplied=false;_lastAppliedHex=null;colorBtnEl=btn;
+    if(!colorPopEl){colorPopEl=document.createElement("div");colorPopEl.className="color-pop";document.body.appendChild(colorPopEl);}
+    renderColorPop();
+    const r=btn.getBoundingClientRect();
+    colorPopEl.style.left=Math.max(6,Math.min(r.left,window.innerWidth-202))+"px";
+    colorPopEl.style.top=(r.bottom+6)+"px";
+    colorPopEl.classList.add("open");btn.classList.add("on");
+    setTimeout(()=>{document.addEventListener("mousedown",_colorPopOutside,true);document.addEventListener("keydown",_colorPopEsc,true);},0);
   }
   // closeColorPop commits whatever was applied: pushes the final color to
   // recents and restores the editor selection. Because applyLive already wrote
@@ -1892,6 +1980,7 @@ function makeEditor(edId,tbId,statusId,valignId){
     document.removeEventListener("mousedown",_colorPopOutside,true);
     document.removeEventListener("keydown",_colorPopEsc,true);
     if(_colorApplied&&_lastAppliedHex)pushRecentColor(_lastAppliedHex);
+    if(_popMode){_popMode=null;_popApply=()=>{};_popDefault=null;refreshCurEls=()=>{};return;}
     const c=frozenCur,s=frozenSel;frozenSel=null;frozenCur=null;
     if(c){
       cur={...c};sel=s?{...s}:null;
@@ -1922,7 +2011,16 @@ function makeEditor(edId,tbId,statusId,valignId){
     curRow.onclick=()=>curInput.click();
     curInput.oninput=()=>{refreshCur(curInput.value);applyLive(curInput.value);};
     curInput.onchange=()=>{refreshCur(curInput.value);applyLive(curInput.value);};
+    refreshCurEls=refreshCur;
     pop.appendChild(curRow);
+    // In generic (card-bg) mode, offer a one-click reset to the default color.
+    if(_popMode&&_popDefault){
+      const dRow=document.createElement("button");dRow.className="cp-row cp-default";dRow.title="Reset to default";
+      dRow.innerHTML='<span class="cp-cur-sw" style="background:'+_popDefault+'"></span><span>Default color</span>';
+      dRow.onmousedown=e=>e.preventDefault();
+      dRow.onclick=()=>{applyAndClose(_popDefault);};
+      pop.appendChild(dRow);
+    }
     const div1=document.createElement("div");div1.className="cp-divider";pop.appendChild(div1);
     // Favorites
     pop.appendChild(label("Favorites"));
@@ -2001,6 +2099,12 @@ function makeEditor(edId,tbId,statusId,valignId){
     tb.appendChild(sep());
     const vd=[{v:"top",svg:'<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2" stroke-width="1.4"/><line x1="8" y1="7" x2="16" y2="7" stroke-width="2.2"/><line x1="8" y1="10.5" x2="13" y2="10.5" stroke-width="2.2"/></svg>'},{v:"middle",svg:'<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2" stroke-width="1.4"/><line x1="8" y1="10.5" x2="16" y2="10.5" stroke-width="2.2"/><line x1="8" y1="14" x2="13" y2="14" stroke-width="2.2"/></svg>'},{v:"bottom",svg:'<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2" stroke-width="1.4"/><line x1="8" y1="14" x2="16" y2="14" stroke-width="2.2"/><line x1="8" y1="17.5" x2="13" y2="17.5" stroke-width="2.2"/></svg>'}];
     vd.forEach(({v,svg})=>{const b=document.createElement("div");b.className="tbtn";b.innerHTML=svg;b.tabIndex=-1;b.dataset.valign=v;b.title="Vertical align: "+v;b.onmousedown=e=>e.preventDefault();b.onclick=()=>{pushUndo("valign");setValign(v);updateTb();};tb.appendChild(b);});
+    // Per-editor card background: paints THIS side's face via the shared picker.
+    const bgBtn=document.createElement("div");bgBtn.className="tbtn tb-bg";bgBtn.tabIndex=-1;bgBtn.title="Card background";
+    bgBtn.innerHTML='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 11l-7-7-9 9 7 7 9-9z"/><path d="M5 13l7-7"/><path d="M19 16s2 2.5 2 4a2 2 0 0 1-4 0c0-1.5 2-4 2-4z"/></svg><span class="tb-bg-dot"></span>';
+    bgBtn.onmousedown=e=>e.preventDefault();
+    bgBtn.onclick=()=>{if(typeof onBgClick==="function")onBgClick(bgBtn);};
+    tb.appendChild(bgBtn);_bgBtnEl=bgBtn;
     tb.appendChild(sep());
     const irg=document.createElement("div");irg.className="img-resize-group";imgResizeGroup=irg;
     const rl=document.createElement("span");rl.className="resize-label";rl.textContent="W";
@@ -2015,6 +2119,31 @@ function makeEditor(edId,tbId,statusId,valignId){
     const bgClear=document.createElement("span");bgClear.textContent="\u00d7";bgClear.title="Remove backdrop";bgClear.style.cssText="cursor:pointer;color:#7dba7d;font-size:13px;line-height:1;padding:0 1px;";
     bgClear.onmousedown=e=>e.stopPropagation();bgClear.onclick=()=>setImgBg(null);
     bgWrap.appendChild(bgLabel);bgWrap.appendChild(bgInput);bgWrap.appendChild(bgClear);irg.appendChild(bgWrap);
+    // Embed a local copy: fetch a hotlinked image and store it as base64 in the
+    // card, so it works offline and survives the source going away. Only works
+    // when the host sends CORS headers — we say so honestly when it doesn't.
+    const dlBtn=document.createElement("span");dlBtn.textContent="\u2913";dlBtn.title="Embed a local copy (base64) \u2014 works offline";dlBtn.style.cssText="cursor:pointer;color:#7dba7d;font-size:13px;line-height:1;padding:0 3px;border-left:1px solid #2b3b2b;margin-left:2px;";
+    dlBtn.onmousedown=e=>e.stopPropagation();
+    dlBtn.onclick=async()=>{
+      if(!selectedImage)return;const{p,runIndex}=selectedImage;const r=doc[p]&&doc[p].runs[runIndex];if(!r)return;
+      if(/^data:/i.test(r.src)){toast('This image is already stored in the card','info');return;}
+      toast('Fetching image\u2026','info');
+      try{
+        const resp=await fetch(r.src,{mode:'cors'});
+        if(!resp.ok)throw new Error('HTTP '+resp.status);
+        const blob=await resp.blob();
+        if(blob.size>MAX_CARD_FIELD)throw new Error('Image too large');
+        const dataURL=await new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=()=>rej(new Error('read failed'));fr.readAsDataURL(blob);});
+        pushUndo("img");r.src=dataURL;
+        busy=true;renderAll();requestAnimationFrame(()=>{busy=false;updateTb();});
+        if(typeof markDirty==="function")markDirty();
+        toast('Local copy embedded ('+Math.round(blob.size/1024)+' KB)','ok');
+      }catch(err){
+        console.error('embed copy failed',err);
+        toast('Couldn\u2019t fetch a copy \u2014 the host doesn\u2019t allow it (CORS). The hotlink stays.','err');
+      }
+    };
+    irg.appendChild(dlBtn);
     tb.appendChild(irg);
     tb.appendChild(sep());
     // Draw: opens the drawing modal; the result is inserted as an image run so
@@ -2023,7 +2152,7 @@ function makeEditor(edId,tbId,statusId,valignId){
     drawBtn.innerHTML='<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';
     drawBtn.onmousedown=e=>e.preventDefault();
     drawBtn.onclick=()=>{readSel();const sc={...cur},ss=sel?{...sel}:null;
-      openDrawModal(url=>{cur=sc;sel=ss;busy=false;selectedImage=null;insImg(url);sel=null;commit();});};
+      openDrawModal(url=>insImgFitted(url,{cur:sc,sel:ss}));};
     tb.appendChild(drawBtn);
     // Image by URL: hotlinks <img src="https://..."> instead of embedding
     // base64, keeping cards/exports small. Needs the host to allow hotlinking.
@@ -2032,10 +2161,18 @@ function makeEditor(edId,tbId,statusId,valignId){
     linkImgBtn.onmousedown=e=>e.preventDefault();
     linkImgBtn.onclick=()=>{readSel();const sc={...cur},ss=sel?{...sel}:null;
       const u=(window.prompt('Image URL (https://\u2026)')||'').trim();
-      cur=sc;sel=ss;
       if(!u)return;
       if(!/^https?:\/\//i.test(u)){toast('URL must start with http(s)://','err');return;}
-      busy=false;selectedImage=null;insImg(u);sel=null;commit();};
+      // Verify the image actually loads before inserting: catches typos, dead
+      // links, and hosts that block hotlinking — instead of a broken icon.
+      toast('Checking image\u2026','info');
+      const probe=new Image();let done=false;
+      const finish=ok2=>{if(done)return;done=true;
+        if(!ok2){toast('That image didn\u2019t load \u2014 the link may be wrong or the host blocks hotlinking','err');return;}
+        const w=_fitWidthFor(probe.naturalWidth||0,probe.naturalHeight||0);cur=sc;sel=ss;busy=false;selectedImage=null;insImg(u,w);sel=null;commit();toast('Image inserted (hotlinked)','ok');};
+      probe.onload=()=>finish(true);probe.onerror=()=>finish(false);
+      setTimeout(()=>finish(false),8000);
+      probe.src=u;};
     tb.appendChild(linkImgBtn);
   }
   function bindEv(){
@@ -2059,7 +2196,7 @@ function makeEditor(edId,tbId,statusId,valignId){
           e.preventDefault();e.stopPropagation();
           const sc={...cur},ss=sel?{...sel}:null;busy=true;
           const f=item.getAsFile(),r=new FileReader();
-          r.onload=()=>{cur=sc;sel=ss;busy=false;selectedImage=null;insImg(r.result);sel=null;commit();};
+          r.onload=()=>insImgFitted(r.result,{cur:sc,sel:ss});
           r.onerror=()=>{busy=false;};r.readAsDataURL(f);return;
         }
       }
@@ -2105,7 +2242,34 @@ function makeEditor(edId,tbId,statusId,valignId){
   function setHTML(html){
     ed.innerHTML=DOMPurify.sanitize(html||'');doc=[];
     const lines=ed.querySelectorAll('.line');
-    if(!lines.length){doc.push(mkPara([mkRun("")]));renderAll();return;}
+    if(!lines.length){
+      // Foreign HTML (AI-generated JSON imports, other apps): no .line structure.
+      // Walk it generically — block tags & <br> split paragraphs, <img> becomes an
+      // image run, b/strong/i/em/u set formatting. Without this, imported cards
+      // would LOOK fine in Learn but parse as empty here and get saved as empty.
+      const hasContent=ed.textContent.replace(/\u200B/g,'').trim()||ed.querySelector('img');
+      if(hasContent){
+        const paras=[];let runs=[];
+        const flush=()=>{paras.push(mkPara(runs.length?runs:[mkRun('')]));runs=[];};
+        (function walk(node,fmt){
+          node.childNodes.forEach(c=>{
+            if(c.nodeType===3){const t=c.textContent.replace(/\u200B/g,'');if(!t.trim())return;const r=mkRun(t);if(fmt.b)r.bold=true;if(fmt.i)r.italic=true;if(fmt.u)r.underline=true;runs.push(r);return;}
+            if(c.nodeType!==1)return;
+            const tag=c.tagName;
+            if(tag==='IMG'){if(c.getAttribute('src'))runs.push(mkImage(c.getAttribute('src'),100));return;}
+            if(tag==='BR'){flush();return;}
+            const f2={b:fmt.b||tag==='B'||tag==='STRONG',i:fmt.i||tag==='I'||tag==='EM',u:fmt.u||tag==='U'};
+            const block=/^(P|DIV|LI|UL|OL|H[1-6]|SECTION|ARTICLE|BLOCKQUOTE|TABLE|TR)$/.test(tag);
+            if(block&&runs.length)flush();
+            walk(c,f2);
+            if(block&&runs.length)flush();
+          });
+        })(ed,{});
+        if(runs.length)flush();
+        doc=paras.length?paras:[mkPara([mkRun('')])];
+      }else doc.push(mkPara([mkRun('')]));
+      renderAll();requestAnimationFrame(()=>placeCaret(0,0));return;
+    }
     lines.forEach(le=>{
       const runs=[];
       le.childNodes.forEach(c=>{
@@ -2120,7 +2284,9 @@ function makeEditor(edId,tbId,statusId,valignId){
   function getPlainText(){return doc.map(p=>p.runs.filter(r=>r.type==='text').map(r=>r.text).join('')).join('\n');}
   buildTb();renderAll();bindEv();
   requestAnimationFrame(()=>{placeCaret(0,0);updateTb();});
-  return{getHTML,setHTML,clear,getPlainText};
+  function insertImage(src){insImgFitted(src,null);}
+  function setBgDot(c){if(_bgBtnEl){const d=_bgBtnEl.querySelector(".tb-bg-dot");if(d)d.style.background=c||"transparent";}}
+  return{getHTML,setHTML,clear,getPlainText,insertImage,openColorPicker,setBgDot};
 }
 const _panelRegistry={};
 function makeDraggable(shellId,dragBarId){
@@ -2182,9 +2348,28 @@ async function saveCurrentCard(){
   }
 }
 function _fadeCards(fn){const wraps=document.querySelectorAll('.editor-wrap');wraps.forEach(w=>w.classList.add('card-fade'));setTimeout(()=>{fn();wraps.forEach(w=>w.classList.remove('card-fade'));},120);}
-function _setEditorBg(c){const f=document.getElementById('valign-front'),b=document.getElementById('valign-back');if(f)f.style.background=c||'';if(b)b.style.background=c||'';}
-function applyCardBg(c){const card=activeCard();if(!card)return;card.bg=c||null;_setEditorBg(c);const inp=document.getElementById('card-bg-input');if(inp&&c)inp.value=c;markDirty();}
-function loadCardIntoEditors(card){_fadeCards(()=>{if(card){frontEditor.setHTML(card.sideA||'');backEditor.setHTML(card.sideB||'');}else{frontEditor.clear();backEditor.clear();}});setSaveStatus('saved');updateCardBar();renderTagbar();_setEditorBg(card?card.bg:null);const _bi=document.getElementById('card-bg-input');if(_bi)_bi.value=(card&&card.bg)||'#16162a';if(typeof ytBoss!=='undefined')ytBoss.syncCard();}
+const CARD_BG_DEFAULT="#0d0d0d"; // matches .editor base
+function _bgSide(card,side){if(!card||!card.bg)return null;if(typeof card.bg==='string')return card.bg;return card.bg[side]||null;}
+function _setCardBgSide(side,c){const card=activeCard();if(!card)return;
+  let bg=card.bg;if(typeof bg==='string')bg={a:bg,b:bg};if(!bg||typeof bg!=='object')bg={a:null,b:null};
+  bg[side]=c||null;
+  if(!bg.a&&!bg.b)card.bg=null;else card.bg={a:bg.a||null,b:bg.b||null};
+  const el=document.getElementById(side==='a'?'valign-front':'valign-back');if(el)el.style.background=c||'';
+  (side==='a'?frontEditor:backEditor).setBgDot(c);
+  markDirty();
+}
+function _applyCardBgToEditors(card){
+  const a=_bgSide(card,'a'),b=_bgSide(card,'b');
+  const vf=document.getElementById('valign-front'),vb=document.getElementById('valign-back');
+  if(vf)vf.style.background=a||'';if(vb)vb.style.background=b||'';
+  if(frontEditor)frontEditor.setBgDot(a);if(backEditor)backEditor.setBgDot(b);
+}
+function openCardBgPicker(side,btn){
+  const card=activeCard();if(!card){toast('No card','err');return;}
+  const ed=side==='a'?frontEditor:backEditor;
+  ed.openColorPicker(btn,{current:_bgSide(card,side),default:CARD_BG_DEFAULT,onPick:c=>_setCardBgSide(side,c===CARD_BG_DEFAULT?null:c)});
+}
+function loadCardIntoEditors(card){_fadeCards(()=>{if(card){frontEditor.setHTML(card.sideA||'');backEditor.setHTML(card.sideB||'');}else{frontEditor.clear();backEditor.clear();}});setSaveStatus('saved');updateCardBar();renderTagbar();_applyCardBgToEditors(card);if(typeof ytBoss!=='undefined')ytBoss.syncCard();if(imgFindMode)_imgFindGo();}
 
 /* Tagbar rendering + persistence. Tags live on card.tags as a plain string[].
    Render: clear chips area, append a chip for each tag, leave the input alone.
@@ -2235,6 +2420,154 @@ async function removeTagFromCurrent(tag){
 async function navigateCard(delta){await saveCurrentCard();const cards=activeCards();if(!cards.length)return;cardIndex=((cardIndex+delta)%cards.length+cards.length)%cards.length;loadCardIntoEditors(activeCard());}
 async function jumpToCard(idx){await saveCurrentCard();cardIndex=Math.max(0,Math.min(activeCards().length-1,idx));loadCardIntoEditors(activeCard());}
 async function commitCardOrder(newCards){const set=activeSet();if(!set||!set.cards)return;const curId=activeCard()?activeCard().id:null;set.cards=newCards;cardIndex=Math.max(0,newCards.findIndex(c=>c.id===curId));try{await db.sets.update(set.id,{cardIDs:newCards.map(c=>c.id)});}catch(err){console.error('reorder save failed',err);}updateCardBar();loadCardIntoEditors(activeCard());}
+/* ===== Image health =====
+   Hotlinked images can die (typo, host gone, hotlink-blocking). This module:
+   1) audits every http(s) <img> in the active set,
+   2) auto-replaces broken ones via Openverse using the card's caption text,
+   3) optionally embeds working images as base64 so the deck works offline.
+   Runs automatically after imports; manual button lives in Manage. */
+function _extractImgs(html){const d=document.createElement('div');d.innerHTML=DOMPurify.sanitize(html||'');return[...d.querySelectorAll('img')].map(i=>i.getAttribute('src')||'').filter(s=>/^https?:\/\//i.test(s));}
+function _probeImage(url){return new Promise(res=>{const im=new Image();let done=false;const f=ok=>{if(!done){done=true;res(ok);}};im.onload=()=>f(true);im.onerror=()=>f(false);setTimeout(()=>f(false),6000);im.src=url;});}
+function _replaceImgSrc(html,fromUrl,toUrl){const d=document.createElement('div');d.innerHTML=DOMPurify.sanitize(html||'');let hit=false;d.querySelectorAll('img').forEach(i=>{if(i.getAttribute('src')===fromUrl){i.setAttribute('src',toUrl);hit=true;}});return hit?d.innerHTML:html;}
+function _imgCaption(html,url){const d=document.createElement('div');d.innerHTML=DOMPurify.sanitize(html||'');const t=(d.textContent||'').replace(/\u200B/g,'').trim();if(t)return t.slice(0,60);try{const u=new URL(url);const q=decodeURIComponent(u.search.replace(/^\?/,''))||u.pathname.split('/').pop();return(q||'').replace(/[,+._-]+/g,' ').trim();}catch(_){return'';}}
+async function fetchImageAsDataURL(url){const resp=await fetch(url,{mode:'cors'});if(!resp.ok)throw new Error('HTTP '+resp.status);const blob=await resp.blob();if(blob.size>MAX_CARD_FIELD)throw new Error('too large');return await new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=()=>rej(new Error('read failed'));fr.readAsDataURL(blob);});}
+const _ovCache=new Map();
+async function _openverseFirst(term){if(!term)return null;const k=term.toLowerCase();if(_ovCache.has(k))return _ovCache.get(k);const u='https://api.openverse.org/v1/images/?q='+encodeURIComponent(term)+'&page_size=3&mature=false';const r=await fetch(u,{headers:{Accept:'application/json'}});if(r.status===429)throw new Error('RATE');if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();const hit=(j.results||[]).find(x=>x.url);const out=hit?hit.url:null;_ovCache.set(k,out);return out;}
+async function auditSetImages(set){const items=[];for(let ci=0;ci<set.cards.length;ci++){for(const side of['sideA','sideB']){for(const url of _extractImgs(set.cards[ci][side]))items.push({ci,side,url});}}
+  const broken=[];let okCount=0;
+  for(let i=0;i<items.length;i+=6){const chunk=items.slice(i,i+6);const rs=await Promise.all(chunk.map(it=>_probeImage(it.url)));rs.forEach((ok,j)=>{if(ok)okCount++;else broken.push(chunk[j]);});}
+  return{total:items.length,ok:okCount,broken};}
+let _imgFixCtx=null;
+function closeImgFix(){const m=document.getElementById('imgfix');if(m)m.classList.remove('show');_imgFixCtx=null;}
+function _ensureImgFixModal(){
+  if(document.getElementById('imgfix'))return;
+  const m=document.createElement('div');m.id='imgfix';
+  m.innerHTML='<div class="if-box"><div class="if-title">Image check</div><div class="if-body" id="if-body"></div><div class="if-prog" id="if-prog"></div><div class="if-actions"><button id="if-close">Close</button><button id="if-embed" title="Fetch each working linked image and store it inside the card (needs the host to allow it). Makes the deck work offline but larger.">Embed local copies</button><button class="primary" id="if-fix">Replace broken via Openverse</button></div></div>';
+  document.body.appendChild(m);
+  document.getElementById('if-close').addEventListener('click',closeImgFix);
+  document.getElementById('if-fix').addEventListener('click',_fixBrokenViaOpenverse);
+  document.getElementById('if-embed').addEventListener('click',_embedAllImages);
+}
+function _openImgFix(set,audit){
+  _ensureImgFixModal();_imgFixCtx={set,audit};
+  document.getElementById('if-body').textContent=audit.broken.length+' of '+audit.total+' linked image'+(audit.total!==1?'s':'')+' in "'+set.name+'" failed to load. I can search Openverse for each card\u2019s caption and swap in a working, openly-licensed image \u2014 review the results after.';
+  document.getElementById('if-prog').textContent='';
+  document.getElementById('if-fix').disabled=!audit.broken.length;
+  document.getElementById('imgfix').classList.add('show');
+}
+async function _fixBrokenViaOpenverse(){
+  if(!_imgFixCtx)return;const{set,audit}=_imgFixCtx;
+  const prog=document.getElementById('if-prog'),btn=document.getElementById('if-fix');btn.disabled=true;
+  let fixed=0,noMatch=0,rateHit=false;const touched=new Set();
+  for(let i=0;i<audit.broken.length;i++){
+    const it=audit.broken[i];prog.textContent='Searching replacements\u2026 '+(i+1)+' / '+audit.broken.length;
+    const term=_imgCaption(set.cards[it.ci][it.side],it.url);
+    let nu=null;
+    try{nu=await _openverseFirst(term);}
+    catch(e){if(e.message==='RATE'){rateHit=true;break;}nu=null;}
+    if(nu){set.cards[it.ci][it.side]=_replaceImgSrc(set.cards[it.ci][it.side],it.url,nu);touched.add(it.ci);fixed++;}
+    else noMatch++;
+    await new Promise(r=>setTimeout(r,150));
+  }
+  for(const ci of touched){const c=set.cards[ci];await DB_saveCard(set.id,c.id,c.sideA,c.sideB,c.bg);}
+  if(touched.size)loadCardIntoEditors(activeCard());
+  prog.textContent=(rateHit?'Openverse rate limit reached \u2014 ':'')+'Replaced '+fixed+(noMatch?' \u00b7 '+noMatch+' had no match':'')+(rateHit?' \u00b7 run again later for the rest':'')+'. Flip through the cards to review.';
+  toast(fixed?('Replaced '+fixed+' broken image'+(fixed!==1?'s':'')):'No replacements found',fixed?'ok':'err');
+}
+async function _embedAllImages(){
+  if(!_imgFixCtx)return;const{set}=_imgFixCtx;
+  const prog=document.getElementById('if-prog'),btn=document.getElementById('if-embed');btn.disabled=true;
+  const items=[];for(let ci=0;ci<set.cards.length;ci++){for(const side of['sideA','sideB']){for(const url of _extractImgs(set.cards[ci][side]))items.push({ci,side,url});}}
+  let ok=0,blocked=0;const touched=new Set();
+  for(let i=0;i<items.length;i++){
+    const it=items[i];prog.textContent='Embedding\u2026 '+(i+1)+' / '+items.length;
+    try{const dataURL=await fetchImageAsDataURL(it.url);set.cards[it.ci][it.side]=_replaceImgSrc(set.cards[it.ci][it.side],it.url,dataURL);touched.add(it.ci);ok++;}
+    catch(_){blocked++;}
+  }
+  for(const ci of touched){const c=set.cards[ci];await DB_saveCard(set.id,c.id,c.sideA,c.sideB,c.bg);}
+  if(touched.size)loadCardIntoEditors(activeCard());
+  btn.disabled=false;
+  prog.textContent='Embedded '+ok+' image'+(ok!==1?'s':'')+(blocked?' \u00b7 '+blocked+' blocked by their host (CORS) \u2014 those stay hotlinked':'')+'.';
+  toast('Embedded '+ok+' image'+(ok!==1?'s':'')+(blocked?' ('+blocked+' blocked)':''),ok?'ok':'err');
+}
+/* ===== Img-find mode: while ON, every card you navigate to auto-searches
+   the image panel using the chosen side's text. Closing the panel or
+   clicking the button again turns it off. ===== */
+let imgFindMode=false,_imgFindTimer=null;
+function _imgFindQuery(){
+  const sideEl=document.getElementById('side-sel');
+  const side=sideEl?sideEl.value:'B';
+  const pick=s=>(((s==='A'?frontEditor:backEditor).getPlainText())||'').replace(/\s+/g,' ').trim();
+  let q=pick(side);
+  if(!q)q=pick(side==='A'?'B':'A'); // chosen side empty -> try the other
+  return q.slice(0,50);
+}
+function _imgFindGo(){clearTimeout(_imgFindTimer);_imgFindTimer=setTimeout(()=>{if(!imgFindMode)return;const q=_imgFindQuery();if(q)browserShell.searchImages(q);else browserShell.searchImages('');},350);}
+function setImgFindMode(on){
+  imgFindMode=on;
+  const b=document.getElementById('find');if(b)b.classList.toggle('on',on);
+  if(on){toast('Img find on \u2014 each card you open searches automatically','info');_imgFindGo();}
+}
+window._onBrowserPanelHide=()=>{if(imgFindMode)setImgFindMode(false);};
+
+/* ===== Tutorial mode: a lightweight coachmark tour over the real UI. Toggle
+   from the sidebar (?). No sample deck — it points at live controls. ===== */
+const TUT_STEPS=[
+  {sel:'#set-tabs,#tabs',title:'Your decks live up here',body:'Each tab is a deck. The + makes a new one; click a tab to switch. Drag-free, local-first \u2014 everything saves to this browser.'},
+  {sel:'#workspace,#editors',title:'Front & back',body:'Type the prompt on the Front and the answer on the Back. The toolbar adds bold, colour, sizes, alignment, and a pencil for freehand drawing.'},
+  {sel:'.tb-bg',title:'Card background',body:'Paint either side\u2019s background. It uses the same colour picker as text \u2014 favourites, recents, and a one-click Default to reset.',opt:true},
+  {sel:'#find',title:'Img find',body:'Click to toggle auto image-search on; then every card you open searches Openverse & Wikimedia. Click the little Back/Front pill to choose which side\u2019s text to search with.'},
+  {sel:'#btn-imgcheck,#btn-reorder',title:'Fix & reorder',body:'\u201cImg check\u201d tests every linked image and repairs broken ones; \u201cOrder\u201d opens a drag-to-reorder list of the deck.',opt:true},
+  {sel:'#sb-learn',title:'Study it',body:'Learn flips cards with spaced repetition; Quiz turns the deck into multiple-choice. Keys 1\u20135 jump between modes.'},
+  {sel:'#btn-import,#btn-export',title:'Import, export & AI',body:'Import accepts a file or pasted JSON \u2014 and has a one-click prompt so any AI can write you a deck. Export one deck or back up everything.'},
+  {sel:'#sb-tutorial',title:'That\u2019s the tour',body:'Re-open this anytime from here. The book icon has the full written Guide. Happy studying!'}
+];
+let _tutIdx=0,_tutOn=false;
+function _tutEl(){let ov=document.getElementById('tut-ov');if(ov)return ov;
+  ov=document.createElement('div');ov.id='tut-ov';
+  ov.innerHTML='<div id="tut-mask"></div><div id="tut-hole"></div><div id="tut-tip"></div>';
+  document.body.appendChild(ov);
+  ov.querySelector('#tut-mask').addEventListener('click',()=>tutStop());
+  window.addEventListener('resize',()=>{if(_tutOn)_tutShow();});
+  return ov;
+}
+function _tutTarget(step){const els=step.sel.split(',').map(s=>document.querySelector(s.trim())).filter(Boolean);return els.find(e=>e.offsetParent!==null)||els[0]||null;}
+function _tutShow(){
+  const ov=_tutEl();const step=TUT_STEPS[_tutIdx];
+  const tip=ov.querySelector('#tut-tip'),hole=ov.querySelector('#tut-hole');
+  const tgt=_tutTarget(step);
+  if(!tgt&&step.opt){ // optional control not visible (e.g. wrong mode) -> skip
+    if(_tutIdx<TUT_STEPS.length-1){_tutIdx++;return _tutShow();}
+  }
+  const r=tgt?tgt.getBoundingClientRect():{left:innerWidth/2-1,top:innerHeight/2-1,width:2,height:2,bottom:innerHeight/2,right:innerWidth/2};
+  const pad=6;
+  hole.style.left=(r.left-pad)+'px';hole.style.top=(r.top-pad)+'px';hole.style.width=(r.width+pad*2)+'px';hole.style.height=(r.height+pad*2)+'px';hole.style.display=tgt?'block':'none';
+  const last=_tutIdx===TUT_STEPS.length-1;
+  tip.innerHTML='<div class="tt-step">Step '+(_tutIdx+1)+' of '+TUT_STEPS.length+'</div><div class="tt-title">'+step.title+'</div><div class="tt-body">'+step.body+'</div><div class="tt-row"><button class="tt-skip">Skip tour</button>'+(_tutIdx>0?'<button class="nav" data-a="back">Back</button>':'')+'<button class="nav primary" data-a="next">'+(last?'Done':'Next')+'</button></div>';
+  tip.querySelector('.tt-skip').onclick=()=>tutStop();
+  tip.querySelectorAll('.nav').forEach(b=>b.onclick=()=>{const a=b.dataset.a;if(a==='back'){_tutIdx=Math.max(0,_tutIdx-1);_tutShow();}else{if(last)tutStop();else{_tutIdx++;_tutShow();}}});
+  // position tip: prefer below the target, flip above if no room
+  tip.style.visibility='hidden';ov.classList.add('show');
+  requestAnimationFrame(()=>{
+    const th=tip.offsetHeight,tw=tip.offsetWidth;
+    let top=r.bottom+12;if(top+th>innerHeight-10)top=Math.max(10,r.top-th-12);
+    let left=Math.min(Math.max(10,r.left),innerWidth-tw-10);
+    tip.style.top=top+'px';tip.style.left=left+'px';tip.style.visibility='visible';
+  });
+}
+function tutStart(){_tutOn=true;_tutIdx=0;document.getElementById('sb-tutorial').classList.add('tut-active');try{db.info.update('info',{tutorialSeen:true});}catch(_){}_tutShow();}
+function tutStop(){_tutOn=false;const ov=document.getElementById('tut-ov');if(ov)ov.classList.remove('show');document.getElementById('sb-tutorial').classList.remove('tut-active');}
+function toggleTutorial(){_tutOn?tutStop():tutStart();}
+async function checkSetImages(opts){
+  const quiet=opts&&opts.quiet;
+  const set=activeSet();if(!set||!set.cards.length){if(!quiet)toast('No cards to check','err');return;}
+  await saveCurrentCard();
+  if(!quiet)toast('Checking images\u2026','info');
+  let audit;try{audit=await auditSetImages(set);}catch(e){console.error(e);if(!quiet)toast('Image check failed','err');return;}
+  if(!audit.total){if(!quiet)toast('No linked images in this set','info');return;}
+  if(!audit.broken.length){if(!quiet)toast('All '+audit.total+' linked image'+(audit.total!==1?'s':'')+' load fine','ok');return;}
+  _openImgFix(set,audit);
+}
 function _cardPreview(card){const d=document.createElement('div');d.innerHTML=DOMPurify.sanitize(card.sideA||'');let t=(d.textContent||'').replace(/\u200B/g,'').trim();if(!t)return{text:'(no text / image card)',empty:true};if(t.length>46)t=t.slice(0,46)+'\u2026';return{text:t,empty:false};}
 function _wireReorderDrag(row,handle,getOrder,onDrop){
   let dragging=false,list=null;
@@ -2327,7 +2660,7 @@ function _buildEmbedDoc(setName,setYtVideoId,cards){
       out.s=c.ytClip.startMs;
       out.e=c.ytClip.endMs;
     }
-    if(c.bg)out.bg=c.bg;
+    if(c.bg)out.bg=(typeof c.bg==='string'?{a:c.bg,b:c.bg}:c.bg);
     return out;
   });
   // Validate the video id strictly — defense in depth before it goes into a URL.
@@ -2500,7 +2833,7 @@ function _buildEmbedDoc(setName,setYtVideoId,cards){
         'pauseClip();'+
         'cd.classList.remove("fl");'+
         'var c=cards[ord[idx]];'+
-        'if(reversed){ft.innerHTML=c.back;bk.innerHTML=c.front;}else{ft.innerHTML=c.front;bk.innerHTML=c.back;}ft.style.background=c.bg||"";bk.style.background=c.bg||"";'+
+        'if(reversed){ft.innerHTML=c.back;bk.innerHTML=c.front;}else{ft.innerHTML=c.front;bk.innerHTML=c.back;}var _ba=(c.bg&&c.bg.a)||"",_bb=(c.bg&&c.bg.b)||"";ft.style.background=reversed?_bb:_ba;bk.style.background=reversed?_ba:_bb;'+
         'po.textContent=idx+1;'+
         // Play button shown only when the current card has timings
         'if(ytId&&typeof c.s==="number"&&typeof c.e==="number")pl.classList.add("show");else pl.classList.remove("show");'+
@@ -2640,6 +2973,27 @@ async function importSet(file){
 /* Shared pipeline for file imports AND pasted JSON. Auto-detects format:
    full-backup files (data.sets + data.cards) route to the restore-with-
    confirmation flow; per-set files go to the new-set / merge chooser. */
+/* Load a deck from a URL fragment: inaflash.cards/#import=<https deck .json>.
+   This is how the Thai course site (and any shared link) drops a deck into a
+   learner's own app. https-only, confirmed, same sanitizing import pipeline. */
+async function maybeImportFromURL(){
+  const m=(location.hash||'').match(/[#&]import=([^&]+)/);
+  if(!m)return;
+  let url;try{url=decodeURIComponent(m[1]);}catch(_){return;}
+  // strip the fragment so a refresh doesn't re-import
+  history.replaceState(null,'',location.pathname+location.search);
+  if(!/^https:\/\//i.test(url)){toast('Import links must be https','err');return;}
+  if(!confirm('Add a flashcard deck from:\n\n'+url+'\n\nThis loads it into your decks here.'))return;
+  try{
+    toast('Fetching deck\u2026','info');
+    const resp=await fetch(url,{mode:'cors'});
+    if(!resp.ok)throw new Error('HTTP '+resp.status);
+    const text=await resp.text();
+    if(text.length>30*1024*1024)throw new Error('file too large');
+    let name='Imported deck';try{const u=new URL(url);name=decodeURIComponent((u.pathname.split('/').pop()||'').replace(/\.json$/i,''))||name;}catch(_){}
+    await importJSONText(text,name);
+  }catch(e){console.error('URL import failed',e);toast('Couldn\u2019t load that deck: '+(e.message||'error'),'err');}
+}
 async function importJSONText(text,fallbackName){
   let data;
   try{data=JSON.parse(text);}catch(_){throw new Error('Not valid JSON');}
@@ -2686,6 +3040,18 @@ async function importPasted(){
   try{await importJSONText(text,'Pasted set');}
   catch(e){console.error('Paste import error:',e);toast('Import failed: '+(e.message||'Invalid JSON'),'err');}
 }
+/* A ready-made prompt for any chatbot that yields JSON our importer accepts.
+   Kept deliberately strict about output shape so paste-import "just works". */
+const AI_DECK_PROMPT=
+'Create a flashcard deck about: [YOUR TOPIC HERE]\n\n'
++'Output ONLY a single JSON object, no markdown fences, no commentary, in exactly this format:\n'
++'{"name":"Deck name","cards":[{"sideA":"question html","sideB":"answer html"},...]}\n\n'
++'Rules:\n'
++'- 10\u201320 cards unless I say otherwise. sideA is the question/front, sideB is the answer/back.\n'
++'- sideA/sideB are HTML strings. Allowed tags: <b>, <i>, <u>, <br>, <p>, and <img src="https://...">.\n'
++'- Images are optional. If you include one, use a real, direct, publicly hotlinkable image URL (e.g. https://upload.wikimedia.org/...). Do not invent URLs \u2014 only use URLs you are confident exist. NEVER use source.unsplash.com, picsum, or placeholder services (they are dead or random); prefer https://upload.wikimedia.org/... files or omit the image.\n'
++'- Keep each side concise. No scripts, styles, or other tags. Plain text is fine too.\n'
++'- Escape double quotes inside the HTML strings so the JSON stays valid.';
 async function _importAsNewSet(data,name){
   toast('Importing\u2026','info');
   const ns=await DB_bulkImport(name,data.cards);
@@ -2697,6 +3063,7 @@ async function _importAsNewSet(data,name){
   const got=ns.cards.length,asked=Array.isArray(data.cards)?data.cards.length:0;
   const skipped=Math.max(0,asked-got);
   toast('Imported "'+name+'" ('+got+' card'+(got!==1?'s':'')+(skipped?', '+skipped+' skipped':'')+')',skipped?'info':'ok');
+  setTimeout(()=>checkSetImages({quiet:true}),300); // surface dead hotlinks right after import
 }
 async function _importIntoCurrent(data){
   const set=activeSet();if(!set){toast('No active set','err');return;}
@@ -2709,6 +3076,7 @@ async function _importIntoCurrent(data){
   const bits=[];if(res.skipped)bits.push(res.skipped+' skipped');if(res.overflow)bits.push(res.overflow+' over the '+MAX_CARDS+'-card limit');
   if(!res.added.length){toast('Nothing imported'+(bits.length?' ('+bits.join(', ')+')':''),'err');return;}
   toast('Added '+res.added.length+' card'+(res.added.length!==1?'s':'')+' to "'+set.name+'"'+(bits.length?' ('+bits.join(', ')+')':''),bits.length?'info':'ok');
+  setTimeout(()=>checkSetImages({quiet:true}),300);
 }
 /* Full-data backup: every set, every card, every bit of info. JSON only —
    simple to inspect, simple to round-trip. Triggers a file download. */
@@ -2879,6 +3247,9 @@ function openInfo(which){
             <li><b>Bold</b>, italic, underline, text <b>colour</b>, font and <b>size</b>, and alignment.</li>
             <li><b>Images</b> &mdash; paste an image straight into a side, or find one in the Browser.</li>
             <li><b>Drawing</b> &mdash; the pencil button opens a canvas (below).</li>
+            <li><b>Images by link</b> &mdash; the picture-frame button inserts an image from a URL (hotlinked, so cards stay small). Select an inserted image to resize it, give it a backdrop colour, or press &#10515; to embed a local copy that works offline.</li>
+            <li><b>Finding images</b> &mdash; toggle <b>Img find</b> in the card bar and every card you open auto-searches Openverse &amp; Wikimedia using the side picked in the little dropdown (front/back); results load a few at a time with a Load-more button (or use the Browser’s Images tab, key 5); click Copy on a result to insert it. <b>Img check</b> tests every linked image in the set and can repair broken ones. Inserted images auto-size to fit the card.</li>
+            <li><b>AI-made decks</b> &mdash; Import &rarr; "Copy a ready-made prompt", paste it into any AI chatbot with your topic, then paste the JSON it returns into the Import box.</li>
           </ul>
           <p>The card bar lets you add new cards, move between them, and delete the current one, and the tabs along the top switch decks or start a new one. Everything saves as you go.</p>
           <h3>The drawing tool</h3>
@@ -2942,7 +3313,7 @@ function openInfo(which){
             <li><b>Hosting (GitHub Pages)</b> &mdash; serves the app and may log requests. <a href="https://docs.github.com/en/site-policy" target="_blank" rel="noopener noreferrer">Policy</a></li>
             <li><b>YouTube / Google</b> &mdash; only when you use a video feature: opening the clip panel, or studying a deck that has a video attached. The player isn&rsquo;t loaded otherwise. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Policy</a></li>
             <li><b>DuckDuckGo</b> &mdash; only when you search in the Browser panel. <a href="https://duckduckgo.com/privacy" target="_blank" rel="noopener noreferrer">Policy</a></li>
-            <li><b>Wikimedia Commons</b> &mdash; only when you search images in the Browser panel. <a href="https://foundation.wikimedia.org/wiki/Policy:Privacy_policy" target="_blank" rel="noopener noreferrer">Policy</a></li>
+            <li><b>Wikimedia Commons</b> &mdash; only when you search images in the Browser panel. <a href="https://foundation.wikimedia.org/wiki/Policy:Privacy_policy" target="_blank" rel="noopener noreferrer">Policy</a></li><li><b>Openverse</b> &mdash; image search in the built-in browser queries the Openverse API (run by WordPress.org). Only your search term is sent. <a href="https://wordpress.org/about/privacy/" target="_blank" rel="noopener">Privacy policy</a>.</li>
           </ul>
           <h3>Cookies</h3>
           <p>We use no tracking or advertising cookies. The app uses local storage only to function &mdash; to save your decks and settings.</p>
@@ -3006,8 +3377,6 @@ function wireEvents(){
   document.getElementById('btn-dup-card').addEventListener('click',()=>duplicateCard());
   document.getElementById('btn-del-card').addEventListener('click',()=>deleteCurrentCard());
   document.getElementById('btn-reorder').addEventListener('click',openReorderPop);
-  document.getElementById('card-bg-input').addEventListener('input',e=>applyCardBg(e.target.value));
-  document.getElementById('card-bg-clear').addEventListener('click',()=>applyCardBg(null));
   ['ed-front','ed-back'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('input',()=>markDirty());el.addEventListener('blur',()=>{clearTimeout(autoSaveTimer);saveCurrentCard();});});
   document.getElementById('search-input').addEventListener('input',e=>renderSearchResults(e.target.value));
   document.getElementById('search-close').addEventListener('click',closeSearch);
@@ -3028,6 +3397,7 @@ function wireEvents(){
     const _aib=document.getElementById('btn-ai');if(_aib)_aib.style.display='none';
   }
   document.getElementById('sb-info').addEventListener('click',()=>openInfo('about'));
+  document.getElementById('sb-tutorial').addEventListener('click',toggleTutorial);
   document.getElementById('sb-guide').addEventListener('click',()=>openInfo('guide'));
   document.getElementById('ai-key').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();document.getElementById('ai-topic').focus();}});
   document.getElementById('btn-export').addEventListener('click',openExportChoice);
@@ -3049,6 +3419,18 @@ function wireEvents(){
   document.getElementById('ip-file').addEventListener('click',()=>{closeImportPick();document.getElementById('import-input').click();});
   document.getElementById('ip-cancel').addEventListener('click',closeImportPick);
   document.getElementById('ip-go').addEventListener('click',importPasted);
+  document.getElementById('btn-check-imgs').addEventListener('click',()=>checkSetImages());
+  document.getElementById('btn-imgcheck').addEventListener('click',()=>checkSetImages());
+  document.getElementById('find').addEventListener('click',e=>{
+    // Clicking the side pill (or its hidden <select>) must NOT toggle the mode.
+    if(e.target.closest('#side')||e.target.id==='side-sel')return;
+    setImgFindMode(!imgFindMode);
+  });
+  document.getElementById('side-sel').addEventListener('change',e=>{
+    document.querySelector('#find #side').firstChild.textContent=e.target.value==='A'?'Front':'Back';
+    if(imgFindMode)_imgFindGo();
+  });
+  document.getElementById('ip-ai-prompt').addEventListener('click',e=>{e.preventDefault();navigator.clipboard.writeText(AI_DECK_PROMPT).then(()=>toast('Prompt copied \u2014 paste it into your AI of choice','ok')).catch(()=>toast('Couldn\u2019t copy \u2014 clipboard blocked','err'));});
   document.getElementById('import-input').addEventListener('change',e=>{if(e.target.files[0]){importSet(e.target.files[0]);e.target.value='';}});
   document.getElementById('ic-cancel').addEventListener('click',closeImportChoice);
   document.getElementById('ic-new').addEventListener('click',async()=>{const p=_pendingImport;closeImportChoice();if(!p)return;try{await _importAsNewSet(p.data,p.name);}catch(e){console.error(e);toast('Import failed: '+(e.message||'error'),'err');}});
@@ -3070,7 +3452,7 @@ function wireEvents(){
   document.addEventListener('keydown',e=>{
     const inInput=document.activeElement&&['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName);
     const inEditor=document.activeElement&&document.activeElement.classList.contains('editor');
-    if(e.key==='Escape'){closeSearch();closeShortcuts();closeAI();closeReorderPop();closeImportChoice();closeExportChoice();closeImportPick();}
+    if(e.key==='Escape'){closeSearch();closeShortcuts();closeAI();closeReorderPop();closeImportChoice();closeExportChoice();closeImportPick();closeImgFix();if(_tutOn)tutStop();}
     if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}
     if(e.key==='?'&&!inInput&&!inEditor){openShortcuts();return;}
     if(e.key==='z'&&(e.metaKey||e.ctrlKey)&&!e.shiftKey&&!inEditor){e.preventDefault();_undo();return;}
@@ -3114,8 +3496,8 @@ if(window.visualViewport)window.visualViewport.addEventListener('resize',_setVH)
 document.addEventListener('DOMContentLoaded',async()=>{
   try{await initDB();}catch(e){showDBError('Database unavailable: '+e.message);console.error('DB init failed:',e);}
   try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();}catch(_){}
-  frontEditor=makeEditor('ed-front','tb-front','status-front','valign-front');
-  backEditor=makeEditor('ed-back','tb-back','status-back','valign-back');
+  frontEditor=makeEditor('ed-front','tb-front','status-front','valign-front',btn=>openCardBgPicker('a',btn));
+  backEditor=makeEditor('ed-back','tb-back','status-back','valign-back',btn=>openCardBgPicker('b',btn));
   makeDraggable('shell-front','dragBar-front');
   makeDraggable('shell-back','dragBar-back');
   slider=sliderBoss.create(document.getElementById('slider-mount'),()=>createSet('Set '+(sets.length+1)),()=>openSearch(),id=>selectSet(id),id=>closeSet(id),async(id,name)=>{const s=sets.find(x=>x.id===id);if(s){s.name=name;await DB_renameSet(id,name);}});
@@ -3141,6 +3523,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   // Backup-status string + nag banner: both safe to fail silently.
   DB_getLastBackup().then(updateBackupStatus);
   maybeShowBackupReminder();
+  maybeImportFromURL(); // #import=<https url to a deck .json> (e.g. from the Thai course site)
   requestAnimationFrame(()=>{const ws=document.getElementById('workspace'),gap=20;const f=document.getElementById('shell-front'),b=document.getElementById('shell-back');const totalW=f.offsetWidth+gap+b.offsetWidth;const startX=Math.max(10,(ws.offsetWidth-totalW)/2);const startY=Math.max(20,(ws.offsetHeight-f.offsetHeight)/2);f.style.left=startX+'px';f.style.top=startY+'px';b.style.left=(startX+f.offsetWidth+gap)+'px';b.style.top=startY+'px';});
 });
 const browserShell=(function(){
@@ -3153,14 +3536,49 @@ const browserShell=(function(){
   function _setEmpty(msg){resultsEl.innerHTML=`<div class="br-empty"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>${DOMPurify.sanitize(msg)}</span></div>`;}
   async function _searchText(query){_setLoading();try{const url='https://api.duckduckgo.com/?q='+encodeURIComponent(query)+'&format=json&no_redirect=1&no_html=0&skip_disambig=0';const data=await fetch(url).then(r=>r.json());_renderText(query,data);}catch(e){_setEmpty('Search failed \u2014 check your connection.');}}
   function _renderText(query,data){resultsEl.innerHTML='';if(data.AbstractText){const box=document.createElement('div');box.className='br-answer-box';const src=data.AbstractURL?`<div class="br-answer-src">Source: <a href="${safeUrl(data.AbstractURL)}" target="_blank" rel="noopener noreferrer" style="color:#4ade80;text-decoration:none">${DOMPurify.sanitize(data.AbstractSource||'')}</a></div>`:'';box.innerHTML=`<div class="br-answer-text">${DOMPurify.sanitize(data.AbstractText)}</div>${src}`;resultsEl.appendChild(box);}if(data.Answer){const box=document.createElement('div');box.className='br-answer-box';box.innerHTML=`<div class="br-answer-text"><strong style="color:#4ade80">Answer: </strong>${DOMPurify.sanitize(data.Answer)}</div>`;resultsEl.appendChild(box);}if(data.Definition){const box=document.createElement('div');box.className='br-answer-box';box.innerHTML=`<div class="br-answer-text"><strong style="color:#a78bfa">Definition: </strong>${DOMPurify.sanitize(data.Definition)}</div>`;resultsEl.appendChild(box);}const topics=(data.RelatedTopics||[]).filter(t=>t.Text&&t.FirstURL);if(topics.length){const lbl=document.createElement('div');lbl.className='br-section-label';lbl.textContent='Related';resultsEl.appendChild(lbl);topics.slice(0,10).forEach(t=>{const row=document.createElement('div');row.className='br-result';const title=(t.Text||'').split(' - ')[0]||t.Text;const url=safeUrl(t.FirstURL);row.innerHTML=`<div style="display:flex;align-items:center;gap:6px"><div class="br-result-title" style="flex:1">${DOMPurify.sanitize(title)}</div><a class="br-open-tab" href="${url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">\u2197</a></div><div class="br-result-snippet">${DOMPurify.sanitize(t.Text||'')}</div>`;row.addEventListener('click',()=>{if(url!=='#')window.open(url,'_blank','noopener,noreferrer');});resultsEl.appendChild(row);});}if(!data.AbstractText&&!data.Answer&&!data.Definition&&!topics.length){resultsEl.innerHTML=`<div class="br-empty"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>No instant results for "<strong>${DOMPurify.sanitize(query)}</strong>"</span><a href="https://duckduckgo.com/?q=${encodeURIComponent(query)}" target="_blank" rel="noopener noreferrer" style="color:#4ade80;font-size:12px;text-decoration:none;margin-top:4px">Search on DuckDuckGo \u2197</a></div>`;return;}const more=document.createElement('div');more.className='br-img-more';more.innerHTML=`<a href="https://duckduckgo.com/?q=${encodeURIComponent(query)}" target="_blank" rel="noopener noreferrer">More results on DuckDuckGo \u2197</a>`;resultsEl.appendChild(more);}
-  async function _searchImages(query){_setLoading();try{const url='https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+encodeURIComponent(query)+'&srnamespace=6&srlimit=30&format=json&origin=*';const data=await fetch(url).then(r=>r.json());const titles=(data.query&&data.query.search||[]).map(r=>r.title);if(!titles.length){_setEmpty('No images found for "'+query+'"');return;}const infoUrl='https://en.wikipedia.org/w/api.php?action=query&titles='+encodeURIComponent(titles.slice(0,18).join('|'))+'&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=300&format=json&origin=*';const info=await fetch(infoUrl).then(r=>r.json());const pages=Object.values((info.query&&info.query.pages)||{});const imgs=pages.filter(p=>p.imageinfo&&p.imageinfo[0]&&p.imageinfo[0].thumburl).map(p=>({thumb:p.imageinfo[0].thumburl,full:p.imageinfo[0].url,title:(p.title||'').replace(/^File:/,'').replace(/\.[^.]+$/,''),page:p.imageinfo[0].descriptionurl||''}));_renderImages(query,imgs);}catch(e){_setEmpty('Image search failed \u2014 check your connection.');console.error(e);}}
-  function _renderImages(query,imgs){resultsEl.innerHTML='';if(!imgs.length){_setEmpty('No images found for "'+query+'"');return;}const lbl=document.createElement('div');lbl.className='br-section-label';lbl.textContent='Wikimedia Commons \u2014 click copy to insert into card';resultsEl.appendChild(lbl);const grid=document.createElement('div');grid.id='browser-img-grid';imgs.forEach(img=>{const card=document.createElement('div');card.className='br-img-card';card.title=img.title;card.innerHTML=`<img src="${DOMPurify.sanitize(img.thumb)}" alt="${DOMPurify.sanitize(img.title)}" loading="lazy"/><div class="br-img-label">${DOMPurify.sanitize(img.title)}</div><div class="br-img-copy">\ud83d\udccb Copy</div>`;card.querySelector('.br-img-copy').addEventListener('click',e=>{e.stopPropagation();_copyImageToCard(img.full,img.title);});card.addEventListener('click',()=>{if(img.page)window.open(img.page,'_blank');});grid.appendChild(card);});resultsEl.appendChild(grid);const more=document.createElement('div');more.className='br-img-more';more.innerHTML=`<a href="https://commons.wikimedia.org/w/index.php?search=${encodeURIComponent(query)}&ns6=1" target="_blank">More on Wikimedia Commons \u2197</a>`;resultsEl.appendChild(more);}
-  function _copyImageToCard(url,title){const target=document.activeElement;const frontEd=document.getElementById('ed-front');const backEd=document.getElementById('ed-back');const ed=(target===frontEd||target===backEd)?target:frontEd;ed.focus();const safe=DOMPurify.sanitize(url);document.execCommand('insertHTML',false,`<img src="${safe}" alt="${DOMPurify.sanitize(title)}" style="max-width:100%"/>`);toast('Image inserted \u2014 click the editor first if it appears empty','ok');}
+  const IMG_PER=5; // per source per page: small first paint, "Load more" for the rest
+  async function _searchOpenverse(query,page){
+    const url='https://api.openverse.org/v1/images/?q='+encodeURIComponent(query)+'&page_size='+IMG_PER+'&page='+page+'&mature=false';
+    const data=await fetch(url,{headers:{'Accept':'application/json'}}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});
+    return (data.results||[]).filter(r=>r.thumbnail&&r.url).map(r=>({thumb:r.thumbnail,full:r.url,title:(r.title||'Untitled')+(r.creator?' \u2014 '+r.creator:''),license:(r.license||'cc').toUpperCase()+(r.license_version?' '+r.license_version:''),page:r.foreign_landing_url||''}));
+  }
+  async function _searchWikimedia(query,offset){
+    const url='https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+encodeURIComponent(query)+'&srnamespace=6&srlimit='+IMG_PER+'&sroffset='+offset+'&format=json&origin=*';const data=await fetch(url).then(r=>r.json());const titles=(data.query&&data.query.search||[]).map(r=>r.title);if(!titles.length)return[];const infoUrl='https://en.wikipedia.org/w/api.php?action=query&titles='+encodeURIComponent(titles.join('|'))+'&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=300&format=json&origin=*';const info=await fetch(infoUrl).then(r=>r.json());const pages=Object.values((info.query&&info.query.pages)||{});return pages.filter(p=>p.imageinfo&&p.imageinfo[0]&&p.imageinfo[0].thumburl).map(p=>({thumb:p.imageinfo[0].thumburl,full:p.imageinfo[0].url,title:(p.title||'').replace(/^File:/,'').replace(/\.[^.]+$/,''),page:p.imageinfo[0].descriptionurl||''}));
+  }
+  let _imgPg=null; // pagination state for the current image query
+  function _imgTile(img){const card=document.createElement('div');card.className='br-img-card';card.title=img.title+(img.license?' \u00b7 '+img.license:'');card.innerHTML=`<img src="${DOMPurify.sanitize(img.thumb)}" alt="${DOMPurify.sanitize(img.title)}" loading="lazy"/><div class="br-img-label">${DOMPurify.sanitize(img.title)}${img.license?' <span class="br-img-lic">'+DOMPurify.sanitize(img.license)+'</span>':''}</div><div class="br-img-copy">\ud83d\udccb Copy</div>`;card.querySelector('.br-img-copy').addEventListener('click',e=>{e.stopPropagation();_copyImageToCard(img.full,img.title);});card.addEventListener('click',()=>{if(img.page)window.open(img.page,'_blank');});return card;}
+  async function _searchImages(query){_setLoading();_imgPg={query,token:Date.now(),ovPage:1,wmOff:0,ovDone:false,wmDone:false,ovGrid:null,wmGrid:null,ovLbl:null,wmLbl:null,moreBtn:null};await _loadMoreImages(true);}
+  async function _loadMoreImages(first){
+    const q=_imgPg;if(!q)return;const tok=q.token;
+    if(q.moreBtn){q.moreBtn.disabled=true;q.moreBtn.textContent='Loading\u2026';}
+    const[ov,wm]=await Promise.all([
+      q.ovDone?Promise.resolve([]):_searchOpenverse(q.query,q.ovPage).catch(e=>{console.error(e);q.ovDone=true;return[];}),
+      q.wmDone?Promise.resolve([]):_searchWikimedia(q.query,q.wmOff).catch(e=>{console.error(e);q.wmDone=true;return[];})
+    ]);
+    if(!_imgPg||_imgPg.token!==tok)return; // a newer search superseded this one
+    if(ov.length<IMG_PER)q.ovDone=true;q.ovPage++;
+    if(wm.length<IMG_PER)q.wmDone=true;q.wmOff+=IMG_PER;
+    if(first){
+      if(!ov.length&&!wm.length){_setEmpty('No images found for "'+q.query+'"');return;}
+      resultsEl.innerHTML='';
+      const mk=label=>{const lbl=document.createElement('div');lbl.className='br-section-label';lbl.textContent=label;resultsEl.appendChild(lbl);const g=document.createElement('div');g.className='browser-img-grid';resultsEl.appendChild(g);return{lbl,g};};
+      const o=mk('Openverse \u2014 openly licensed \u00b7 click copy to insert');q.ovLbl=o.lbl;q.ovGrid=o.g;
+      const w=mk('Wikimedia Commons \u2014 click copy to insert');q.wmLbl=w.lbl;q.wmGrid=w.g;
+      const mb=document.createElement('button');mb.className='br-load-more';mb.textContent='Load more images';mb.addEventListener('click',()=>_loadMoreImages(false));resultsEl.appendChild(mb);q.moreBtn=mb;
+      const more=document.createElement('div');more.className='br-img-more';more.innerHTML=`<a href="https://openverse.org/search/image?q=${encodeURIComponent(q.query)}" target="_blank">More on Openverse \u2197</a> \u00b7 <a href="https://commons.wikimedia.org/w/index.php?search=${encodeURIComponent(q.query)}&ns6=1" target="_blank">Wikimedia Commons \u2197</a>`;resultsEl.appendChild(more);
+    }
+    ov.forEach(img=>q.ovGrid&&q.ovGrid.appendChild(_imgTile(img)));
+    wm.forEach(img=>q.wmGrid&&q.wmGrid.appendChild(_imgTile(img)));
+    const tidy=(g,l,done)=>{if(g&&l&&done&&!g.children.length){g.style.display='none';l.style.display='none';}};
+    tidy(q.ovGrid,q.ovLbl,q.ovDone);tidy(q.wmGrid,q.wmLbl,q.wmDone);
+    if(q.moreBtn){const done=q.ovDone&&q.wmDone;q.moreBtn.style.display=done?'none':'';q.moreBtn.disabled=false;q.moreBtn.textContent='Load more images';}
+  }
+  function _copyImageToCard(url,title){const target=document.activeElement;const backEd=document.getElementById('ed-back');const which=(target===backEd)?backEditor:frontEditor;which.insertImage(DOMPurify.sanitize(url));toast('Image inserted into the '+(which===backEditor?'back':'front')+' of the card','ok');}
   function _doSearch(query){query=query.trim();if(!query)return;currentQuery=query;urlInput.value=query;if(currentTab==='text')_searchText(query);else _searchImages(query);}
   function _switchTab(tab){currentTab=tab;document.querySelectorAll('.br-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));urlInput.placeholder=tab==='images'?'Search images\u2026':'Search anything\u2026';if(currentQuery)_doSearch(currentQuery);else _setEmpty(tab==='images'?'Search for images to use in your cards':'Search or browse to research your cards');}
   function _makeDraggable(){const ws=document.getElementById('workspace');let dragging=false,dox=0,doy=0,resizing=false,rdir='',rox=0,roy=0,row=0,roh=0,rorx=0,rory=0;dragBar.addEventListener('mousedown',e=>{if(e.button!==0)return;shell.style.zIndex=250;const wr=ws.getBoundingClientRect();dox=(e.clientX-wr.left)-shell.offsetLeft;doy=(e.clientY-wr.top)-shell.offsetTop;dragging=true;document.body.style.userSelect='none';e.preventDefault();});shell.querySelectorAll('.rh').forEach(h=>{h.addEventListener('mousedown',e=>{if(e.button!==0)return;shell.style.zIndex=250;const wr=ws.getBoundingClientRect();rdir=h.dataset.dir;rox=e.clientX-wr.left;roy=e.clientY-wr.top;row=shell.offsetWidth;roh=shell.offsetHeight;rorx=shell.offsetLeft;rory=shell.offsetTop;resizing=true;document.body.style.userSelect='none';e.preventDefault();e.stopPropagation();});});document.addEventListener('mousemove',e=>{const wr=ws.getBoundingClientRect(),mx=e.clientX-wr.left,my=e.clientY-wr.top,wsW=ws.offsetWidth,wsH=ws.offsetHeight;if(dragging){shell.style.left=Math.max(0,Math.min(wsW-shell.offsetWidth,mx-dox))+'px';shell.style.top=Math.max(0,Math.min(wsH-shell.offsetHeight,my-doy))+'px';}if(resizing){const dx=mx-rox,dy=my-roy;let nw=row,nh=roh,nx=rorx,ny=rory;if(rdir.includes('r'))nw=Math.max(320,row+dx);if(rdir.includes('b'))nh=Math.max(320,roh+dy);if(rdir.includes('l')){nw=Math.max(320,row-dx);nx=rorx+(row-nw);}if(rdir.includes('t')){nh=Math.max(320,roh-dy);ny=rory+(roh-nh);}if(nx<0){nw+=nx;nx=0;}if(ny<0){nh+=ny;ny=0;}nw=Math.min(nw,wsW-nx);nh=Math.min(nh,wsH-ny);shell.style.left=nx+'px';shell.style.top=ny+'px';shell.style.width=nw+'px';shell.style.height=nh+'px';}});document.addEventListener('mouseup',()=>{if(dragging||resizing){dragging=resizing=false;document.body.style.userSelect='';}});shell.addEventListener('mousedown',()=>{shell.style.zIndex=250;});}
   function show(){visible=true;shell.classList.add('visible');document.getElementById('sb-browser').classList.add('active-browser');urlInput.focus();}
-  function hide(){visible=false;shell.classList.remove('visible');document.getElementById('sb-browser').classList.remove('active-browser');}
+  function hide(){visible=false;shell.classList.remove('visible');document.getElementById('sb-browser').classList.remove('active-browser');if(window._onBrowserPanelHide)window._onBrowserPanelHide();}
   function toggle(){visible?hide():show();}
   function init(){
     shell=document.getElementById('browser-shell');dragBar=document.getElementById('browser-drag-bar');urlInput=document.getElementById('browser-url');resultsEl=document.getElementById('browser-results');favBar=document.getElementById('browser-favbar');addFavBtn=document.getElementById('btn-add-fav');favEmpty=favBar.querySelector('.fav-empty');
@@ -3175,7 +3593,8 @@ const browserShell=(function(){
     document.getElementById('browser-close').addEventListener('click',hide);
     document.getElementById('sb-browser').addEventListener('click',toggle);
   }
-  return{init,show,hide,toggle};
+  function searchImages(q){show();currentQuery='';_switchTab('images');if(q){urlInput.value=q;_doSearch(q);}}
+  return{init,show,hide,toggle,searchImages};
 })();
 
 /* ══════════════════════════════════════════════════════════

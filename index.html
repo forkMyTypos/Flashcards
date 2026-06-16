@@ -2305,6 +2305,7 @@ function makeDraggable(shellId,dragBarId){
 }
 
 let frontEditor,backEditor,slider;
+let _lastEditorSide='a'; // which editor the user last worked in, for research-panel Copy
 let sets=[],activeSetId=null,cardIndex=0,autoSaveTimer=null;
 let currentMode='create';
 let _undoStack=[];
@@ -2997,6 +2998,7 @@ async function maybeImportFromURL(){
 async function importJSONText(text,fallbackName){
   let data;
   try{data=JSON.parse(text);}catch(_){throw new Error('Not valid JSON');}
+  // Full-backup file -> restore flow (unchanged).
   if(data&&data.data&&Array.isArray(data.data.sets)&&Array.isArray(data.data.cards)){
     _pendingRestore=data;
     const when=data.exportedAt?new Date(data.exportedAt).toLocaleString():'unknown date';
@@ -3007,11 +3009,46 @@ async function importJSONText(text,fallbackName){
     document.getElementById('restore-confirm').classList.add('show');
     return;
   }
-  if(!data.cards||!Array.isArray(data.cards))throw new Error('Invalid format');
-  const name=(data.name||fallbackName||'Imported set')+'';
-  if(activeSet()){_pendingImport={data,name};openImportChoice(name,data.cards.length);return;}
-  await _importAsNewSet(data,name);
+  // Adaptable per-set import: accept the many shapes AI tools and other apps
+  // emit, then coerce to our {sideA,sideB} format.
+  const norm=normalizeImport(data);
+  if(!norm.cards.length)throw new Error('No cards found in that JSON');
+  const name=(norm.name||fallbackName||('New set '+(sets.length+1)))+'';
+  const payload={name,cards:norm.cards};
+  if(activeSet()){_pendingImport={data:payload,name};openImportChoice(name,norm.cards.length);return;}
+  await _importAsNewSet(payload,name);
 }
+/* Coerce loosely-shaped JSON into {name, cards:[{sideA,sideB}]}.
+   Handles: {cards:[...]}, {name,cards}, bare arrays, and a deck nested under
+   common keys (deck/flashcards/items/data). Each card may use any of:
+   sideA/sideB, front/back, question/answer, q/a, term/definition, prompt/answer,
+   or a 2-item array ["front","back"]. Strings become single-line cards. */
+function normalizeImport(data){
+  let name=null,arr=null;
+  if(Array.isArray(data))arr=data;
+  else if(data&&typeof data==='object'){
+    name=data.name||data.title||data.deckName||null;
+    arr=data.cards||data.flashcards||data.deck||data.items||data.entries||(Array.isArray(data.data)?data.data:null);
+  }
+  if(!Array.isArray(arr))return{name,cards:[]};
+  const pick=(o,keys)=>{for(const k of keys){if(o[k]!=null&&o[k]!=='')return o[k];}return'';};
+  const wrap=v=>{const s=String(v==null?'':v);return /<[a-z][\s\S]*>/i.test(s)?s:'<div class="line" style="text-align:center">'+_escForCard(s)+'</div>';};
+  const cards=[];
+  for(const raw of arr){
+    let a='',b='';
+    if(Array.isArray(raw)){a=raw[0];b=raw[1];}
+    else if(raw&&typeof raw==='object'){
+      a=pick(raw,['sideA','front','question','q','term','prompt','word','en','text']);
+      b=pick(raw,['sideB','back','answer','a','definition','meaning','translation','def']);
+      if(!b&&raw.examples)b=raw.examples; // last-ditch
+    }
+    else if(typeof raw==='string'){a=raw;}
+    if(a===''&&b==='')continue;
+    cards.push({sideA:sanitizeCardField(wrap(a)),sideB:sanitizeCardField(wrap(b)),sr:null,bg:null});
+  }
+  return{name,cards};
+}
+function _escForCard(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 let _pendingImport=null;
 function openImportChoice(name,count){
   const m=document.getElementById('import-choice');
@@ -3051,6 +3088,7 @@ const AI_DECK_PROMPT=
 +'- sideA/sideB are HTML strings. Allowed tags: <b>, <i>, <u>, <br>, <p>, and <img src="https://...">.\n'
 +'- Images are optional. If you include one, use a real, direct, publicly hotlinkable image URL (e.g. https://upload.wikimedia.org/...). Do not invent URLs \u2014 only use URLs you are confident exist. NEVER use source.unsplash.com, picsum, or placeholder services (they are dead or random); prefer https://upload.wikimedia.org/... files or omit the image.\n'
 +'- Keep each side concise. No scripts, styles, or other tags. Plain text is fine too.\n'
++'- Simpler shapes also import fine if easier: {"front":"...","back":"..."} or {"question":"...","answer":"..."}.\n'
 +'- Escape double quotes inside the HTML strings so the JSON stays valid.';
 async function _importAsNewSet(data,name){
   toast('Importing\u2026','info');
@@ -3498,6 +3536,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
   try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();}catch(_){}
   frontEditor=makeEditor('ed-front','tb-front','status-front','valign-front',btn=>openCardBgPicker('a',btn));
   backEditor=makeEditor('ed-back','tb-back','status-back','valign-back',btn=>openCardBgPicker('b',btn));
+  document.getElementById('ed-front').addEventListener('focus',()=>{_lastEditorSide='a';});
+  document.getElementById('ed-back').addEventListener('focus',()=>{_lastEditorSide='b';});
   makeDraggable('shell-front','dragBar-front');
   makeDraggable('shell-back','dragBar-back');
   slider=sliderBoss.create(document.getElementById('slider-mount'),()=>createSet('Set '+(sets.length+1)),()=>openSearch(),id=>selectSet(id),id=>closeSet(id),async(id,name)=>{const s=sets.find(x=>x.id===id);if(s){s.name=name;await DB_renameSet(id,name);}});
@@ -3536,7 +3576,7 @@ const browserShell=(function(){
   function _setEmpty(msg){resultsEl.innerHTML=`<div class="br-empty"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>${DOMPurify.sanitize(msg)}</span></div>`;}
   async function _searchText(query){_setLoading();try{const url='https://api.duckduckgo.com/?q='+encodeURIComponent(query)+'&format=json&no_redirect=1&no_html=0&skip_disambig=0';const data=await fetch(url).then(r=>r.json());_renderText(query,data);}catch(e){_setEmpty('Search failed \u2014 check your connection.');}}
   function _renderText(query,data){resultsEl.innerHTML='';if(data.AbstractText){const box=document.createElement('div');box.className='br-answer-box';const src=data.AbstractURL?`<div class="br-answer-src">Source: <a href="${safeUrl(data.AbstractURL)}" target="_blank" rel="noopener noreferrer" style="color:#4ade80;text-decoration:none">${DOMPurify.sanitize(data.AbstractSource||'')}</a></div>`:'';box.innerHTML=`<div class="br-answer-text">${DOMPurify.sanitize(data.AbstractText)}</div>${src}`;resultsEl.appendChild(box);}if(data.Answer){const box=document.createElement('div');box.className='br-answer-box';box.innerHTML=`<div class="br-answer-text"><strong style="color:#4ade80">Answer: </strong>${DOMPurify.sanitize(data.Answer)}</div>`;resultsEl.appendChild(box);}if(data.Definition){const box=document.createElement('div');box.className='br-answer-box';box.innerHTML=`<div class="br-answer-text"><strong style="color:#a78bfa">Definition: </strong>${DOMPurify.sanitize(data.Definition)}</div>`;resultsEl.appendChild(box);}const topics=(data.RelatedTopics||[]).filter(t=>t.Text&&t.FirstURL);if(topics.length){const lbl=document.createElement('div');lbl.className='br-section-label';lbl.textContent='Related';resultsEl.appendChild(lbl);topics.slice(0,10).forEach(t=>{const row=document.createElement('div');row.className='br-result';const title=(t.Text||'').split(' - ')[0]||t.Text;const url=safeUrl(t.FirstURL);row.innerHTML=`<div style="display:flex;align-items:center;gap:6px"><div class="br-result-title" style="flex:1">${DOMPurify.sanitize(title)}</div><a class="br-open-tab" href="${url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">\u2197</a></div><div class="br-result-snippet">${DOMPurify.sanitize(t.Text||'')}</div>`;row.addEventListener('click',()=>{if(url!=='#')window.open(url,'_blank','noopener,noreferrer');});resultsEl.appendChild(row);});}if(!data.AbstractText&&!data.Answer&&!data.Definition&&!topics.length){resultsEl.innerHTML=`<div class="br-empty"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>No instant results for "<strong>${DOMPurify.sanitize(query)}</strong>"</span><a href="https://duckduckgo.com/?q=${encodeURIComponent(query)}" target="_blank" rel="noopener noreferrer" style="color:#4ade80;font-size:12px;text-decoration:none;margin-top:4px">Search on DuckDuckGo \u2197</a></div>`;return;}const more=document.createElement('div');more.className='br-img-more';more.innerHTML=`<a href="https://duckduckgo.com/?q=${encodeURIComponent(query)}" target="_blank" rel="noopener noreferrer">More results on DuckDuckGo \u2197</a>`;resultsEl.appendChild(more);}
-  const IMG_PER=5; // per source per page: small first paint, "Load more" for the rest
+  const IMG_PER=3; // per source per page: faster first paint, "Load more" for the rest (6 total)
   async function _searchOpenverse(query,page){
     const url='https://api.openverse.org/v1/images/?q='+encodeURIComponent(query)+'&page_size='+IMG_PER+'&page='+page+'&mature=false';
     const data=await fetch(url,{headers:{'Accept':'application/json'}}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});
@@ -3573,7 +3613,7 @@ const browserShell=(function(){
     tidy(q.ovGrid,q.ovLbl,q.ovDone);tidy(q.wmGrid,q.wmLbl,q.wmDone);
     if(q.moreBtn){const done=q.ovDone&&q.wmDone;q.moreBtn.style.display=done?'none':'';q.moreBtn.disabled=false;q.moreBtn.textContent='Load more images';}
   }
-  function _copyImageToCard(url,title){const target=document.activeElement;const backEd=document.getElementById('ed-back');const which=(target===backEd)?backEditor:frontEditor;which.insertImage(DOMPurify.sanitize(url));toast('Image inserted into the '+(which===backEditor?'back':'front')+' of the card','ok');}
+  function _copyImageToCard(url,title){const which=_lastEditorSide==='b'?backEditor:frontEditor;which.insertImage(DOMPurify.sanitize(url));toast('Image inserted into the '+(_lastEditorSide==='b'?'back':'front')+' of the card','ok');}
   function _doSearch(query){query=query.trim();if(!query)return;currentQuery=query;urlInput.value=query;if(currentTab==='text')_searchText(query);else _searchImages(query);}
   function _switchTab(tab){currentTab=tab;document.querySelectorAll('.br-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));urlInput.placeholder=tab==='images'?'Search images\u2026':'Search anything\u2026';if(currentQuery)_doSearch(currentQuery);else _setEmpty(tab==='images'?'Search for images to use in your cards':'Search or browse to research your cards');}
   function _makeDraggable(){const ws=document.getElementById('workspace');let dragging=false,dox=0,doy=0,resizing=false,rdir='',rox=0,roy=0,row=0,roh=0,rorx=0,rory=0;dragBar.addEventListener('mousedown',e=>{if(e.button!==0)return;shell.style.zIndex=250;const wr=ws.getBoundingClientRect();dox=(e.clientX-wr.left)-shell.offsetLeft;doy=(e.clientY-wr.top)-shell.offsetTop;dragging=true;document.body.style.userSelect='none';e.preventDefault();});shell.querySelectorAll('.rh').forEach(h=>{h.addEventListener('mousedown',e=>{if(e.button!==0)return;shell.style.zIndex=250;const wr=ws.getBoundingClientRect();rdir=h.dataset.dir;rox=e.clientX-wr.left;roy=e.clientY-wr.top;row=shell.offsetWidth;roh=shell.offsetHeight;rorx=shell.offsetLeft;rory=shell.offsetTop;resizing=true;document.body.style.userSelect='none';e.preventDefault();e.stopPropagation();});});document.addEventListener('mousemove',e=>{const wr=ws.getBoundingClientRect(),mx=e.clientX-wr.left,my=e.clientY-wr.top,wsW=ws.offsetWidth,wsH=ws.offsetHeight;if(dragging){shell.style.left=Math.max(0,Math.min(wsW-shell.offsetWidth,mx-dox))+'px';shell.style.top=Math.max(0,Math.min(wsH-shell.offsetHeight,my-doy))+'px';}if(resizing){const dx=mx-rox,dy=my-roy;let nw=row,nh=roh,nx=rorx,ny=rory;if(rdir.includes('r'))nw=Math.max(320,row+dx);if(rdir.includes('b'))nh=Math.max(320,roh+dy);if(rdir.includes('l')){nw=Math.max(320,row-dx);nx=rorx+(row-nw);}if(rdir.includes('t')){nh=Math.max(320,roh-dy);ny=rory+(roh-nh);}if(nx<0){nw+=nx;nx=0;}if(ny<0){nh+=ny;ny=0;}nw=Math.min(nw,wsW-nx);nh=Math.min(nh,wsH-ny);shell.style.left=nx+'px';shell.style.top=ny+'px';shell.style.width=nw+'px';shell.style.height=nh+'px';}});document.addEventListener('mouseup',()=>{if(dragging||resizing){dragging=resizing=false;document.body.style.userSelect='';}});shell.addEventListener('mousedown',()=>{shell.style.zIndex=250;});}

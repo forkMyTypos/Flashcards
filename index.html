@@ -2428,8 +2428,26 @@ async function removeTagFromCurrent(tag){
   try{await db.cards.update(card.id,{tags:card.tags});}
   catch(e){console.error('Tag save failed:',e);}
 }
-async function navigateCard(delta){await saveCurrentCard();const cards=activeCards();if(!cards.length)return;cardIndex=((cardIndex+delta)%cards.length+cards.length)%cards.length;loadCardIntoEditors(activeCard());}
-async function jumpToCard(idx){await saveCurrentCard();cardIndex=Math.max(0,Math.min(activeCards().length-1,idx));loadCardIntoEditors(activeCard());}
+let _navBusy=false;
+async function navigateCard(delta){
+  if(_navBusy)return; // rapid next/prev clicks could otherwise overlap and save the wrong card's content onto the next one
+  _navBusy=true;
+  try{
+    await saveCurrentCard();
+    const cards=activeCards();if(!cards.length)return;
+    cardIndex=((cardIndex+delta)%cards.length+cards.length)%cards.length;
+    loadCardIntoEditors(activeCard());
+  }finally{_navBusy=false;}
+}
+async function jumpToCard(idx){
+  if(_navBusy)return;
+  _navBusy=true;
+  try{
+    await saveCurrentCard();
+    cardIndex=Math.max(0,Math.min(activeCards().length-1,idx));
+    loadCardIntoEditors(activeCard());
+  }finally{_navBusy=false;}
+}
 async function commitCardOrder(newCards){const set=activeSet();if(!set||!set.cards)return;const curId=activeCard()?activeCard().id:null;set.cards=newCards;cardIndex=Math.max(0,newCards.findIndex(c=>c.id===curId));try{await db.sets.update(set.id,{cardIDs:newCards.map(c=>c.id)});}catch(err){console.error('reorder save failed',err);}updateCardBar();loadCardIntoEditors(activeCard());}
 /* ===== Image health =====
    Hotlinked images can die (typo, host gone, hotlink-blocking). This module:
@@ -2636,7 +2654,7 @@ function closeSearch(){document.getElementById('search-overlay').classList.remov
 function renderSearchResults(query){const res=document.getElementById('search-results'),q=query.trim().toLowerCase();const closedSets=sets.filter(s=>s.closed===true),openSets=sets.filter(s=>s.closed!==true);const visibleClosed=q?closedSets.filter(s=>s.name.toLowerCase().includes(q)):closedSets;const cardMatches=[];if(q){openSets.forEach(set=>{(set.cards||[]).forEach((card,idx)=>{const tmp=document.createElement('div');tmp.innerHTML=DOMPurify.sanitize((card.sideA||'')+(card.sideB||''));const text=tmp.textContent||'';if(text.toLowerCase().includes(q))cardMatches.push({set,card,idx,text});});});}if(!visibleClosed.length&&!cardMatches.length){res.innerHTML=q?'<div id="search-empty">No results</div>':'<div id="search-empty">Start typing to search across all open sets</div>';return;}res.innerHTML='';if(visibleClosed.length){const lbl=document.createElement('div');lbl.className='search-section-label';lbl.textContent='Closed Sets';res.appendChild(lbl);visibleClosed.forEach(set=>{const n=(set.cards||[]).length;const item=document.createElement('div');item.className='search-result-item closed-set';item.innerHTML=`<div class="search-result-meta"><span class="search-result-set">${DOMPurify.sanitize(set.name)}</span><span class="search-result-text" style="color:#2a2a4a">${n} card${n!==1?'s':''}</span></div><span class="search-reopen-tag">Reopen</span>`;item.addEventListener('click',async()=>{closeSearch();await reopenSet(set.id);enterCreateMode();});res.appendChild(item);});}if(cardMatches.length){const lbl=document.createElement('div');lbl.className='search-section-label';lbl.textContent='Card Matches';res.appendChild(lbl);cardMatches.slice(0,30).forEach(({set,idx,text})=>{const item=document.createElement('div');item.className='search-result-item';const snippet=text.slice(0,120).trim();const safeQ=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');const parts=snippet.split(new RegExp('('+safeQ+')','gi'));const hiHtml=parts.map(p=>p.toLowerCase()===q?'<mark>'+DOMPurify.sanitize(p)+'</mark>':DOMPurify.sanitize(p)).join('');item.innerHTML=`<div class="search-result-meta"><span class="search-result-set">${DOMPurify.sanitize(set.name)}</span><span class="search-result-text">${hiHtml}</span></div>`;item.addEventListener('click',async()=>{closeSearch();await selectSet(set.id);await jumpToCard(idx);});res.appendChild(item);});}}
 function openShortcuts(){document.getElementById('shortcuts-modal').classList.add('open');}
 function closeShortcuts(){document.getElementById('shortcuts-modal').classList.remove('open');}
-function exportSet(){const set=activeSet();if(!set){toast('No active set','err');return;}const data={name:set.name,version:2,cards:set.cards.map(c=>({sideA:c.sideA,sideB:c.sideB,sr:c.sr||null,bg:c.bg||null})),exported:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(set.name||'flashcards').replace(/[^a-z0-9]/gi,'_')+'.json';a.click();URL.revokeObjectURL(a.href);toast('Exported "'+set.name+'"','ok');}
+function exportSet(){const set=activeSet();if(!set){toast('No active set','err');return;}const data={name:set.name,version:2,cards:set.cards.map(c=>({sideA:c.sideA,sideB:c.sideB,sr:c.sr||null,bg:c.bg||null,ytClip:c.ytClip||null})),ytVideoId:set.ytVideoId||null,exported:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(set.name||'flashcards').replace(/[^a-z0-9]/gi,'_')+'.json';a.click();URL.revokeObjectURL(a.href);toast('Exported "'+set.name+'"','ok');}
 
 /* Self-contained embed snippet for the current set. The output is an
    <iframe srcdoc="..."> wrapping a complete HTML document (CSS + JS + cards
@@ -3054,7 +3072,7 @@ async function importJSONText(text,fallbackName){
   const norm=normalizeImport(data);
   if(!norm.cards.length)throw new Error('No cards found in that JSON');
   const name=(norm.name||fallbackName||('New set '+(sets.length+1)))+'';
-  const payload={name,cards:norm.cards};
+  const payload={name,cards:norm.cards,ytVideoId:norm.ytVideoId||null};
   if(activeSet()){_pendingImport={data:payload,name};openImportChoice(name,norm.cards.length);return;}
   await _importAsNewSet(payload,name);
 }
@@ -3084,9 +3102,15 @@ function normalizeImport(data){
     }
     else if(typeof raw==='string'){a=raw;}
     if(a===''&&b==='')continue;
-    cards.push({sideA:sanitizeCardField(wrap(a)),sideB:sanitizeCardField(wrap(b)),sr:null,bg:null});
+    let ytClip=null,bg=null;
+    if(raw&&typeof raw==='object'){
+      if(raw.ytClip&&typeof raw.ytClip.startMs==='number'&&typeof raw.ytClip.endMs==='number')ytClip=raw.ytClip;
+      bg=raw.bg||null;
+    }
+    cards.push({sideA:sanitizeCardField(wrap(a)),sideB:sanitizeCardField(wrap(b)),sr:null,bg,ytClip});
   }
-  return{name,cards};
+  const ytVideoId=(data&&typeof data==='object'&&/^[A-Za-z0-9_-]{11}$/.test(data.ytVideoId||''))?data.ytVideoId:null;
+  return{name,cards,ytVideoId};
 }
 function _escForCard(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 let _pendingImport=null;

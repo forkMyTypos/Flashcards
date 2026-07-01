@@ -1,3 +1,4 @@
+<script src="script1"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -234,6 +235,12 @@ input[type="number"]{-moz-appearance:textfield;}
 .img-resize-group input[type="range"]{width:64px;height:4px;accent-color:#4caf50;cursor:pointer;}
 .img-resize-group .resize-val{font-size:10px;color:#7dba7d;min-width:30px;text-align:right;font-family:monospace;}
 .editor-wrap{border:1px solid #2a2a2a;border-radius:0 0 8px 8px;background:#0d0d0d;flex:1;min-height:0;overflow:hidden;position:relative;transition:opacity .12s;}
+.tb-audio{color:#9ad;}
+.aud-play-btn{position:absolute;top:8px;right:8px;z-index:6;width:30px;height:30px;border-radius:50%;border:1px solid #2a4a6a;background:#16243a;color:#9cf;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.4);}
+.aud-play-btn:hover{background:#1d3354;border-color:#3b82f6;}
+.aud-play-btn:active{transform:scale(.92);}
+.learn-aud-btn{position:absolute;top:10px;right:10px;z-index:8;width:34px;height:34px;border-radius:50%;border:1px solid #2a4a6a;background:#16243a;color:#9cf;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.45);}
+.learn-aud-btn:hover{background:#1d3354;border-color:#3b82f6;}
 .editor-wrap.card-fade{opacity:0;}
 .editor-valign-wrap{position:absolute;inset:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;}
 .editor-valign-wrap.valign-top{justify-content:flex-start;}
@@ -379,7 +386,7 @@ input[type="number"]{-moz-appearance:textfield;}
 .cardsC{position:relative;flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .grab{position:absolute;cursor:grab;user-select:none;}
 .grab:active{cursor:grabbing;}
-.learn-shell{position:relative;display:flex;flex-direction:column;width:440px;height:340px;min-width:320px;min-height:220px;border-radius:10px;border:1px solid #3a5a8a;background:#161622;box-shadow:0 8px 40px rgba(0,0,0,0.75);transition:border-color .4s,background .4s;}
+.learn-shell{position:relative;display:flex;flex-direction:column;width:420px;height:520px;min-width:300px;min-height:320px;border-radius:10px;border:1px solid #3a5a8a;background:#161622;box-shadow:0 8px 40px rgba(0,0,0,0.75);transition:border-color .4s,background .4s;}
 .learn-shell.flipped{border-color:#5a3a3a;background:#1c1616;}
 /* Reverse mode: cards start on the back (red) side and flip to the front (blue) side. */
 .learn-shell.reversed{border-color:#5a3a3a;background:#1c1616;}
@@ -711,10 +718,14 @@ input[type="number"]{-moz-appearance:textfield;}
   .learn-topbar{flex-wrap:wrap;}
   /* Titlebar: logo shrinks to the mark, tabs own row 1, action buttons drop
      to their own full-width row underneath — nothing overlaps the tabs. */
-  #titlebar{flex-wrap:wrap;padding:8px;row-gap:6px;gap:6px;}
+  #titlebar{display:grid;grid-template-columns:auto 1fr;grid-template-areas:'logo tabs' 'actions actions';align-items:center;gap:6px;padding:8px;height:auto;flex-wrap:initial;}
+  #app-label{grid-area:logo;}
+  #slider-mount{grid-area:tabs;flex:initial!important;min-width:0;width:100%;}
   #app-label .al-name{display:none;}
   #titlebar .divider{display:none;}
-  .title-actions{order:3;width:100%;margin-left:0;justify-content:flex-end;flex-wrap:wrap;row-gap:4px;}
+  .title-actions{grid-area:actions;width:100%;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .title-actions::-webkit-scrollbar{display:none;}
+  .title-actions .title-btn{flex-shrink:0;}
   .set-tab{font-size:1.05rem;padding:0 10px;height:32px;}
   .tCont .len,.tCont .arrow,.tb-search-btn,.tCont .add{height:32px;}
   /* Cardbar + editor toolbars: one compact row you can swipe sideways,
@@ -792,12 +803,12 @@ input[type="number"]{-moz-appearance:textfield;}
     <div class="shell shell-front" id="shell-front">
       <div class="drag-bar" id="dragBar-front"><div class="drag-dots"><span></span><span></span><span></span></div><div class="drag-badge">Front</div><div style="width:38px"></div></div>
       <div class="rh rh-r" data-dir="r"></div><div class="rh rh-b" data-dir="b"></div><div class="rh rh-l" data-dir="l"></div><div class="rh rh-br" data-dir="br"></div><div class="rh rh-bl" data-dir="bl"></div><div class="rh rh-tr" data-dir="tr"></div><div class="rh rh-tl" data-dir="tl"></div>
-      <div class="panel-body"><div id="tb-front" class="toolbar"></div><div class="editor-wrap"><div class="editor-valign-wrap valign-top" id="valign-front"><div id="ed-front" class="editor" contenteditable="true" spellcheck="true"></div></div></div></div>
+      <div class="panel-body"><div id="tb-front" class="toolbar"></div><div class="editor-wrap"><button id="aud-play-front" class="aud-play-btn" title="Play audio" style="display:none">&#128266;</button><div class="editor-valign-wrap valign-top" id="valign-front"><div id="ed-front" class="editor" contenteditable="true" spellcheck="true"></div></div></div></div>
     </div>
     <div class="shell shell-back" id="shell-back">
       <div class="drag-bar" id="dragBar-back"><div class="drag-dots"><span></span><span></span><span></span></div><div class="drag-badge">Back</div><div style="width:38px"></div></div>
       <div class="rh rh-r" data-dir="r"></div><div class="rh rh-b" data-dir="b"></div><div class="rh rh-l" data-dir="l"></div><div class="rh rh-br" data-dir="br"></div><div class="rh rh-bl" data-dir="bl"></div><div class="rh rh-tr" data-dir="tr"></div><div class="rh rh-tl" data-dir="tl"></div>
-      <div class="panel-body"><div id="tb-back" class="toolbar"></div><div class="editor-wrap"><div class="editor-valign-wrap valign-top" id="valign-back"><div id="ed-back" class="editor" contenteditable="true" spellcheck="true"></div></div></div></div>
+      <div class="panel-body"><div id="tb-back" class="toolbar"></div><div class="editor-wrap"><button id="aud-play-back" class="aud-play-btn" title="Play audio" style="display:none">&#128266;</button><div class="editor-valign-wrap valign-top" id="valign-back"><div id="ed-back" class="editor" contenteditable="true" spellcheck="true"></div></div></div></div>
     </div>
     <div id="browser-shell">
       <div id="browser-drag-bar"><div class="browser-dots"><span></span><span></span><span></span></div><div class="browser-badge">Research</div><button id="browser-close">&#215;</button></div>
@@ -964,6 +975,7 @@ input[type="number"]{-moz-appearance:textfield;}
     </div>
     <div class="rc-actions ic-actions">
       <button id="ec-cancel">Cancel</button>
+      <button id="ec-copy" title="Copy this set as JSON text you can paste anywhere">Copy as text</button>
       <button id="ec-all">Everything (backup)</button>
       <button class="confirm" id="ec-set">This set</button>
     </div>
@@ -976,7 +988,7 @@ input[type="number"]{-moz-appearance:textfield;}
     <button class="ip-file-btn" id="ip-file">Choose a .json file&hellip;</button>
     <div class="ip-or">or paste JSON</div>
     <textarea id="ip-paste" spellcheck="false" placeholder='{"name":"My set","cards":[{"sideA":"...","sideB":"..."}]}'></textarea>
-    <div class="ip-ai-row">Want AI to write your deck? <a id="ip-ai-prompt" href="#">Copy a ready-made prompt</a> for ChatGPT / Claude / Gemini, then paste the JSON it returns above.</div>
+    <div class="ip-ai-row">Want AI to write your deck? <a id="ip-ai-prompt" href="#">Copy a ready-made prompt</a> for ChatGPT / Claude / Gemini, then paste what it gives you above \u2014 JSON, a table, or Front | Back lines all work.</div>
     <div class="ip-imgs-row">
       <button class="ip-file-btn" id="ip-imgfolder-btn">+ Add a folder of images&hellip;</button>
       <span id="ip-imgfolder-status"></span>
@@ -1070,7 +1082,7 @@ async function initDB(){
 }
 var dbBoss={getSet:async function(id){return await db.sets.get(id);},getCard:async function(id){return await db.cards.get(id);}};
 async function DB_loadApp(){const allSets=await db.sets.toArray();const info=await db.info.get('info').catch(()=>null);const result={sets:[],lastSetId:info?info.lastSet:null};for(const s of allSets){const cards=await DB_loadCards(s.id);result.sets.push({id:s.id,name:s.name,cards,closed:s.open===false,ytVideoId:s.ytVideoId||null});}return result;}
-async function DB_loadCards(setId){const s=await db.sets.get(setId);if(!s||!s.cardIDs||!s.cardIDs.length)return[];const raw=await db.cards.where('id').anyOf(s.cardIDs).toArray();return s.cardIDs.map(id=>raw.find(c=>c.id===id)).filter(Boolean).map(c=>({id:c.id,name:c.name||'',sideA:c.sideA||'',sideB:c.sideB||'',tags:c.tags||[],sr:c.sr||null,ytClip:c.ytClip||null,bg:c.bg||null}));}
+async function DB_loadCards(setId){const s=await db.sets.get(setId);if(!s||!s.cardIDs||!s.cardIDs.length)return[];const raw=await db.cards.where('id').anyOf(s.cardIDs).toArray();return s.cardIDs.map(id=>raw.find(c=>c.id===id)).filter(Boolean).map(c=>({id:c.id,name:c.name||'',sideA:c.sideA||'',sideB:c.sideB||'',tags:c.tags||[],sr:c.sr||null,ytClip:c.ytClip||null,bg:c.bg||null,audioA:c.audioA||null,audioB:c.audioB||null}));}
 async function DB_createSet(name){const cardId=await db.cards.add({name:'card1',sideA:'',sideB:'',tags:[]});const info=await db.info.get('info');const n=(info&&info.setN)?info.setN:1;await db.info.update('info',{setN:n+1});const setId=await db.sets.add({name,cardIDs:[cardId],open:true,n:1,tags:[]});return{id:setId,name,cards:[{id:cardId,name:'card1',sideA:'',sideB:'',tags:[]}]};}
 async function DB_saveCard(setId,cardId,sideA,sideB,bg){await db.cards.update(cardId,{sideA,sideB,bg:bg||null});}
 async function DB_addCard(setId){const s=await db.sets.get(setId);const n=s?(s.n||0)+1:1;const cardId=await db.cards.add({name:'card'+n,sideA:'',sideB:'',tags:[]});const cardIDs=s?[...(s.cardIDs||[]),cardId]:[cardId];await db.sets.update(setId,{cardIDs,n});return{id:cardId,name:'card'+n,sideA:'',sideB:'',tags:[]};}
@@ -1083,13 +1095,13 @@ async function DB_bulkImport(name,cardsData){
   for(const c of (Array.isArray(cardsData)?cardsData:[])){
     if(!c||typeof c!=='object')continue;
     if(cardFieldTooBig(c.sideA)||cardFieldTooBig(c.sideB))continue;
-    clean.push({sideA:sanitizeCardField(c.sideA||''),sideB:sanitizeCardField(c.sideB||''),sr:c.sr,ytClip:c.ytClip,bg:c.bg||null});
+    clean.push({sideA:sanitizeCardField(c.sideA||''),sideB:sanitizeCardField(c.sideB||''),sr:c.sr,ytClip:c.ytClip,bg:c.bg||null,audioA:c.audioA||null,audioB:c.audioB||null});
   }
   if(!clean.length)clean.push({sideA:'',sideB:''});
-  const cardObjects=clean.map((c,i)=>({name:'card'+(i+1),sideA:c.sideA,sideB:c.sideB,tags:[],sr:c.sr||undefined,ytClip:c.ytClip||undefined,bg:c.bg||null}));
+  const cardObjects=clean.map((c,i)=>({name:'card'+(i+1),sideA:c.sideA,sideB:c.sideB,tags:[],sr:c.sr||undefined,ytClip:c.ytClip||undefined,bg:c.bg||null,audioA:c.audioA||null,audioB:c.audioB||null}));
   const cardIds=await db.cards.bulkAdd(cardObjects,{allKeys:true});
   const setId=await db.sets.add({name,cardIDs:cardIds,open:true,n:clean.length,tags:[]});
-  return{id:setId,name,cards:cardIds.map((id,i)=>({id,name:'card'+(i+1),sideA:cardObjects[i].sideA,sideB:cardObjects[i].sideB,tags:[],sr:cardObjects[i].sr||null,ytClip:cardObjects[i].ytClip||null,bg:cardObjects[i].bg||null}))};
+  return{id:setId,name,cards:cardIds.map((id,i)=>({id,name:'card'+(i+1),sideA:cardObjects[i].sideA,sideB:cardObjects[i].sideB,tags:[],sr:cardObjects[i].sr||null,ytClip:cardObjects[i].ytClip||null,bg:cardObjects[i].bg||null,audioA:cardObjects[i].audioA||null,audioB:cardObjects[i].audioB||null}))};
 }
 async function DB_deleteSet(setId){const s=await db.sets.get(setId);if(s&&s.cardIDs&&s.cardIDs.length)await db.cards.bulkDelete(s.cardIDs);await db.sets.delete(setId);}
 /* Merge cards from an import file into an EXISTING set. Same inbound
@@ -1101,17 +1113,17 @@ async function DB_mergeCards(setId,cardsData){
   for(const c of (Array.isArray(cardsData)?cardsData:[])){
     if(!c||typeof c!=='object'){skipped++;continue;}
     if(cardFieldTooBig(c.sideA)||cardFieldTooBig(c.sideB)){skipped++;continue;}
-    clean.push({sideA:sanitizeCardField(c.sideA||''),sideB:sanitizeCardField(c.sideB||''),sr:c.sr,ytClip:c.ytClip,bg:c.bg||null});
+    clean.push({sideA:sanitizeCardField(c.sideA||''),sideB:sanitizeCardField(c.sideB||''),sr:c.sr,ytClip:c.ytClip,bg:c.bg||null,audioA:c.audioA||null,audioB:c.audioB||null});
   }
   const room=Math.max(0,MAX_CARDS-s.cardIDs.length);
   const overflow=Math.max(0,clean.length-room);
   const take=clean.slice(0,room);
   if(!take.length)return{added:[],skipped,overflow};
   const base=s.cardIDs.length;
-  const cardObjects=take.map((c,i)=>({name:'card'+(base+i+1),sideA:c.sideA,sideB:c.sideB,tags:[],sr:c.sr||undefined,ytClip:c.ytClip||undefined,bg:c.bg||null}));
+  const cardObjects=take.map((c,i)=>({name:'card'+(base+i+1),sideA:c.sideA,sideB:c.sideB,tags:[],sr:c.sr||undefined,ytClip:c.ytClip||undefined,bg:c.bg||null,audioA:c.audioA||null,audioB:c.audioB||null}));
   const ids=await db.cards.bulkAdd(cardObjects,{allKeys:true});
   await db.sets.update(setId,{cardIDs:[...s.cardIDs,...ids],n:s.cardIDs.length+ids.length});
-  return{added:ids.map((id,i)=>({id,name:cardObjects[i].name,sideA:cardObjects[i].sideA,sideB:cardObjects[i].sideB,tags:[],sr:cardObjects[i].sr||null,ytClip:cardObjects[i].ytClip||null,bg:cardObjects[i].bg||null})),skipped,overflow};
+  return{added:ids.map((id,i)=>({id,name:cardObjects[i].name,sideA:cardObjects[i].sideA,sideB:cardObjects[i].sideB,tags:[],sr:cardObjects[i].sr||null,ytClip:cardObjects[i].ytClip||null,bg:cardObjects[i].bg||null,audioA:cardObjects[i].audioA||null,audioB:cardObjects[i].audioB||null})),skipped,overflow};
 }
 async function DB_renameSet(setId,name){await db.sets.update(setId,{name});}
 async function DB_setSetOpen(setId,open){await db.sets.update(setId,{open});}
@@ -1581,6 +1593,17 @@ var learnBoss={
   _bindCards:function(){
     const shell=this.c.querySelector('.learn-shell'),inner=this.c.querySelector('.learn-inner'),resizeEl=this.c.querySelector('.resize'),grab=this.c.querySelector('.grab'),dragBar=this.c.querySelector('.learn-drag-bar');
     this.sideA=this.c.querySelector('.learn-front');this.sideB=this.c.querySelector('.learn-back');this.shellEl=shell;
+    // Stage 2: render each face through a LOCKED editor (same factory as Create)
+    // so card content -- especially image px sizing -- is identical to Create mode.
+    // The face element keeps its flip/position CSS; the editor lives inside it.
+    (()=>{
+      const mk=(faceEl,tag)=>{
+        faceEl.innerHTML='<div class="editor-valign-wrap valign-top" id="lrn-v-'+tag+'"><div id="lrn-ed-'+tag+'" class="editor"></div></div>';
+        return makeEditor('lrn-ed-'+tag,'lrn-tb-'+tag,'lrn-st-'+tag,'lrn-v-'+tag,null,{mode:'learn'});
+      };
+      this.edA=mk(this.sideA,'a');
+      this.edB=mk(this.sideB,'b');
+    })();
     const ytBtn=this.c.querySelector('#yt-learn-btn');
     if(ytBtn){ytBtn.addEventListener('click',()=>{if(typeof ytBoss==='undefined')return;ytBoss.toggleLearnAutoplay();});}
     this._loadCardSize(shell);
@@ -1611,9 +1634,30 @@ var learnBoss={
   _unflip:function(){this.shellEl.classList.remove('flipped');const showFront=!this.reversed;this.c.querySelector('.learn-badge-front').style.display=showFront?'':'none';this.c.querySelector('.learn-badge-back').style.display=showFront?'none':'';},
   _rate:async function(r){const card=this.cards[this.order[this.pos]];if(!card)return;const ratingKey=r===0?'again':r===1?'unsure':'knew';this.ratings[card.id]=ratingKey;const newSR=SR.rate(card,r);card.sr=newSR;try{await DB_saveSR(card.id,newSR);}catch(e){}this._updateProgress();updateSRStatus();},
   _rateKey:function(r){if(!this.shellEl||!this.shellEl.classList.contains('flipped'))return;this._rate(r).then(()=>this._next());},
-  _next:function(){this._unflip();setTimeout(()=>this._goRel(1),220);},
+  _unflipInstant:function(){
+    // Unflip with NO rotation animation, so advancing to a new card can never
+    // show a half-rotated face (which in reverse mode is the answer side).
+    const inner=this.c.querySelector('.learn-inner');
+    if(inner){const prev=inner.style.transition;inner.style.transition='none';this._unflip();
+      // force reflow so the 'none' takes effect before we restore the transition
+      void inner.offsetWidth;inner.style.transition=prev||'';}
+    else this._unflip();
+  },
+  _next:function(){this._goRel(1);},
   _updateProgress:function(){const known=Object.values(this.ratings).filter(r=>r==='knew').length,total=this.cards.length,pct=total?Math.round(known/total*100):0;const bar=this.c.querySelector('.learn-progress-bar');if(bar)bar.style.width=pct+'%';const ctr=document.getElementById('learn-counter');if(ctr)ctr.textContent=known+' / '+total+' known';const srInfo=this.c.querySelector('.learn-sr-info');if(srInfo){const card=this.cards[this.order[this.pos]];srInfo.textContent=card?SR.label(card):'';}},
-  _goTo:function(idx){const len=this.order.length;if(!len)return;this.pos=((idx%len)+len)%len;const posInput=this.c.querySelector('.posInput'),totalEl=this.c.querySelector('.total-span');if(posInput)posInput.value=this.pos+1;if(totalEl)totalEl.textContent=len;this._unflip();const card=this.cards[this.order[this.pos]];if(card){const aHtml=_normalizeCardHTML(DOMPurify.sanitize(card.sideA||'')),bHtml=_normalizeCardHTML(DOMPurify.sanitize(card.sideB||''));if(this.reversed){this.sideA.innerHTML=bHtml;this.sideB.innerHTML=aHtml;}else{this.sideA.innerHTML=aHtml;this.sideB.innerHTML=bHtml;}const _ba=_bgSide(card,'a')||'',_bb=_bgSide(card,'b')||'';this.sideA.style.background=this.reversed?_bb:_ba;this.sideB.style.background=this.reversed?_ba:_bb;}this._updateProgress();if(card&&typeof ytBoss!=='undefined')ytBoss.playCardClip(card);},
+  _goTo:function(idx){const len=this.order.length;if(!len)return;this.pos=((idx%len)+len)%len;const posInput=this.c.querySelector('.posInput'),totalEl=this.c.querySelector('.total-span');if(posInput)posInput.value=this.pos+1;if(totalEl)totalEl.textContent=len;this._unflipInstant();const card=this.cards[this.order[this.pos]];if(card){const aHtml=card.sideA||'',bHtml=card.sideB||'';if(this.reversed){this.edA.setHTML(bHtml);this.edB.setHTML(aHtml);}else{this.edA.setHTML(aHtml);this.edB.setHTML(bHtml);}const _ba=_bgSide(card,'a')||'',_bb=_bgSide(card,'b')||'';this.sideA.style.background=this.reversed?_bb:_ba;this.sideB.style.background=this.reversed?_ba:_bb;
+      const _frontAudio=this.reversed?card.audioB:card.audioA;
+      const _backAudio=this.reversed?card.audioA:card.audioB;
+      [[this.sideA,_frontAudio],[this.sideB,_backAudio]].forEach(([panel,aud])=>{
+        if(!panel)return;
+        const old=panel.querySelector('.learn-aud-btn');if(old)old.remove();
+        if(aud&&aud.text){
+          if(getComputedStyle(panel).position==='static')panel.style.position='relative';
+          const btn=document.createElement('button');btn.className='learn-aud-btn';btn.textContent='\u{1F50A}';btn.title='Play audio';
+          btn.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(aud);};
+          panel.appendChild(btn);
+        }
+      });}this._updateProgress();if(card&&typeof ytBoss!=='undefined')ytBoss.playCardClip(card);},
   currentCard:function(){return(this.cards&&this.order)?this.cards[this.order[this.pos]]:null;},
   _toggleShuffle:function(){this.shuffled=!this.shuffled;const btn=this.c.querySelector('#btn-shuffle');btn.classList.toggle('shuffle-on',this.shuffled);btn.classList.toggle('active',this.shuffled);this._buildOrder();this._goTo(0);toast(this.shuffled?'Shuffled':'Order restored','info');},
   /* Reverse mode: start showing the back content (red side), flip to see front
@@ -1847,7 +1891,10 @@ function _drawInsert(){const cv=_draw.canvas,ctx=_draw.ctx;
   if(_draw.bg==="paper"){o.fillStyle="#fcfcf7";o.fillRect(0,0,w,h);}
   o.drawImage(cv,minX,minY,w,h,0,0,w,h);
   const url=out.toDataURL("image/png");const cb=_draw.onInsert;_drawClose();if(cb)cb(url);}
-function makeEditor(edId,tbId,statusId,valignId,onBgClick){
+function makeEditor(edId,tbId,statusId,valignId,onBgClick,opts){
+  opts=opts||{};
+  const _mode=opts.mode||'create';        // 'create' = editable; 'learn' = locked, no chrome
+  const _readonly=(_mode==='learn');
   let doc=[],cur={p:0,offset:0},sel=null,busy=false;
   let _bgBtnEl=null;
   let fmt={bold:false,italic:false,underline:false,color:null,size:null,font:null};
@@ -1930,7 +1977,7 @@ function makeEditor(edId,tbId,statusId,valignId,onBgClick){
   function setImgW(w){if(!selectedImage)return;const{p,runIndex}=selectedImage;if(!doc[p]||!doc[p].runs[runIndex])return;doc[p].runs[runIndex].width=w;const wrap=ed.querySelector(`[data-img-p="${p}"][data-img-ri="${runIndex}"]`);if(wrap){wrap.style.width=w+"%";}else{const le=getLine(p);if(le)le.replaceWith(buildLine(p));}}
   function setImgBg(c){if(!selectedImage)return;const{p,runIndex}=selectedImage;if(!doc[p]||!doc[p].runs[runIndex])return;pushUndo("imgbg");doc[p].runs[runIndex].bg=c||null;const wrap=ed.querySelector(`[data-img-p="${p}"][data-img-ri="${runIndex}"]`);if(wrap)wrap.style.background=c||"transparent";if(typeof markDirty==="function")markDirty();}
   function _toHex(c){if(!c)return"#ffffff";if(c[0]==="#")return c;const m=c.match(/\d+/g);if(!m||m.length<3)return"#ffffff";return"#"+m.slice(0,3).map(n=>(+n).toString(16).padStart(2,"0")).join("");}
-  function updateTb(){const tb=document.getElementById(tbId);tb.querySelectorAll(".tbtn[data-k]").forEach(b=>{b.classList.toggle("on",!!fmt[b.dataset.k]);});const si=tb.querySelector('input[type="number"]');if(si)si.value=fmt.size||15;const fs=tb.querySelector('select');if(fs)fs.value=fmt.font||"Arial";if(colorBarEl)colorBarEl.style.background=pickerColor;if(colorSwatchEl)colorSwatchEl.style.background=pickerColor;if(imgResizeGroup){if(selectedImage){imgResizeGroup.classList.add("visible");const r=doc[selectedImage.p]&&doc[selectedImage.p].runs[selectedImage.runIndex];const w=r?(r.width||100):100;if(imgResizeSlider)imgResizeSlider.value=w;if(imgResizeVal)imgResizeVal.textContent=w+"%";if(imgBgInput&&r&&r.bg)imgBgInput.value=_toHex(r.bg);}else imgResizeGroup.classList.remove("visible");}tb.querySelectorAll(".tbtn[data-valign]").forEach(b=>{b.classList.toggle("on",b.dataset.valign===currentValign);});const _al=(doc[cur.p]&&doc[cur.p].align)||"left";tb.querySelectorAll(".tbtn[data-align]").forEach(b=>{b.classList.toggle("on",b.dataset.align===_al);});}
+  function updateTb(){const tb=document.getElementById(tbId);if(!tb)return;tb.querySelectorAll(".tbtn[data-k]").forEach(b=>{b.classList.toggle("on",!!fmt[b.dataset.k]);});const si=tb.querySelector('input[type="number"]');if(si)si.value=fmt.size||15;const fs=tb.querySelector('select');if(fs)fs.value=fmt.font||"Arial";if(colorBarEl)colorBarEl.style.background=pickerColor;if(colorSwatchEl)colorSwatchEl.style.background=pickerColor;if(imgResizeGroup){if(selectedImage){imgResizeGroup.classList.add("visible");const r=doc[selectedImage.p]&&doc[selectedImage.p].runs[selectedImage.runIndex];const w=r?(r.width||100):100;if(imgResizeSlider)imgResizeSlider.value=w;if(imgResizeVal)imgResizeVal.textContent=w+"%";if(imgBgInput&&r&&r.bg)imgBgInput.value=_toHex(r.bg);}else imgResizeGroup.classList.remove("visible");}tb.querySelectorAll(".tbtn[data-valign]").forEach(b=>{b.classList.toggle("on",b.dataset.valign===currentValign);});const _al=(doc[cur.p]&&doc[cur.p].align)||"left";tb.querySelectorAll(".tbtn[data-align]").forEach(b=>{b.classList.toggle("on",b.dataset.align===_al);});}
   // --- Color popover -------------------------------------------------------
   // One button opens a popover with Default / Favorites / Recent / Palette /
   // Custom. Selection is frozen on open (clicking the popover would otherwise
@@ -2132,6 +2179,20 @@ function makeEditor(edId,tbId,statusId,valignId,onBgClick){
     bgBtn.onmousedown=e=>e.preventDefault();
     bgBtn.onclick=()=>{if(typeof onBgClick==="function")onBgClick(bgBtn);};
     tb.appendChild(bgBtn);_bgBtnEl=bgBtn;
+    // Experimental per-side audio (TTS). Uses the current text selection if any,
+    // else this whole side's text. Side derived from the editor id (ed-front/back).
+    const audBtn=document.createElement("div");audBtn.className="tbtn tb-audio";audBtn.tabIndex=-1;audBtn.title="Add audio (experimental) \u2014 speak this side, or the selected text";
+    audBtn.innerHTML='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>';
+    audBtn.onmousedown=e=>e.preventDefault();
+    audBtn.onclick=()=>{
+      readSel();
+      const side=(edId==='ed-front')?'A':'B';
+      let selText='';
+      try{const s=window.getSelection();if(s&&!s.isCollapsed&&s.toString().trim())selText=s.toString().trim();}catch(_){}
+      const fullText=getPlainText();
+      if(typeof openAudioModal==='function')openAudioModal(side,selText,fullText);
+    };
+    tb.appendChild(audBtn);
     tb.appendChild(sep());
     const irg=document.createElement("div");irg.className="img-resize-group";imgResizeGroup=irg;
     const rl=document.createElement("span");rl.className="resize-label";rl.textContent="W";
@@ -2319,7 +2380,14 @@ function makeEditor(edId,tbId,statusId,valignId,onBgClick){
   }
   function clear(){doc=[mkPara([mkRun("")])];renderAll();requestAnimationFrame(()=>placeCaret(0,0));}
   function getPlainText(){return doc.map(p=>p.runs.filter(r=>r.type==='text').map(r=>r.text).join('')).join('\n');}
-  buildTb();renderAll();bindEv();
+  if(_readonly){
+    // Learn mode: same renderer (buildLine), but no toolbar, no edit wiring.
+    // Locked for editing yet still selectable so copy works.
+    renderAll();
+    if(ed){ed.setAttribute('contenteditable','false');ed.style.userSelect='text';ed.style.webkitUserSelect='text';ed.spellcheck=false;}
+  } else {
+    buildTb();renderAll();bindEv();
+  }
   requestAnimationFrame(()=>{placeCaret(0,0);updateTb();});
   function insertImage(src,meta){insImgFitted(src,null,meta||null);}
   function setBgDot(c){if(_bgBtnEl){const d=_bgBtnEl.querySelector(".tb-bg-dot");if(d)d.style.background=c||"transparent";}}
@@ -2372,6 +2440,8 @@ async function saveCurrentCard(){
   try{
     await DB_saveCard(set.id,card.id,card.sideA,card.sideB,card.bg);
     if(card.ytClip!==undefined)await db.cards.update(card.id,{ytClip:card.ytClip});
+    if(card.audioA!==undefined)await db.cards.update(card.id,{audioA:card.audioA});
+    if(card.audioB!==undefined)await db.cards.update(card.id,{audioB:card.audioB});
     setSaveStatus('saved');
   }catch(e){
     setSaveStatus('unsaved');
@@ -2407,7 +2477,7 @@ function openCardBgPicker(side,btn){
   const ed=side==='a'?frontEditor:backEditor;
   ed.openColorPicker(btn,{current:_bgSide(card,side),default:CARD_BG_DEFAULT,onPick:c=>_setCardBgSide(side,c===CARD_BG_DEFAULT?null:c)});
 }
-async function loadCardIntoEditors(card){await _fadeCards(()=>{if(card){frontEditor.setHTML(card.sideA||'');backEditor.setHTML(card.sideB||'');}else{frontEditor.clear();backEditor.clear();}});setSaveStatus('saved');updateCardBar();renderTagbar();_applyCardBgToEditors(card);if(typeof ytBoss!=='undefined')ytBoss.syncCard();if(imgFindMode)_imgFindGo();}
+async function loadCardIntoEditors(card){await _fadeCards(()=>{if(card){frontEditor.setHTML(card.sideA||'');backEditor.setHTML(card.sideB||'');}else{frontEditor.clear();backEditor.clear();}});setSaveStatus('saved');updateCardBar();renderTagbar();_applyCardBgToEditors(card);if(typeof updateAudioButtons==='function')updateAudioButtons();if(typeof ytBoss!=='undefined')ytBoss.syncCard();if(imgFindMode)_imgFindGo();}
 
 /* Tagbar rendering + persistence. Tags live on card.tags as a plain string[].
    Render: clear chips area, append a chip for each tag, leave the input alone.
@@ -2509,6 +2579,40 @@ function _normalizeCardHTML(html){
     img.replaceWith(span);
   });
   return d.innerHTML;
+}
+/* ===== Experimental per-side audio (TTS) =====
+   Plays a side's text via Google Translate's (unofficial) tw-ob TTS endpoint
+   through an <audio> element (avoids the CORS wall that blocks fetch). If Google
+   is blocked/broken, falls back to the browser's built-in speechSynthesis so a
+   tap always produces sound. inaflash.cards only; not used on published sites. */
+let _lastTTSLang=null;            // sticky language default for the Add-audio UI
+let _ttsAudioEl=null;
+function _googleTTSUrl(text,lang){
+  return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(lang||'en')+'&q='+encodeURIComponent(text);
+}
+function _speakFallback(text,lang){
+  try{
+    if(!('speechSynthesis'in window))return false;
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    if(lang)u.lang=lang.length===2?lang:lang; // browsers accept e.g. 'th', 'en'
+    window.speechSynthesis.speak(u);
+    return true;
+  }catch(_){return false;}
+}
+function playTTS(audio){
+  if(!audio||!audio.text)return;
+  const text=String(audio.text).slice(0,200); // endpoint caps length
+  const lang=audio.lang||'en';
+  try{if(_ttsAudioEl){_ttsAudioEl.pause();_ttsAudioEl=null;}}catch(_){}
+  let fellBack=false;
+  const el=new Audio();
+  _ttsAudioEl=el;
+  el.src=_googleTTSUrl(text,lang);
+  // If Google errors (CORS/block/404), fall back to browser speech.
+  el.onerror=()=>{if(!fellBack){fellBack=true;_speakFallback(text,lang);}};
+  const pr=el.play();
+  if(pr&&pr.catch)pr.catch(()=>{if(!fellBack){fellBack=true;_speakFallback(text,lang);}});
 }
 function _extractImgs(html){const d=document.createElement('div');d.innerHTML=DOMPurify.sanitize(html||'');return[...d.querySelectorAll('img')].map(i=>i.getAttribute('src')||'').filter(s=>/^https?:\/\//i.test(s));}
 function _probeImage(url){return new Promise(res=>{const im=new Image();let done=false;const f=ok=>{if(!done){done=true;res(ok);}};im.onload=()=>f(true);im.onerror=()=>f(false);setTimeout(()=>f(false),6000);im.src=url;});}
@@ -2722,8 +2826,8 @@ function closeSearch(){document.getElementById('search-overlay').classList.remov
 function renderSearchResults(query){const res=document.getElementById('search-results'),q=query.trim().toLowerCase();const closedSets=sets.filter(s=>s.closed===true),openSets=sets.filter(s=>s.closed!==true);const visibleClosed=q?closedSets.filter(s=>s.name.toLowerCase().includes(q)):closedSets;const cardMatches=[];if(q){openSets.forEach(set=>{(set.cards||[]).forEach((card,idx)=>{const tmp=document.createElement('div');tmp.innerHTML=DOMPurify.sanitize((card.sideA||'')+(card.sideB||''));const text=tmp.textContent||'';if(text.toLowerCase().includes(q))cardMatches.push({set,card,idx,text});});});}if(!visibleClosed.length&&!cardMatches.length){res.innerHTML=q?'<div id="search-empty">No results</div>':'<div id="search-empty">Start typing to search across all open sets</div>';return;}res.innerHTML='';if(visibleClosed.length){const lbl=document.createElement('div');lbl.className='search-section-label';lbl.textContent='Closed Sets';res.appendChild(lbl);visibleClosed.forEach(set=>{const n=(set.cards||[]).length;const item=document.createElement('div');item.className='search-result-item closed-set';item.innerHTML=`<div class="search-result-meta"><span class="search-result-set">${DOMPurify.sanitize(set.name)}</span><span class="search-result-text" style="color:#2a2a4a">${n} card${n!==1?'s':''}</span></div><span class="search-reopen-tag">Reopen</span>`;item.addEventListener('click',async()=>{closeSearch();await reopenSet(set.id);enterCreateMode();});res.appendChild(item);});}if(cardMatches.length){const lbl=document.createElement('div');lbl.className='search-section-label';lbl.textContent='Card Matches';res.appendChild(lbl);cardMatches.slice(0,30).forEach(({set,idx,text})=>{const item=document.createElement('div');item.className='search-result-item';const snippet=text.slice(0,120).trim();const safeQ=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');const parts=snippet.split(new RegExp('('+safeQ+')','gi'));const hiHtml=parts.map(p=>p.toLowerCase()===q?'<mark>'+DOMPurify.sanitize(p)+'</mark>':DOMPurify.sanitize(p)).join('');item.innerHTML=`<div class="search-result-meta"><span class="search-result-set">${DOMPurify.sanitize(set.name)}</span><span class="search-result-text">${hiHtml}</span></div>`;item.addEventListener('click',async()=>{closeSearch();await selectSet(set.id);await jumpToCard(idx);});res.appendChild(item);});}}
 function openShortcuts(){document.getElementById('shortcuts-modal').classList.add('open');}
 function closeShortcuts(){document.getElementById('shortcuts-modal').classList.remove('open');}
-function exportSet(){
-  const set=activeSet();if(!set){toast('No active set','err');return;}
+function _buildSetExportData(){
+  const set=activeSet();if(!set)return null;
   const imgModeEl=document.querySelector('input[name="ec-imgmode"]:checked');
   const imageMode=imgModeEl?imgModeEl.value:'embed';
   const cards=set.cards.map(c=>{
@@ -2732,12 +2836,33 @@ function exportSet(){
       const stripImg=html=>{const d=document.createElement('div');d.innerHTML=DOMPurify.sanitize(html||'');d.querySelectorAll('[data-img-run],img').forEach(el=>el.remove());return d.innerHTML;};
       sideA=stripImg(sideA);sideB=stripImg(sideB);
     }
-    return{sideA,sideB,sr:c.sr||null,bg:c.bg||null,ytClip:c.ytClip||null};
+    return{sideA,sideB,sr:c.sr||null,bg:c.bg||null,ytClip:c.ytClip||null,audioA:c.audioA||null,audioB:c.audioB||null};
   });
-  const data={name:set.name,version:2,imageMode,cards,ytVideoId:set.ytVideoId||null,exported:new Date().toISOString()};
+  return{name:set.name,version:2,imageMode,cards,ytVideoId:set.ytVideoId||null,exported:new Date().toISOString()};
+}
+async function copySetAsText(){
+  const data=_buildSetExportData();
+  if(!data){toast('No active set','err');return;}
+  const text=JSON.stringify(data,null,2);
+  try{
+    await navigator.clipboard.writeText(text);
+    toast('Copied "'+data.name+'" as text \u2014 paste it anywhere','ok');
+  }catch(_){
+    // Clipboard API can be blocked (no https / permission) \u2014 fall back to a
+    // textarea the user can copy from manually.
+    const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:10%;left:50%;transform:translateX(-50%);width:80%;height:60%;z-index:99999;font-family:monospace;font-size:12px';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');toast('Copied as text','ok');}catch(e){toast('Select the text and copy it manually','info');}
+    setTimeout(()=>ta.remove(),60000);
+    ta.addEventListener('blur',()=>ta.remove());
+  }
+}
+function exportSet(){
+  const data=_buildSetExportData();
+  if(!data){toast('No active set','err');return;}
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(set.name||'flashcards').replace(/[^a-z0-9]/gi,'_')+'.json';a.click();URL.revokeObjectURL(a.href);
-  toast('Exported "'+set.name+'"'+(imageMode==='folder'?' \u2014 remember to bring the image folder too':''),'ok');
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(data.name||'flashcards').replace(/[^a-z0-9]/gi,'_')+'.json';a.click();URL.revokeObjectURL(a.href);
+  toast('Exported "'+data.name+'"'+(data.imageMode==='folder'?' \u2014 remember to bring the image folder too':''),'ok');
 }
 
 /* Self-contained embed snippet for the current set. The output is an
@@ -3090,6 +3215,73 @@ async function importSet(file){
    This is how the Thai course site (and any shared link) drops a deck into a
    learner's own app. https-only, confirmed, same sanitizing import pipeline. */
 /* Editable image attribution dialog. Reads/writes the run's .meta in place. */
+/* Experimental per-side audio modal. Sets activeCard().audioA / audioB to
+   {text,lang}. Defaults text to the selection (if any) else the side's text;
+   language sticks to whatever you last chose. */
+/* Show the speaker button on each editor side that has audio; wire it to play. */
+function updateAudioButtons(){
+  const card=(typeof activeCard==='function')?activeCard():null;
+  [['aud-play-front','audioA'],['aud-play-back','audioB']].forEach(([btnId,key])=>{
+    const btn=document.getElementById(btnId);if(!btn)return;
+    const a=card&&card[key];
+    if(a&&a.text){btn.style.display='flex';btn.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(a);};}
+    else{btn.style.display='none';btn.onclick=null;}
+  });
+}
+function openAudioModal(side,selText,fullText){
+  const card=(typeof activeCard==='function')?activeCard():null;
+  if(!card){toast('No active card','err');return;}
+  const key=side==='A'?'audioA':'audioB';
+  const existing=card[key]||null;
+  const defaultText=(selText&&selText.trim())||existing&&existing.text||(fullText||'').trim();
+  const defaultLang=existing&&existing.lang||_lastTTSLang||'th';
+  let m=document.getElementById('audiomodal');
+  if(!m){
+    m=document.createElement('div');m.id='audiomodal';
+    m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:5400;';
+    m.innerHTML='<div class="am-box" style="background:#16162a;border:1px solid #2a3a5a;border-radius:9px;padding:20px;width:min(420px,92vw);color:#e0e0e0;">'
+      +'<div style="font-size:15px;font-weight:700;color:#7cb0ff;margin-bottom:2px;">Add audio <span style="font-size:10px;font-weight:600;color:#caa24a;border:1px solid #6a571f;background:#241d08;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle;">EXPERIMENTAL</span></div>'
+      +'<div style="font-size:11.5px;color:#9090b0;line-height:1.5;margin-bottom:14px;">Speak this side aloud via Google Translate. If that\u2019s unavailable, your browser\u2019s built-in voice is used instead. Quality varies by language and device.</div>'
+      +'<label style="display:block;font-size:10.5px;color:#8a8aa8;margin:9px 0 3px;">Text to speak</label>'
+      +'<textarea id="am-text" style="width:100%;box-sizing:border-box;min-height:54px;background:#10101a;border:1px solid #2a2a3a;border-radius:6px;color:#e0e0e0;font-size:13px;padding:7px 9px;outline:none;resize:vertical;"></textarea>'
+      +'<label style="display:block;font-size:10.5px;color:#8a8aa8;margin:11px 0 3px;">Language</label>'
+      +'<select id="am-lang" style="width:100%;box-sizing:border-box;height:32px;background:#10101a;border:1px solid #2a2a3a;border-radius:6px;color:#e0e0e0;font-size:13px;padding:0 8px;outline:none;"></select>'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-top:16px;">'
+      +'<button id="am-test" style="height:30px;padding:0 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#cdb;">\u25b6 Test</button>'
+      +'<button id="am-remove" style="height:30px;padding:0 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #5a2b2b;background:#1a1a2a;color:#f88;margin-right:auto;">Remove</button>'
+      +'<button id="am-cancel" style="height:30px;padding:0 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #2a2a3a;background:#1a1a2a;color:#e0e0e0;">Cancel</button>'
+      +'<button id="am-save" style="height:30px;padding:0 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #3b82f6;background:#1a2540;color:#7cb0ff;">Save</button>'
+      +'</div></div>';
+    document.body.appendChild(m);
+    const langs=[['th','Thai'],['en','English'],['es','Spanish'],['fr','French'],['de','German'],['it','Italian'],['pt','Portuguese'],['ru','Russian'],['ja','Japanese'],['ko','Korean'],['zh-CN','Chinese'],['ar','Arabic'],['hi','Hindi'],['vi','Vietnamese'],['id','Indonesian'],['nl','Dutch'],['pl','Polish'],['tr','Turkish']];
+    const sel=m.querySelector('#am-lang');
+    langs.forEach(([v,n])=>{const o=document.createElement('option');o.value=v;o.textContent=n;sel.appendChild(o);});
+    m.addEventListener('mousedown',e=>{if(e.target.id==='audiomodal')m.classList.remove('show')&(m.style.display='none');});
+  }
+  m.style.display='flex';
+  const textEl=m.querySelector('#am-text'),langEl=m.querySelector('#am-lang');
+  textEl.value=defaultText;langEl.value=defaultLang;
+  const close=()=>{m.style.display='none';};
+  m.querySelector('#am-cancel').onclick=close;
+  m.querySelector('#am-test').onclick=()=>{const t=textEl.value.trim();if(t)playTTS({text:t,lang:langEl.value});};
+  m.querySelector('#am-remove').onclick=async()=>{
+    card[key]=null;_lastTTSLang=langEl.value;
+    if(typeof saveCurrentCard==='function')await saveCurrentCard();
+    if(typeof markDirty==='function')markDirty();
+    if(typeof updateAudioButtons==='function')updateAudioButtons();
+    close();toast('Audio removed','info');
+  };
+  m.querySelector('#am-save').onclick=async()=>{
+    const t=textEl.value.trim();
+    if(!t){toast('Enter some text to speak','err');return;}
+    card[key]={text:t,lang:langEl.value};
+    _lastTTSLang=langEl.value; // sticky default for next time
+    if(typeof saveCurrentCard==='function')await saveCurrentCard();
+    if(typeof markDirty==='function')markDirty();
+    if(typeof updateAudioButtons==='function')updateAudioButtons();
+    close();toast('Audio added to '+(side==='A'?'front':'back'),'ok');
+  };
+}
 function openImgAttrib(run,onSave){
   let m=document.getElementById('imgattrib');
   if(!m){m=document.createElement('div');m.id='imgattrib';
@@ -3400,10 +3592,13 @@ function normalizeImport(data){
     }
     else if(typeof raw==='string'){a=raw;}
     if(a===''&&b==='')continue;
-    let ytClip=null,bg=null;
+    let ytClip=null,bg=null,audioA=null,audioB=null;
     if(raw&&typeof raw==='object'){
       if(raw.ytClip&&typeof raw.ytClip.startMs==='number'&&typeof raw.ytClip.endMs==='number')ytClip=raw.ytClip;
       bg=raw.bg||null;
+      // Per-side TTS audio: {text, lang}. Accept only well-formed objects.
+      const okAudio=x=>x&&typeof x==='object'&&typeof x.text==='string'&&x.text.trim()?{text:x.text.trim(),lang:(typeof x.lang==='string'&&x.lang.trim())?x.lang.trim():'en'}:null;
+      audioA=okAudio(raw.audioA);audioB=okAudio(raw.audioB);
     }
     cards.push((()=>{
       // A side can reference an image two ways:
@@ -3425,7 +3620,7 @@ function normalizeImport(data){
         sideA: aImg?'':sanitizeCardField(wrap(a)),
         sideB: bImg?'':sanitizeCardField(wrap(b)),
         imgA: aImg, imgB: bImg,
-        sr:null, bg, ytClip
+        sr:null, bg, ytClip, audioA, audioB
       };
     })());
   }
@@ -3468,15 +3663,18 @@ async function importPasted(){
    Kept deliberately strict about output shape so paste-import "just works". */
 const AI_DECK_PROMPT=
 'Create a flashcard deck about: [YOUR TOPIC HERE]\n\n'
-+'Output ONLY a single JSON object, no markdown fences, no commentary, in exactly this format:\n'
-+'{"name":"Deck name","cards":[{"sideA":"question html","sideB":"answer html"},...]}\n\n'
++'Output a single JSON object in this format:\n'
++'{"name":"Deck name","cards":[{"sideA":"front html","sideB":"back html"},...]}\n\n'
 +'Rules:\n'
-+'- 10\u201320 cards unless I say otherwise. sideA is the question/front, sideB is the answer/back.\n'
-+'- sideA/sideB are HTML strings. Allowed tags: <b>, <i>, <u>, <br>, <p>, and <img src="https://...">.\n'
-+'- Images are optional. If you include one, use a real, direct, publicly hotlinkable image URL (e.g. https://upload.wikimedia.org/...). Do not invent URLs \u2014 only use URLs you are confident exist. NEVER use source.unsplash.com, picsum, or placeholder services (they are dead or random); prefer https://upload.wikimedia.org/... files or omit the image.\n'
-+'- Keep each side concise. No scripts, styles, or other tags. Plain text is fine too.\n'
-+'- Simpler shapes also import fine if easier: {"front":"...","back":"..."} or {"question":"...","answer":"..."}.\n'
-+'- Escape double quotes inside the HTML strings so the JSON stays valid.';
++'- sideA is the front, sideB is the back.\n'
++'- sideA/sideB are HTML strings. Allowed tags: <b>, <i>, <u>, <br>, <p>, <span>, <div>, and <img src="https://...">.\n'
++'- You may use inline styles for emphasis, e.g. <span style="font-size:30px">\u2026</span> for a large heading, or <span style="color:#60a5fa">\u2026</span> for colour. Keep styles to font-size, color, font-weight, and text-align.\n'
++'- Images are optional. If you include one, use a real, direct, publicly hotlinkable image URL. Do not invent URLs \u2014 only use ones you are confident exist. Prefer https://upload.wikimedia.org/... files; NEVER use source.unsplash.com, picsum, or placeholder services (they are dead or random). Omit the image if unsure.\n'
++'- To place an image from a folder I will supply later, put "img:filename.png" as a side value (e.g. {"sideA":"img:thailand.png","sideB":"Thailand"}).\n'
++'- Simpler shapes also import fine if easier: {"front":"...","back":"..."} or {"question":"...","answer":"..."}. A markdown table or "Front | Back" lines work too.\n'
++'- Optional audio/video: add a set-level "ytVideoId" (the 11-character YouTube id, e.g. "dQw4w9WgXcQ") and, on any card, a "ytClip":{"startMs":5000,"endMs":12000} to auto-play that slice of the video (times in milliseconds) in Learn and Quiz. Only do this if I give you a specific video.\n'
++'- Optional spoken audio (experimental): on any card, add "audioA":{"text":"\u0e44\u0e17\u0e22","lang":"th"} and/or "audioB":{"text":"Thailand","lang":"en"} to give that side a tap-to-speak button (text-to-speech). Use the correct language code (th, en, es, ja, etc.).\n'
++'- Escape double quotes inside HTML strings so the JSON stays valid.';
 async function _importAsNewSet(data,name){
   toast('Importing\u2026','info');
   const ns=await DB_bulkImport(name,data.cards);
@@ -3828,6 +4026,7 @@ function wireEvents(){
   document.getElementById('btn-export').addEventListener('click',openExportChoice);
   document.getElementById('ec-cancel').addEventListener('click',closeExportChoice);
   document.getElementById('ec-set').addEventListener('click',()=>{closeExportChoice();exportSet();});
+  document.getElementById('ec-copy').addEventListener('click',()=>{closeExportChoice();copySetAsText();});
   document.getElementById('ec-all').addEventListener('click',()=>{closeExportChoice();doBackupAll();});
   document.getElementById('btn-embed').addEventListener('click',openEmbedModal);
   document.getElementById('embed-close').addEventListener('click',closeEmbedModal);

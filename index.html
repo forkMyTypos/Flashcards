@@ -422,6 +422,7 @@ input[type="number"]{-moz-appearance:textfield;}
 .learn-front img,.learn-back img{max-width:100%;height:auto;display:block;border-radius:4px;}
 .learn-front .img-run,.learn-back .img-run{display:inline-block;max-width:100%;}
 .learn-front .img-run img,.learn-back .img-run img{width:100%;}
+.learn-front .editor-valign-wrap,.learn-back .editor-valign-wrap{padding-left:13px;padding-right:13px;}
 .learn-ratings{position:absolute;bottom:0;left:0;right:0;display:flex;gap:1px;border-radius:0 0 10px 10px;overflow:hidden;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none;}
 .learn-shell.flipped .learn-ratings{opacity:1;transform:translateY(0);pointer-events:auto;}
 .rating-btn{flex:1;height:30px;border:none;cursor:pointer;font-size:11px;font-weight:600;letter-spacing:.04em;transition:filter .15s;display:flex;align-items:center;justify-content:center;gap:4px;}
@@ -714,7 +715,7 @@ input[type="number"]{-moz-appearance:textfield;}
   #workspace.show-back .shell-back{display:flex;}
   #browser-shell,#yt-shell{position:fixed!important;inset:0!important;left:0!important;top:0!important;width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;border-radius:0!important;z-index:2000!important;}
   #browser-shell .rh,#yt-shell .rh{display:none!important;}
-  .learn-shell{width:min(440px,calc(100vw - 84px))!important;min-width:0!important;}
+  .learn-shell{width:min(440px,calc(100vw - 84px))!important;min-width:0!important;height:min(500px,calc(var(--vh,1vh)*100 - 170px))!important;min-height:280px!important;}
   .learn-topbar{flex-wrap:wrap;}
   /* Titlebar: logo shrinks to the mark, tabs own row 1, action buttons drop
      to their own full-width row underneath — nothing overlaps the tabs. */
@@ -1666,9 +1667,15 @@ var learnBoss={
   _applyReverse:function(){if(this.shellEl)this.shellEl.classList.toggle('reversed',!!this.reversed);const btn=this.c&&this.c.querySelector('#btn-reverse');if(btn)btn.classList.toggle('active',!!this.reversed);},
   _restart:function(){this.ratings={};this._updateProgress();this._goTo(0);this._unflip();toast('Progress reset','info');},
   _buildOrder:function(){const len=this.cards.length;this.order=Array.from({length:len},(_,i)=>i);this.order.sort((a,b)=>{const da=SR.isDue(this.cards[a])?0:1,db=SR.isDue(this.cards[b])?0:1;return da-db;});if(this.shuffled){const due=this.order.filter(i=>SR.isDue(this.cards[i])),notDue=this.order.filter(i=>!SR.isDue(this.cards[i]));const shuffle=arr=>{for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}};shuffle(due);shuffle(notDue);this.order=[...due,...notDue];}},
-  load:async function(id){if(!id)return;const set=await dbBoss.getSet(id);if(!set||!set.cardIDs||!set.cardIDs.length)return;this.cards=await Promise.all(set.cardIDs.map(cid=>dbBoss.getCard(cid)));this.ratings={};this._buildOrder();this._updateProgress();this._applyReverse();this._goTo(0);},
-  _saveCardSize:async function(s){try{await db.info.update('info',{learnCardW:s.offsetWidth,learnCardH:s.offsetHeight});}catch(e){}},
-  _loadCardSize:async function(s){try{const i=await db.info.get('info');if(i&&i.learnCardW){s.style.width=i.learnCardW+'px';s.style.height=i.learnCardH+'px';}}catch(e){}}
+  load:async function(id){if(!id)return;const set=await dbBoss.getSet(id);if(!set||!set.cardIDs||!set.cardIDs.length)return;this.cards=await Promise.all(set.cardIDs.map(cid=>dbBoss.getCard(cid)));this.ratings={};if(this.shellEl)this._loadCardSize(this.shellEl);this._buildOrder();this._updateProgress();this._applyReverse();this._goTo(0);},
+  _saveCardSize:async function(s){/* Learn card mirrors the Create front shell; size not persisted separately */},
+  _loadCardSize:function(s){
+    // Mirror the Create front shell so width% images render identical pixels in both modes.
+    if(window.matchMedia&&window.matchMedia('(max-width:920px)').matches)return; // mobile: CSS owns the size
+    const src=document.getElementById('shell-front');
+    const w=(src&&parseInt(src.style.width,10))||440,h=(src&&parseInt(src.style.height,10))||500;
+    s.style.width=w+'px';s.style.height=h+'px';
+  }
 };
 const sliderBoss={
   create(container,onAdd,onSearch,onSelect,onClose,onRename){

@@ -1652,7 +1652,7 @@ var learnBoss={
       [[this.sideA,_frontAudio],[this.sideB,_backAudio]].forEach(([panel,aud])=>{
         if(!panel)return;
         const old=panel.querySelector('.learn-aud-btn');if(old)old.remove();
-        if(aud&&aud.text){
+        if(aud&&(aud.text||aud.src)){
           if(getComputedStyle(panel).position==='static')panel.style.position='relative';
           const btn=document.createElement('button');btn.className='learn-aud-btn';btn.textContent='\u{1F50A}';btn.title='Play audio';
           btn.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(aud);};
@@ -2607,19 +2607,38 @@ function _speakFallback(text,lang){
     return true;
   }catch(_){return false;}
 }
+/* Three ways to make a sound, tried in order, each catching the one before:
+   the recording (audio.src), then Google's synthetic voice reading audio.text,
+   then the browser's own voice. A deck that ships mp3s still speaks if a file
+   404s; a deck that carries only text behaves exactly as it did before. */
 function playTTS(audio){
-  if(!audio||!audio.text)return;
-  const text=String(audio.text).slice(0,200); // endpoint caps length
+  if(!audio||(!audio.text&&!audio.src))return;
+  const text=String(audio.text||'').slice(0,200); // endpoint caps length
   const lang=audio.lang||'en';
   try{if(_ttsAudioEl){_ttsAudioEl.pause();_ttsAudioEl=null;}}catch(_){}
+  const speak=()=>{if(text)_speakFallback(text,lang);};
+  const googleTTS=()=>{
+    if(!text){speak();return;}
+    let fell=false;
+    const el=new Audio();
+    _ttsAudioEl=el;
+    el.src=_googleTTSUrl(text,lang);
+    // If Google errors (CORS/block/404), fall back to browser speech.
+    el.onerror=()=>{if(!fell){fell=true;speak();}};
+    const pr=el.play();
+    if(pr&&pr.catch)pr.catch(()=>{if(!fell){fell=true;speak();}});
+  };
+  // https only: the page's media-src blocks anything else, so an http URL would
+  // fail with nothing on screen — better to go straight to a synthetic voice.
+  const src=(typeof audio.src==='string'&&/^https:\/\//i.test(audio.src))?audio.src:'';
+  if(!src){googleTTS();return;}
   let fellBack=false;
   const el=new Audio();
   _ttsAudioEl=el;
-  el.src=_googleTTSUrl(text,lang);
-  // If Google errors (CORS/block/404), fall back to browser speech.
-  el.onerror=()=>{if(!fellBack){fellBack=true;_speakFallback(text,lang);}};
+  el.src=src;
+  el.onerror=()=>{if(!fellBack){fellBack=true;googleTTS();}};
   const pr=el.play();
-  if(pr&&pr.catch)pr.catch(()=>{if(!fellBack){fellBack=true;_speakFallback(text,lang);}});
+  if(pr&&pr.catch)pr.catch(()=>{if(!fellBack){fellBack=true;googleTTS();}});
 }
 function _extractImgs(html){const d=document.createElement('div');d.innerHTML=DOMPurify.sanitize(html||'');return[...d.querySelectorAll('img')].map(i=>i.getAttribute('src')||'').filter(s=>/^https?:\/\//i.test(s));}
 function _probeImage(url){return new Promise(res=>{const im=new Image();let done=false;const f=ok=>{if(!done){done=true;res(ok);}};im.onload=()=>f(true);im.onerror=()=>f(false);setTimeout(()=>f(false),6000);im.src=url;});}
@@ -3231,7 +3250,7 @@ function updateAudioButtons(){
   [['aud-play-front','audioA'],['aud-play-back','audioB']].forEach(([btnId,key])=>{
     const btn=document.getElementById(btnId);if(!btn)return;
     const a=card&&card[key];
-    if(a&&a.text){btn.style.display='flex';btn.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(a);};}
+    if(a&&(a.text||a.src)){btn.style.display='flex';btn.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(a);};}
     else{btn.style.display='none';btn.onclick=null;}
   });
 }
@@ -3281,7 +3300,9 @@ function openAudioModal(side,selText,fullText){
   m.querySelector('#am-save').onclick=async()=>{
     const t=textEl.value.trim();
     if(!t){toast('Enter some text to speak','err');return;}
-    card[key]={text:t,lang:langEl.value};
+    // Editing the spoken text must not throw away an imported recording.
+    card[key]=Object.assign({},(existing&&existing.src)?{src:existing.src}:null,
+                            {text:t,lang:langEl.value});
     _lastTTSLang=langEl.value; // sticky default for next time
     if(typeof saveCurrentCard==='function')await saveCurrentCard();
     if(typeof markDirty==='function')markDirty();
@@ -3603,8 +3624,17 @@ function normalizeImport(data){
     if(raw&&typeof raw==='object'){
       if(raw.ytClip&&typeof raw.ytClip.startMs==='number'&&typeof raw.ytClip.endMs==='number')ytClip=raw.ytClip;
       bg=raw.bg||null;
-      // Per-side TTS audio: {text, lang}. Accept only well-formed objects.
-      const okAudio=x=>x&&typeof x==='object'&&typeof x.text==='string'&&x.text.trim()?{text:x.text.trim(),lang:(typeof x.lang==='string'&&x.lang.trim())?x.lang.trim():'en'}:null;
+      // Per-side audio: a recording (src), words to speak (text), or both.
+      const okAudio=x=>{
+        if(!x||typeof x!=='object')return null;
+        const text=typeof x.text==='string'?x.text.trim():'';
+        const src=(typeof x.src==='string'&&/^https:\/\//i.test(x.src.trim()))?x.src.trim():'';
+        if(!text&&!src)return null;
+        const out={lang:(typeof x.lang==='string'&&x.lang.trim())?x.lang.trim():'en'};
+        if(src)out.src=src;
+        if(text)out.text=text;
+        return out;
+      };
       audioA=okAudio(raw.audioA);audioB=okAudio(raw.audioB);
     }
     cards.push((()=>{
@@ -3680,7 +3710,7 @@ const AI_DECK_PROMPT=
 +'- To place an image from a folder I will supply later, put "img:filename.png" as a side value (e.g. {"sideA":"img:thailand.png","sideB":"Thailand"}).\n'
 +'- Simpler shapes also import fine if easier: {"front":"...","back":"..."} or {"question":"...","answer":"..."}. A markdown table or "Front | Back" lines work too.\n'
 +'- Optional audio/video: add a set-level "ytVideoId" (the 11-character YouTube id, e.g. "dQw4w9WgXcQ") and, on any card, a "ytClip":{"startMs":5000,"endMs":12000} to auto-play that slice of the video (times in milliseconds) in Learn and Quiz. Only do this if I give you a specific video.\n'
-+'- Optional spoken audio (experimental): on any card, add "audioA":{"text":"\u0e44\u0e17\u0e22","lang":"th"} and/or "audioB":{"text":"Thailand","lang":"en"} to give that side a tap-to-speak button (text-to-speech). Use the correct language code (th, en, es, ja, etc.).\n'
++'- Optional spoken audio (experimental): on any card, add "audioA":{"text":"\u0e44\u0e17\u0e22","lang":"th"} and/or "audioB":{"text":"Thailand","lang":"en"} to give that side a tap-to-speak button (text-to-speech). Use the correct language code (th, en, es, ja, etc.). To play a real recording instead, add "src":"https://…/word.mp3" alongside it — the file is used first, and the spoken text is the fallback if it will not load. The address must be https.\n'
 +'- Escape double quotes inside HTML strings so the JSON stays valid.';
 async function _importAsNewSet(data,name){
   toast('Importing\u2026','info');

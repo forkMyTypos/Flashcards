@@ -241,6 +241,10 @@ input[type="number"]{-moz-appearance:textfield;}
 .aud-play-btn:active{transform:scale(.92);}
 .learn-aud-btn{position:absolute;top:10px;right:10px;z-index:8;width:34px;height:34px;border-radius:50%;border:1px solid #2a4a6a;background:#16243a;color:#9cf;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.45);}
 .learn-aud-btn:hover{background:#1d3354;border-color:#3b82f6;}
+/* The slow reading, when a deck carries one: below the speaker, and quieter,
+   because it is the second thing you reach for and not the first. */
+.learn-aud-btn.slow{top:50px;width:30px;height:30px;font-size:13px;color:#7f93b5;border-color:#243a56;}
+.learn-aud-btn.slow:hover{color:#a9bcda;background:#1d3354;border-color:#3b82f6;}
 .editor-wrap.card-fade{opacity:0;}
 .editor-valign-wrap{position:absolute;inset:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;}
 .editor-valign-wrap.valign-top{justify-content:flex-start;}
@@ -1651,12 +1655,20 @@ var learnBoss={
       const _backAudio=this.reversed?card.audioA:card.audioB;
       [[this.sideA,_frontAudio],[this.sideB,_backAudio]].forEach(([panel,aud])=>{
         if(!panel)return;
-        const old=panel.querySelector('.learn-aud-btn');if(old)old.remove();
-        if(aud&&(aud.text||aud.src)){
+        panel.querySelectorAll('.learn-aud-btn').forEach(b=>b.remove());
+        if(aud&&(aud.text||aud.src||aud.slow)){
           if(getComputedStyle(panel).position==='static')panel.style.position='relative';
           const btn=document.createElement('button');btn.className='learn-aud-btn';btn.textContent='\u{1F50A}';btn.title='Play audio';
           btn.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(aud);};
           panel.appendChild(btn);
+          // A second recording, read slowly, gets a second button rather than
+          // replacing the first: a button that sometimes plays slowly would be
+          // a lucky dip, and you usually want to hear both.
+          if(aud.slow){
+            const sb=document.createElement('button');sb.className='learn-aud-btn slow';sb.textContent='\u{1F422}';sb.title='Play slowly';
+            sb.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(aud,'slow');};
+            panel.appendChild(sb);
+          }
         }
       });}this._updateProgress();if(card&&typeof ytBoss!=='undefined')ytBoss.playCardClip(card);},
   currentCard:function(){return(this.cards&&this.order)?this.cards[this.order[this.pos]]:null;},
@@ -2611,8 +2623,8 @@ function _speakFallback(text,lang){
    the recording (audio.src), then Google's synthetic voice reading audio.text,
    then the browser's own voice. A deck that ships mp3s still speaks if a file
    404s; a deck that carries only text behaves exactly as it did before. */
-function playTTS(audio){
-  if(!audio||(!audio.text&&!audio.src))return;
+function playTTS(audio,which){
+  if(!audio||(!audio.text&&!audio.src&&!audio.slow))return;
   const text=String(audio.text||'').slice(0,200); // endpoint caps length
   const lang=audio.lang||'en';
   try{if(_ttsAudioEl){_ttsAudioEl.pause();_ttsAudioEl=null;}}catch(_){}
@@ -2630,7 +2642,10 @@ function playTTS(audio){
   };
   // https only: the page's media-src blocks anything else, so an http URL would
   // fail with nothing on screen — better to go straight to a synthetic voice.
-  const src=(typeof audio.src==='string'&&/^https:\/\//i.test(audio.src))?audio.src:'';
+  const https=u=>(typeof u==='string'&&/^https:\/\//i.test(u))?u:'';
+  // 'slow' asks for the second recording; if a deck has none, the normal one
+  // still plays, which beats a button that does nothing.
+  const src=(which==='slow')?(https(audio.slow)||https(audio.src)):https(audio.src);
   if(!src){googleTTS();return;}
   let fellBack=false;
   const el=new Audio();
@@ -3250,7 +3265,7 @@ function updateAudioButtons(){
   [['aud-play-front','audioA'],['aud-play-back','audioB']].forEach(([btnId,key])=>{
     const btn=document.getElementById(btnId);if(!btn)return;
     const a=card&&card[key];
-    if(a&&(a.text||a.src)){btn.style.display='flex';btn.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(a);};}
+    if(a&&(a.text||a.src||a.slow)){btn.style.display='flex';btn.onclick=e=>{e.preventDefault();e.stopPropagation();playTTS(a);};}
     else{btn.style.display='none';btn.onclick=null;}
   });
 }
@@ -3302,6 +3317,7 @@ function openAudioModal(side,selText,fullText){
     if(!t){toast('Enter some text to speak','err');return;}
     // Editing the spoken text must not throw away an imported recording.
     card[key]=Object.assign({},(existing&&existing.src)?{src:existing.src}:null,
+                            (existing&&existing.slow)?{slow:existing.slow}:null,
                             {text:t,lang:langEl.value});
     _lastTTSLang=langEl.value; // sticky default for next time
     if(typeof saveCurrentCard==='function')await saveCurrentCard();
@@ -3624,14 +3640,17 @@ function normalizeImport(data){
     if(raw&&typeof raw==='object'){
       if(raw.ytClip&&typeof raw.ytClip.startMs==='number'&&typeof raw.ytClip.endMs==='number')ytClip=raw.ytClip;
       bg=raw.bg||null;
-      // Per-side audio: a recording (src), words to speak (text), or both.
+      // Per-side audio: a recording (src), a slow reading of it (slow), words
+      // to speak (text), or any mix. https only — see playTTS.
       const okAudio=x=>{
         if(!x||typeof x!=='object')return null;
+        const url=v=>(typeof v==='string'&&/^https:\/\//i.test(v.trim()))?v.trim():'';
         const text=typeof x.text==='string'?x.text.trim():'';
-        const src=(typeof x.src==='string'&&/^https:\/\//i.test(x.src.trim()))?x.src.trim():'';
-        if(!text&&!src)return null;
+        const src=url(x.src),slow=url(x.slow);
+        if(!text&&!src&&!slow)return null;
         const out={lang:(typeof x.lang==='string'&&x.lang.trim())?x.lang.trim():'en'};
         if(src)out.src=src;
+        if(slow)out.slow=slow;
         if(text)out.text=text;
         return out;
       };
@@ -3710,7 +3729,7 @@ const AI_DECK_PROMPT=
 +'- To place an image from a folder I will supply later, put "img:filename.png" as a side value (e.g. {"sideA":"img:thailand.png","sideB":"Thailand"}).\n'
 +'- Simpler shapes also import fine if easier: {"front":"...","back":"..."} or {"question":"...","answer":"..."}. A markdown table or "Front | Back" lines work too.\n'
 +'- Optional audio/video: add a set-level "ytVideoId" (the 11-character YouTube id, e.g. "dQw4w9WgXcQ") and, on any card, a "ytClip":{"startMs":5000,"endMs":12000} to auto-play that slice of the video (times in milliseconds) in Learn and Quiz. Only do this if I give you a specific video.\n'
-+'- Optional spoken audio (experimental): on any card, add "audioA":{"text":"\u0e44\u0e17\u0e22","lang":"th"} and/or "audioB":{"text":"Thailand","lang":"en"} to give that side a tap-to-speak button (text-to-speech). Use the correct language code (th, en, es, ja, etc.). To play a real recording instead, add "src":"https://…/word.mp3" alongside it — the file is used first, and the spoken text is the fallback if it will not load. The address must be https.\n'
++'- Optional spoken audio (experimental): on any card, add "audioA":{"text":"\u0e44\u0e17\u0e22","lang":"th"} and/or "audioB":{"text":"Thailand","lang":"en"} to give that side a tap-to-speak button (text-to-speech). Use the correct language code (th, en, es, ja, etc.). To play a real recording instead, add "src":"https://…/word.mp3" alongside it — the file is used first, and the spoken text is the fallback if it will not load. Add "slow":"https://…/word_slow.mp3" as well and the card gets a second, turtle button that plays the slow reading. Every address must be https.\n'
 +'- Escape double quotes inside HTML strings so the JSON stays valid.';
 async function _importAsNewSet(data,name){
   toast('Importing\u2026','info');
